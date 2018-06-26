@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="python, computer vision," />
 
 
 
@@ -79,13 +79,31 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Blogs of Zhaocheng">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="Opencv+python 视频车辆识别最近要做交通管理和控制课程的实验，提到采集数据时老师说可以用多种方法来实现，因此想到自己编写一个车辆识别的程序。第一个想到的是循环神经网络，但是因为自己在机器学习方面造诣还是很浅的，因此选择了比较传统，也是相关论坛比较多的opencv进行实现，这里选用的级联分类器训练(Cascade Classifier)，一路上很多网上的大神的博客给了很详细的指导，记录下">
+<meta name="keywords" content="python, computer vision">
+<meta property="og:type" content="article">
+<meta property="og:title" content="opencv+python车辆识别">
+<meta property="og:url" content="http://yoursite.com/2018/06/26/opencv-python车辆识别/index.html">
 <meta property="og:site_name" content="Blogs of Zhaocheng">
+<meta property="og:description" content="Opencv+python 视频车辆识别最近要做交通管理和控制课程的实验，提到采集数据时老师说可以用多种方法来实现，因此想到自己编写一个车辆识别的程序。第一个想到的是循环神经网络，但是因为自己在机器学习方面造诣还是很浅的，因此选择了比较传统，也是相关论坛比较多的opencv进行实现，这里选用的级联分类器训练(Cascade Classifier)，一路上很多网上的大神的博客给了很详细的指导，记录下">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="e:/学海无涯/实验/视频数车/实验图片/TIM截图20180608210759.png">
+<meta property="og:image" content="e:/学海无涯/实验/视频数车/实验图片/TIM截图20180608210816.png">
+<meta property="og:image" content="e:/学海无涯/实验/视频数车/实验图片/TIM截图20180608212139.png">
+<meta property="og:image" content="e:/学海无涯/实验/视频数车/实验图片/TIM截图20180608212706.png">
+<meta property="og:image" content="e:/学海无涯/实验/视频数车/实验图片/TIM截图20180609080723.png">
+<meta property="og:image" content="e:/学海无涯/实验/视频数车/实验图片/TIM截图20180609081342.png">
+<meta property="og:image" content="e:/学海无涯/实验/视频数车/实验图片/TIM截图20180609081806.png">
+<meta property="og:image" content="e:/学海无涯/实验/视频数车/实验图片/TIM截图20180610171937.png">
+<meta property="og:image" content="e:/学海无涯/实验/视频数车/实验图片/TIM截图20180610172713.png">
+<meta property="og:image" content="e:/学海无涯/实验/视频数车/实验图片/TIM截图20180610172832.png">
+<meta property="og:image" content="e:/学海无涯/实验/视频数车/实验图片/TIM截图20180610173859.png">
+<meta property="og:image" content="e:/学海无涯/实验/视频数车/实验图片/TIM截图20180610183242.png">
+<meta property="og:updated_time" content="2018-06-26T01:10:25.931Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Blogs of Zhaocheng">
+<meta name="twitter:title" content="opencv+python车辆识别">
+<meta name="twitter:description" content="Opencv+python 视频车辆识别最近要做交通管理和控制课程的实验，提到采集数据时老师说可以用多种方法来实现，因此想到自己编写一个车辆识别的程序。第一个想到的是循环神经网络，但是因为自己在机器学习方面造诣还是很浅的，因此选择了比较传统，也是相关论坛比较多的opencv进行实现，这里选用的级联分类器训练(Cascade Classifier)，一路上很多网上的大神的博客给了很详细的指导，记录下">
+<meta name="twitter:image" content="e:/学海无涯/实验/视频数车/实验图片/TIM截图20180608210759.png">
 
 
 
@@ -115,13 +133,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/06/26/opencv-python车辆识别/"/>
 
 
 
 
 
-  <title>Blogs of Zhaocheng</title>
+  <title>opencv+python车辆识别 | Blogs of Zhaocheng</title>
   
 
 
@@ -140,8 +158,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -214,205 +231,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/26/预习作业——大数据量查找相同数据/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Zhaocheng Du">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blogs of Zhaocheng">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/26/预习作业——大数据量查找相同数据/" itemprop="url">预习作业——大数据量查找相同数据</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-26T09:14:56+08:00">
-                2018-06-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="预习作业1——大数据量查找相同数据"><a href="#预习作业1——大数据量查找相同数据" class="headerlink" title="预习作业1——大数据量查找相同数据"></a>预习作业1——大数据量查找相同数据</h1><p>本次的作业是在大数据实习前的三个预习作业第一项，其问题描述如下：</p>
-<p>有两个文件分别存储着升序排列的整形数据(没有重复的数据),写一个程序将这两个文件的整形数据的交集找出来,要求程序运行速度最优。</p>
-<p>本次编程使用C++完成。</p>
-<p><strong>参考文献</strong></p>
-<p>二叉树算法：<a href="http://blog.jobbole.com/104106/" target="_blank" rel="noopener">http://blog.jobbole.com/104106/</a></p>
-<p>gdb使用教程：<a href="http://witmax.cn/gdb-usage.html" target="_blank" rel="noopener">http://witmax.cn/gdb-usage.html</a></p>
-<h2 id="1-相关概念"><a href="#1-相关概念" class="headerlink" title="1. 相关概念"></a>1. 相关概念</h2><p><strong>时间复杂度</strong>：</p>
-<p>时间复杂度是指执行算法所需要的计算工作量，简单来说，时间复杂度指的是语句执行次数。</p>
-<p><strong>时间复杂度计算方法</strong>：</p>
-<ol>
-<li>用常数1代替运行时间中的所有加法常数 </li>
-<li>修改后的运行次数函数中，只保留最高阶项 </li>
-<li>去除最高阶项的系数</li>
-</ol>
-<h2 id="2-环境配置"><a href="#2-环境配置" class="headerlink" title="2.环境配置"></a>2.环境配置</h2><p>从windows转换为linux之后各种不适应，现在刚刚反应过来，linux系统并不存在windows系统中各种友好的图像化软件，例如<code>Visual Studio 2008</code> 这种鬼，它已经彻底颠覆了我对于计算机的思维…</p>
-<p><strong>C++在linux系统中编译</strong></p>
-<p>在linux中首先要将C++文件<code>.cpp</code> 使用<code>g++</code> 进行编译，什么是编译呢，通过查询，就是将高级语言转化为计算机可识别，可运行的二进制文件。其实我们可以看到在linux系统当中，所有的指令，例如<code>ls</code> ,<code>mv</code> 都是通过编译后将高级语言转化为的简单指令，因为后的文件就可以直接在shell中输入运行了：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$  g++ -g hello.cpp -o hello</span><br></pre></td></tr></table></figure>
-<p>其中 -g是为了能够显示变量名和函数名，不然显示是一段二进制地址。</p>
-<p><strong>C++在linux系统中调试</strong></p>
-<p>在编译之后我们要进行代码的调试，在linux系统当中使用<code>GDB</code>来对已经编译好的代码进行调试，在bash</p>
-<p>中输入<code>GDB</code>即可打开相应界面和指令。</p>
-<table>
-<thead>
-<tr>
-<th>指令</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>file helloworld</td>
-<td>打开已编译完的helloworld可执行文件</td>
-</tr>
-<tr>
-<td>l</td>
-<td>查看源代码</td>
-</tr>
-<tr>
-<td>b func</td>
-<td>在某函数处设置断点</td>
-</tr>
-<tr>
-<td>b 16</td>
-<td>在第16行插入断点</td>
-</tr>
-<tr>
-<td>n</td>
-<td>从断点下一步</td>
-</tr>
-<tr>
-<td>p i</td>
-<td>打印变量i的值</td>
-</tr>
-<tr>
-<td>c</td>
-<td>继续执行下面的</td>
-</tr>
-<tr>
-<td>delete 16</td>
-<td>删除断点16</td>
-</tr>
-</tbody>
-</table>
-<h2 id="3-实现方法"><a href="#3-实现方法" class="headerlink" title="3.实现方法"></a>3.实现方法</h2><p><strong>基本思路</strong></p>
-<p>step1,  先在文档1和文档2中读取一个基本数据</p>
-<p>step2,  将这两个数据进行对比大小</p>
-<p>step3, 若两个数据大小相同，存入output.txt文档当中</p>
-<p>​            若文档1中数据大于文档2中数据，文档2重新读入一个数据(因为这样数据可以数据2变大)</p>
-<p>​            若文档2中数据大于文档2中数据，文档1重新读入一个数据(因为这样数据可以数据1变大)</p>
-<p>step4, 销毁fin1,fin2,fout对象，释放内存</p>
-<p><strong>实现C++代码</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;fstream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">string</span> line1;</span><br><span class="line">    <span class="built_in">string</span> line2;</span><br><span class="line">    <span class="built_in">string</span> line3;</span><br><span class="line">    <span class="keyword">int</span> data1;</span><br><span class="line">    <span class="keyword">int</span> data2;</span><br><span class="line">    <span class="function">ifstream <span class="title">fin1</span><span class="params">(<span class="string">"/media/vincent/新加卷/data/1_1.txt"</span>)</span></span>; <span class="comment">//点1</span></span><br><span class="line">    <span class="function">ifstream <span class="title">fin2</span><span class="params">(<span class="string">"/media/vincent/新加卷/data/1_2.txt"</span>)</span></span>;</span><br><span class="line">    <span class="function">ofstream <span class="title">fout</span><span class="params">(<span class="string">"/media/vincent/新加卷/data/output.txt"</span>)</span></span>;</span><br><span class="line">    fin1 &gt;&gt; line1; <span class="comment">//点2</span></span><br><span class="line">    fin2 &gt;&gt; line2;</span><br><span class="line">    <span class="keyword">while</span> (!fin1.eof() &amp; !fin2.eof()) </span><br><span class="line">    &#123;</span><br><span class="line">        data1 = atoi(line1.c_str()); <span class="comment">//点2</span></span><br><span class="line">        data2 = atoi(line2.c_str());</span><br><span class="line">        <span class="keyword">if</span> (data1 == data2)</span><br><span class="line">        &#123;</span><br><span class="line">            fout &lt;&lt; line1 &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">            fin1 &gt;&gt; line1;</span><br><span class="line">            fin2 &gt;&gt; line2;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="string">"line1"</span> &lt;&lt; line1 &lt;&lt; <span class="string">"line2"</span> &lt;&lt; line2 &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (data1 &lt; data2)</span><br><span class="line">        &#123;</span><br><span class="line">            fin1 &gt;&gt; line1;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="string">"line1"</span> &lt;&lt; line1 &lt;&lt; <span class="string">"line2"</span> &lt;&lt; line2 &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            fin2 &gt;&gt; line2;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="string">"line1"</span> &lt;&lt; line1 &lt;&lt; <span class="string">"line2"</span> &lt;&lt; line2 &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">        &#125;</span><br><span class="line">     &#125;</span><br><span class="line">    fin1.close(); <span class="comment">//点4</span></span><br><span class="line">    fin2.close();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>C++相关示意</strong></p>
-<p>点1：使用<code>ifstream</code>和<code>ofstream</code>定义输入输出文档</p>
-<p>点2：将字符串型数据转化为整形数据，便于后面对比大小</p>
-<p>点3：销毁对象，释放内存</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
 
   
 
@@ -442,9 +263,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/26/opencv-python车辆识别/" itemprop="url">opencv+python车辆识别</a></h1>
+          <h1 class="post-title" itemprop="name headline">opencv+python车辆识别</h1>
         
 
         <div class="post-meta">
@@ -494,9 +313,7 @@
       
 
       
-        
-          
-            <h1 id="Opencv-python-视频车辆识别"><a href="#Opencv-python-视频车辆识别" class="headerlink" title="Opencv+python 视频车辆识别"></a>Opencv+python 视频车辆识别</h1><p>最近要做交通管理和控制课程的实验，提到采集数据时老师说可以用多种方法来实现，因此想到自己编写一个车辆识别的程序。第一个想到的是循环神经网络，但是因为自己在机器学习方面造诣还是很浅的，因此选择了比较传统，也是相关论坛比较多的opencv进行实现，这里选用的级联分类器训练(Cascade Classifier)，一路上很多网上的大神的博客给了很详细的指导，记录下来，希望自己以后可以用到。</p>
+        <h1 id="Opencv-python-视频车辆识别"><a href="#Opencv-python-视频车辆识别" class="headerlink" title="Opencv+python 视频车辆识别"></a>Opencv+python 视频车辆识别</h1><p>最近要做交通管理和控制课程的实验，提到采集数据时老师说可以用多种方法来实现，因此想到自己编写一个车辆识别的程序。第一个想到的是循环神经网络，但是因为自己在机器学习方面造诣还是很浅的，因此选择了比较传统，也是相关论坛比较多的opencv进行实现，这里选用的级联分类器训练(Cascade Classifier)，一路上很多网上的大神的博客给了很详细的指导，记录下来，希望自己以后可以用到。</p>
 <p><strong>参考文献：</strong></p>
 <p>haar特征识别算法原理：<a href="https://blog.csdn.net/jing_xin/article/details/17383161" target="_blank" rel="noopener">https://blog.csdn.net/jing_xin/article/details/17383161</a></p>
 <p>博主提到了很多有用的资源：<a href="https://blog.csdn.net/u014696921/article/details/69935802" target="_blank" rel="noopener">https://blog.csdn.net/u014696921/article/details/69935802</a></p>
@@ -597,8 +414,6 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> moviepy.editor <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="comment">#from cv2 import cv</span></span><br><span class="line"></span><br><span class="line">filename = <span class="string">'E:/学海无涯/20180613_IMG_0627 (3).MOV'</span></span><br><span class="line">fps = <span class="number">24</span>   <span class="comment">#视频帧率</span></span><br><span class="line">fourcc = cv2.VideoWriter_fourcc(*<span class="string">'XVID'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#clip = VideoFileClip(filename).subclip(242,291)</span></span><br><span class="line"><span class="comment">#clip.write_videofile("E:/学海无涯/rawvideo.mp4")</span></span><br><span class="line"></span><br><span class="line">car_cascade = cv2.CascadeClassifier(<span class="string">'C:/Users/Administrator/Desktop/lll/haarcascade_eye.xml'</span>)</span><br><span class="line">car_cascade.load(<span class="string">'C:/Users/Administrator/Desktop/lll/haarcascade_eye.xml'</span>)</span><br><span class="line">VideoCap = cv2.VideoCapture(<span class="string">"E:/学海无涯/rawvideo.mp4"</span>)</span><br><span class="line">videoWriter = cv2.VideoWriter(<span class="string">'E:/学海无涯/processedvideo.mp4'</span>, fourcc, fps, (<span class="number">1360</span>,<span class="number">480</span>))</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span>(VideoCap.isOpened()):</span><br><span class="line">  ret, frame = VideoCap.read() <span class="comment">#逐帧获取视频，frame是图片</span></span><br><span class="line">  <span class="keyword">if</span> ret == <span class="keyword">True</span>: <span class="comment">#处理并显示这一帧的图片</span></span><br><span class="line">      gray_img = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY) <span class="comment">#转化为灰度图</span></span><br><span class="line">      cars = car_cascade.detectMultiScale(gray_img, <span class="number">1.3</span>, <span class="number">5</span>) <span class="comment">#车辆检测，返回(x,y,w,h)</span></span><br><span class="line">      <span class="keyword">for</span> (x,y,w,h) <span class="keyword">in</span> cars: <span class="comment">#对每一个兴趣区画框</span></span><br><span class="line">        	cv2.rectangle(frame,(x,y),(x+w,y+h),(<span class="number">255</span>,<span class="number">0</span>,<span class="number">0</span>),<span class="number">2</span>)</span><br><span class="line">      cv2.imshow(<span class="string">'Frame'</span>,frame) <span class="comment">#显示图片</span></span><br><span class="line">      videoWriter.write(frame)</span><br><span class="line">      <span class="keyword">if</span> cv2.waitKey(<span class="number">25</span>) &amp; <span class="number">0xFF</span> == ord(<span class="string">'q'</span>): <span class="comment">#按Q停止</span></span><br><span class="line">          <span class="keyword">break</span></span><br><span class="line">  <span class="keyword">else</span>: <span class="comment">#没有帧后显示循环</span></span><br><span class="line">      <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#处理完后释放所有的对象</span></span><br><span class="line">VideoCap.release()</span><br><span class="line">videoWriter.release()</span><br><span class="line"><span class="comment">#关闭所有帧</span></span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
 <p>在做完了这一波之后越来越觉得掌握算法本身比掌握如何使用算法更加的重要，相比而言现在的东西还是一个半成品，代码什么的后面还需要改进。</p>
 
-          
-        
       
     </div>
     
@@ -613,585 +428,40 @@
 
     <footer class="post-footer">
       
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/01/交通向参考文献和检索方法汇总/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Zhaocheng Du">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blogs of Zhaocheng">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/01/交通向参考文献和检索方法汇总/" itemprop="url">交通向参考文献和检索方法汇总</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-01T12:14:35+08:00">
-                2018-06-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
+        <div class="post-tags">
           
-
+            <a href="/tags/python-computer-vision/" rel="tag"># python, computer vision</a>
           
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="参考文献和检索方法汇总"><a href="#参考文献和检索方法汇总" class="headerlink" title="参考文献和检索方法汇总"></a>参考文献和检索方法汇总</h1><p>最近听了很多也问了很多关于信息检索的方法，信息检索的网站以及相关期刊的问题，做一下简单的整理。因为倩妮老铁在之前已经做了一波整理，因此在这里做一波cite。有兴趣的可以通过下面的网页参考并且关注倩妮老铁的博客。</p>
-<p><strong>参考内容 ：</strong></p>
-<p>倩妮老铁的博客: <a href="http://qianni1997.github.io/" target="_blank" rel="noopener">http://qianni1997.github.io/</a></p>
-<p>陈喜群老师个人主页: <a href="http://person.zju.edu.cn/xiqun/687353.html" target="_blank" rel="noopener">http://person.zju.edu.cn/xiqun/687353.html</a></p>
-<h2 id="信息检索的常用网页："><a href="#信息检索的常用网页：" class="headerlink" title="信息检索的常用网页："></a>信息检索的常用网页：</h2><ul>
-<li><p>百度学术或者在百度主页的右上角设置上进行高级检索</p>
-<p>虽然百度学术的质量不高，但有一点好处是在找到想要引用的文章之后，在左侧可自动生成引用论文的格式。</p>
-</li>
-<li><p>中国知网(CNKI)</p>
-<p>这个就不必多说了，注意常看的论文类型为硕博士论文和期刊论文。</p>
-</li>
-<li><p>Web of science</p>
-<p>可以从交大图书馆主页的热门资源中进入，如果自己进入的话需要进行账号登录。主要为SCI数据库。但由于论文发表后需要有一段时间的延迟方可在该网页上找到资源，信息更新相对较慢。</p>
-</li>
-<li><p>Science Direct </p>
-<p>就不多说了，收录论文相当全面，能够覆盖大量的期刊，并且可以在校园网的环境下下载。</p>
-</li>
-<li><p>Google scholar</p>
-<p>覆盖面优于Science direct，但由于需要翻墙加上学校并没有购买使用权，可以在出国后使用。</p>
-</li>
-</ul>
-<h2 id="交通领域的重要外文期刊"><a href="#交通领域的重要外文期刊" class="headerlink" title="交通领域的重要外文期刊"></a>交通领域的重要外文期刊</h2><p>以下期刊是在郑芳芳老师课后提及的几个期刊，由倩妮老铁整理，包含但不限于：</p>
-<ul>
-<li><p>《Transportation Science》</p>
-</li>
-<li><p>《Transportation Research》</p>
-<p>A: Policy and Practice; B: Methodological; C: Emerging technology; </p>
-<p>D: Transport and environment; E: Logistics and Transportation; F: Traffic psychology and behaviors</p>
-</li>
-<li><p>《IEEE Xplore: IEEE Transaction on Intelligent Transportation System》</p>
-<p>此期刊偏向于应用</p>
-</li>
-<li><p>ISTTT—International Symposium on Transportation and Traffic Theory</p>
-</li>
-<li><p>《Journal of Advanced Transportation》</p>
-</li>
-<li><p>TRB会议</p>
-</li>
-</ul>
-<p>以下为陈喜群老师总结的年度科学与技术领域 SCI 和 SSCI 相关内容，具体参见陈喜群老师主页。自左至右各列分别为序号，期刊名称，影响因子(总引用数除以论文数)，可引用项目(论文发表总数)，被引总数。 </p>
-<table>
-<thead>
-<tr>
-<th></th>
-<th>Journal Title</th>
-<th>Impact Factor</th>
-<th>Citable Items</th>
-<th>Total Citations</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1.</td>
-<td>Computer-Aided Civil and Infrastructure Engineering</td>
-<td>5.786</td>
-<td>60</td>
-<td>2444</td>
-</tr>
-<tr>
-<td>2.</td>
-<td>Vehicular Communications</td>
-<td>5.108</td>
-<td>19</td>
-<td>202</td>
-</tr>
-<tr>
-<td>3.</td>
-<td>IEEE Vehicular Technology Magazine</td>
-<td>4.429</td>
-<td>25</td>
-<td>849</td>
-</tr>
-<tr>
-<td>4.</td>
-<td>IEEE Transactions on Vehicular Technology</td>
-<td>4.066</td>
-<td>894</td>
-<td>17010</td>
-</tr>
-<tr>
-<td>5.</td>
-<td>Transportation Research Part C-Emerging Technologies</td>
-<td>3.805</td>
-<td>229</td>
-<td>6122</td>
-</tr>
-<tr>
-<td>6.</td>
-<td>Transportation Research Part B-Methodological</td>
-<td>3.769</td>
-<td>194</td>
-<td>8518</td>
-</tr>
-<tr>
-<td>7.</td>
-<td>IEEE Transactions on Intelligent Transportation Systems</td>
-<td>3.724</td>
-<td>306</td>
-<td>7224</td>
-</tr>
-<tr>
-<td>8.</td>
-<td>IEEE Intelligent Transportation Systems Magazine</td>
-<td>3.654</td>
-<td>27</td>
-<td>384</td>
-</tr>
-<tr>
-<td>9.</td>
-<td>Transportation Science</td>
-<td>3.275</td>
-<td>81</td>
-<td>4456</td>
-</tr>
-<tr>
-<td>10.</td>
-<td>Transportation Research Part E-Logistics and Transportation Review</td>
-<td>2.974</td>
-<td>155</td>
-<td>4427</td>
-</tr>
-<tr>
-<td>11.</td>
-<td>Accident Analysis and Prevention</td>
-<td>2.685</td>
-<td>296</td>
-<td>13131</td>
-</tr>
-<tr>
-<td>12.</td>
-<td>Journal of Transport Geography</td>
-<td>2.675</td>
-<td>162</td>
-<td>4692</td>
-</tr>
-<tr>
-<td>13.</td>
-<td>Networks &amp; Spatial Economics</td>
-<td>2.662</td>
-<td>49</td>
-<td>1041</td>
-</tr>
-<tr>
-<td>14.</td>
-<td>Transportation</td>
-<td>2.633</td>
-<td>51</td>
-<td>2692</td>
-</tr>
-<tr>
-<td>15.</td>
-<td>Transportation Research Part A-Policy and Practice</td>
-<td>2.609</td>
-<td>201</td>
-<td>6615</td>
-</tr>
-<tr>
-<td>16.</td>
-<td>Transportmetrica B-Transport Dynamics</td>
-<td>2.520</td>
-<td>10</td>
-<td>97</td>
-</tr>
-<tr>
-<td>17.</td>
-<td>Journal of Air Transport Management</td>
-<td>2.357</td>
-<td>138</td>
-<td>2383</td>
-</tr>
-<tr>
-<td>18.</td>
-<td>Transportation Research Part D-Transport and Environment</td>
-<td>2.341</td>
-<td>175</td>
-<td>3572</td>
-</tr>
-<tr>
-<td>19.</td>
-<td>Transport Policy</td>
-<td>2.269</td>
-<td>147</td>
-<td>3737</td>
-</tr>
-<tr>
-<td>20.</td>
-<td>International Journal of Engine Research</td>
-<td>2.237</td>
-<td>76</td>
-<td>1232</td>
-</tr>
-<tr>
-<td>21.</td>
-<td>Mobilities</td>
-<td>2.043</td>
-<td>46</td>
-<td>868</td>
-</tr>
-<tr>
-<td>22.</td>
-<td>Transportmetrica A-Transport Science</td>
-<td>2.033</td>
-<td>48</td>
-<td>302</td>
-</tr>
-<tr>
-<td>23.</td>
-<td>International Journal of Sustainable Transportation</td>
-<td>1.973</td>
-<td>87</td>
-<td>504</td>
-</tr>
-<tr>
-<td>24.</td>
-<td>Journal of Safety Research</td>
-<td>1.841</td>
-<td>51</td>
-<td>2604</td>
-</tr>
-<tr>
-<td>25.</td>
-<td>Transportation Research Part F-Traffic Psychology and Behaviour</td>
-<td>1.830</td>
-<td>173</td>
-<td>2637</td>
-</tr>
-<tr>
-<td>26.</td>
-<td>Journal of Advanced Transportation</td>
-<td>1.813</td>
-<td>86</td>
-<td>796</td>
-</tr>
-<tr>
-<td>27.</td>
-<td>Journal of Intelligent Transportation Systems</td>
-<td>1.769</td>
-<td>43</td>
-<td>543</td>
-</tr>
-<tr>
-<td>28.</td>
-<td>Maritime Policy &amp; Management</td>
-<td>1.741</td>
-<td>64</td>
-<td>1171</td>
-</tr>
-<tr>
-<td>29.</td>
-<td>Journal of Transport &amp; Health</td>
-<td>1.718</td>
-<td>54</td>
-<td>251</td>
-</tr>
-<tr>
-<td>30.</td>
-<td>Journal of Transport and Land Use</td>
-<td>1.679</td>
-<td>25</td>
-<td>282</td>
-</tr>
-<tr>
-<td>31.</td>
-<td>Proceedings of The Institution of Mechanical Engineers Part F-Journal of Rail and Rapid Transit</td>
-<td>1.537</td>
-<td>148</td>
-<td>1343</td>
-</tr>
-<tr>
-<td>32.</td>
-<td>Traffic Injury Prevention</td>
-<td>1.677</td>
-<td>156</td>
-<td>1290</td>
-</tr>
-<tr>
-<td>33.</td>
-<td>Proceedings of The Institution of Mechanical Engineers Part F-Journal of Automobile Engineering</td>
-<td>1.253</td>
-<td>143</td>
-<td>2309</td>
-</tr>
-<tr>
-<td>34.</td>
-<td>IET Intelligent Transport Systems</td>
-<td>1.194</td>
-<td>79</td>
-<td>642</td>
-</tr>
-<tr>
-<td>35.</td>
-<td>Transport</td>
-<td>1.163</td>
-<td>45</td>
-<td>424</td>
-</tr>
-<tr>
-<td>36.</td>
-<td>European Transport Research Review</td>
-<td>0.962</td>
-<td>26</td>
-<td>195</td>
-</tr>
-<tr>
-<td>37.</td>
-<td>Journal of Transportation Engineering</td>
-<td>0.962</td>
-<td>98</td>
-<td>3220</td>
-</tr>
-<tr>
-<td>38.</td>
-<td>Maritime Economics &amp; Logistics</td>
-<td>0.939</td>
-<td>26</td>
-<td>519</td>
-</tr>
-<tr>
-<td>39.</td>
-<td>Journal of Transport Economics and Policy</td>
-<td>0.935</td>
-<td>17</td>
-<td>1035</td>
-</tr>
-<tr>
-<td>40.</td>
-<td>International Journal of Automotive Technology</td>
-<td>0.897</td>
-<td>108</td>
-<td>968</td>
-</tr>
-<tr>
-<td>41.</td>
-<td>Transportation Journal</td>
-<td>0.897</td>
-<td>15</td>
-<td>464</td>
-</tr>
-<tr>
-<td>42.</td>
-<td>Research in Transportation Economics</td>
-<td>0.781</td>
-<td>73</td>
-<td>669</td>
-</tr>
-<tr>
-<td>43.</td>
-<td>International Journal of Vehicle Design</td>
-<td>0.713</td>
-<td>54</td>
-<td>709</td>
-</tr>
-<tr>
-<td>44.</td>
-<td>Journal of Public Transportation</td>
-<td>0.710</td>
-<td>27</td>
-<td>544</td>
-</tr>
-<tr>
-<td>45.</td>
-<td>Transportation Letters-The International Journal of Transportation Research</td>
-<td>0.706</td>
-<td>27</td>
-<td>186</td>
-</tr>
-<tr>
-<td>46.</td>
-<td>European Journal of Transport and Infrastructure Research</td>
-<td>0.619</td>
-<td>37</td>
-<td>361</td>
-</tr>
-<tr>
-<td>47.</td>
-<td>International Journal of Shipping and Transport Logistics</td>
-<td>0.609</td>
-<td>23</td>
-<td>173</td>
-</tr>
-<tr>
-<td>48.</td>
-<td>Transportation Research Record</td>
-<td>0.598</td>
-<td>848</td>
-<td>16327</td>
-</tr>
-<tr>
-<td>49.</td>
-<td>Transportation Planning and Technology</td>
-<td>0.474</td>
-<td>50</td>
-<td>550</td>
-</tr>
-<tr>
-<td>50.</td>
-<td>Journal of Transportation Safety &amp; Security</td>
-<td>0.465</td>
-<td>31</td>
-<td>93</td>
-</tr>
-<tr>
-<td>51.</td>
-<td>Promet-Traffic &amp; Transportation</td>
-<td>0.430</td>
-<td>63</td>
-<td>201</td>
-</tr>
-<tr>
-<td>52.</td>
-<td>Proceedings of the Institution of Civil Engineers-Transport</td>
-<td>0.402</td>
-<td>36</td>
-<td>235</td>
-</tr>
-<tr>
-<td>53.</td>
-<td>International Journal of Heavy Vehicle Systems</td>
-<td>0.308</td>
-<td>20</td>
-<td>102</td>
-</tr>
-<tr>
-<td>54.</td>
-<td>ITE Journal-Institute of Transportation Engineers</td>
-<td>0.291</td>
-<td>46</td>
-<td>269</td>
-</tr>
-<tr>
-<td>55.</td>
-<td>International Journal of Transport Economics</td>
-<td>0.220</td>
-<td>16</td>
-<td>189</td>
-</tr>
-<tr>
-<td>56.</td>
-<td>Road &amp; Transport Research</td>
-<td>0.024</td>
-<td>6</td>
-<td>115</td>
-</tr>
-<tr>
-<td></td>
-<td>Summary</td>
-<td>-</td>
-<td>6190</td>
-<td>89669</td>
-</tr>
-</tbody>
-</table>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
       
 
       
       
-        <div class="post-eof"></div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/01/交通向参考文献和检索方法汇总/" rel="next" title="交通向参考文献和检索方法汇总">
+                <i class="fa fa-chevron-left"></i> 交通向参考文献和检索方法汇总
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/06/26/预习作业——大数据量查找相同数据/" rel="prev" title="预习作业——大数据量查找相同数据">
+                预习作业——大数据量查找相同数据 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
       
     </footer>
   </div>
@@ -1201,10 +471,11 @@
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -1212,6 +483,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -1232,8 +507,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -1284,6 +568,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Opencv-python-视频车辆识别"><span class="nav-number">1.</span> <span class="nav-text">Opencv+python 视频车辆识别</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-搭建需要在python中使用opencv的环境"><span class="nav-number">1.1.</span> <span class="nav-text">1. 搭建需要在python中使用opencv的环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-创建正负训练样本集"><span class="nav-number">1.2.</span> <span class="nav-text">2. 创建正负训练样本集</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-创建正样本集"><span class="nav-number">1.2.1.</span> <span class="nav-text">2.1 创建正样本集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-创建负样本集"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.2 创建负样本集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-生成vec文件"><span class="nav-number">1.2.3.</span> <span class="nav-text">2.3 生成vec文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-使用adaboost算法训练数据"><span class="nav-number">1.3.</span> <span class="nav-text">3. 使用adaboost算法训练数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-对图片进行初步检测"><span class="nav-number">1.4.</span> <span class="nav-text">4.对图片进行初步检测</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-使用cv2做视频处理"><span class="nav-number">1.5.</span> <span class="nav-text">5.使用cv2做视频处理</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -1417,6 +717,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
