@@ -79,13 +79,27 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Blogs of Zhaocheng">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="基于LBS的打车APP开发功能描述：现在我们想要开发一个类似于滴滴打车的软件，主要想要实现下面的两个功能： 在给定的一张北京地图上，有诸多的出租车车辆 功能1: range_query，在一个范围内，例如我们的屏幕范围内，显示出所有的出租车信息 功能2: knn_query，用户指定起点，可以获得距离最近的k辆车 面临问题与解决方案 对于range_query  如何存储北京的地图信息，使得信息检">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于LBS的出租车检索内核实现.md">
+<meta property="og:url" content="http://yoursite.com/2018/08/05/基于LBS的出租车检索内核实现/index.html">
 <meta property="og:site_name" content="Blogs of Zhaocheng">
+<meta property="og:description" content="基于LBS的打车APP开发功能描述：现在我们想要开发一个类似于滴滴打车的软件，主要想要实现下面的两个功能： 在给定的一张北京地图上，有诸多的出租车车辆 功能1: range_query，在一个范围内，例如我们的屏幕范围内，显示出所有的出租车信息 功能2: knn_query，用户指定起点，可以获得距离最近的k辆车 面临问题与解决方案 对于range_query  如何存储北京的地图信息，使得信息检">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2018/08/05/基于LBS的出租车检索内核实现/E:/学海无涯/Hexo/source/_posts/基于LBS的出租车检索内核实现/2018-07-25%2019-44-37屏幕截图.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/05/基于LBS的出租车检索内核实现/E:/学海无涯/Hexo/source/_posts/基于LBS的出租车检索内核实现/2018-07-25%2019-47-28屏幕截图.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/05/基于LBS的出租车检索内核实现/E:/学海无涯/Hexo/source/_posts/基于LBS的出租车检索内核实现/2018-07-26%2007-43-43屏幕截图.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/05/基于LBS的出租车检索内核实现/E:/学海无涯/Hexo/source/_posts/基于LBS的出租车检索内核实现/2018-07-30%2000-17-25屏幕截图.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/05/基于LBS的出租车检索内核实现/E:/学海无涯/Hexo/source/_posts/基于LBS的出租车检索内核实现/2018-08-04%2023-06-02屏幕截图.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/05/基于LBS的出租车检索内核实现/E:/学海无涯/Hexo/source/_posts/基于LBS的出租车检索内核实现/2018-08-04%2011-12-37屏幕截图.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/05/基于LBS的出租车检索内核实现/E:/学海无涯/Hexo/source/_posts/基于LBS的出租车检索内核实现/2018-08-04%2011-15-06屏幕截图.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/05/基于LBS的出租车检索内核实现/E:/学海无涯/Hexo/source/_posts/基于LBS的出租车检索内核实现/2018-08-04%2021-29-14屏幕截图.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/05/基于LBS的出租车检索内核实现/E:/学海无涯/Hexo/source/_posts/基于LBS的出租车检索内核实现/2018-08-04%2021-29-29屏幕截图.png">
+<meta property="og:updated_time" content="2018-08-05T15:28:02.622Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Blogs of Zhaocheng">
+<meta name="twitter:title" content="基于LBS的出租车检索内核实现.md">
+<meta name="twitter:description" content="基于LBS的打车APP开发功能描述：现在我们想要开发一个类似于滴滴打车的软件，主要想要实现下面的两个功能： 在给定的一张北京地图上，有诸多的出租车车辆 功能1: range_query，在一个范围内，例如我们的屏幕范围内，显示出所有的出租车信息 功能2: knn_query，用户指定起点，可以获得距离最近的k辆车 面临问题与解决方案 对于range_query  如何存储北京的地图信息，使得信息检">
+<meta name="twitter:image" content="http://yoursite.com/2018/08/05/基于LBS的出租车检索内核实现/E:/学海无涯/Hexo/source/_posts/基于LBS的出租车检索内核实现/2018-07-25%2019-44-37屏幕截图.png">
 
 
 
@@ -115,13 +129,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/08/05/基于LBS的出租车检索内核实现/"/>
 
 
 
 
 
-  <title>Blogs of Zhaocheng</title>
+  <title>基于LBS的出租车检索内核实现.md | Blogs of Zhaocheng</title>
   
 
 
@@ -140,8 +154,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -214,9 +227,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -246,9 +259,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/05/基于LBS的出租车检索内核实现/" itemprop="url">基于LBS的出租车检索内核实现.md</a></h1>
+          <h1 class="post-title" itemprop="name headline">基于LBS的出租车检索内核实现.md</h1>
         
 
         <div class="post-meta">
@@ -298,9 +309,7 @@
       
 
       
-        
-          
-            <h1 id="基于LBS的打车APP开发"><a href="#基于LBS的打车APP开发" class="headerlink" title="基于LBS的打车APP开发"></a>基于LBS的打车APP开发</h1><p><strong>功能描述</strong>：现在我们想要开发一个类似于滴滴打车的软件，主要想要实现下面的两个功能：</p>
+        <h1 id="基于LBS的打车APP开发"><a href="#基于LBS的打车APP开发" class="headerlink" title="基于LBS的打车APP开发"></a>基于LBS的打车APP开发</h1><p><strong>功能描述</strong>：现在我们想要开发一个类似于滴滴打车的软件，主要想要实现下面的两个功能：</p>
 <p>在给定的一张北京地图上，有诸多的出租车车辆</p>
 <p>功能1: range_query，在一个范围内，例如我们的屏幕范围内，显示出所有的出租车信息</p>
 <p>功能2: knn_query，用户指定起点，可以获得距离最近的k辆车</p>
@@ -829,8 +838,6 @@
 <h3 id="8-3-编写MinDist函数"><a href="#8-3-编写MinDist函数" class="headerlink" title="8.3 编写MinDist函数"></a>8.3 编写MinDist函数</h3><p>MinDist的大小根据格子所在源格子的位置有所不同，共有九种情况，以下做了分别的编写。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//见上，lbs_distance.h</span></span><br><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">Dist_min</span><span class="params">(<span class="keyword">lbs_grid_t</span>* lbs_grid, <span class="keyword">double</span> src_lon, <span class="keyword">double</span> src_lat, <span class="keyword">int</span> dis_cell_id)</span></span>&#123;</span><br><span class="line">  <span class="keyword">double</span> grid_distance;</span><br><span class="line">  <span class="keyword">double</span> des_lon;</span><br><span class="line">  <span class="keyword">double</span> des_lat;</span><br><span class="line">  <span class="keyword">int</span> src_cell_row = lbs_grid_cell_row(lbs_grid, src_lat)</span><br><span class="line">  <span class="keyword">int</span> src_cell_col = lbs_grid_cell_col(lbs_grid, src_lon)</span><br><span class="line">  lbs_grid_cell_row_col(lbs_grid, dis_cell_id, &amp;(<span class="keyword">int</span> des_cell_row), &amp;(<span class="keyword">int</span> des_cell_col));</span><br><span class="line">  <span class="comment">//左上的格子</span></span><br><span class="line">  <span class="keyword">if</span> (des_cell_row &gt; src_cell_row) &amp; (des_cell_col &lt; src_cell_col)&#123;</span><br><span class="line">    des_lon = LBS_LON_MIN + (des_cell_col + <span class="number">1</span>) * lbs_grid-&gt;cell_width;</span><br><span class="line">    des_lat = LBS_LAT_MIN + (des_cell_row) * lbs_grid-&gt;cell_height;</span><br><span class="line">    grid_distance = lbs_distance(src_lon, src_lat, des_lon, des_lat);</span><br><span class="line">    &#125;</span><br><span class="line">  <span class="comment">//直上的格子</span></span><br><span class="line">  <span class="keyword">else</span> <span class="keyword">if</span> (des_cell_row &gt; src_cell_row) &amp; (des_cell_col == src_cell_col)&#123;</span><br><span class="line">    des_lon = src_lon;</span><br><span class="line">    des_lat = LBS_LAT_MIN + (des_cell_row) * lbs_grid-&gt;cell_height;</span><br><span class="line">    grid_distance = lbs_distance(src_lon, src_lat, des_lon, des_lat);</span><br><span class="line">    &#125;</span><br><span class="line">  <span class="comment">//右上的格子</span></span><br><span class="line">  <span class="keyword">else</span> <span class="keyword">if</span> (des_cell_row &gt; src_cell_row) &amp; (des_cell_col &gt; src_cell_col)&#123;</span><br><span class="line">    des_lon = LBS_LON_MIN + (des_cell_col) * lbs_grid-&gt;cell_width;</span><br><span class="line">    des_lat = LBS_LAT_MIN + (des_cell_row) * lbs_grid-&gt;cell_height; </span><br><span class="line">    grid_distance = lbs_distance(src_lon, src_lat, des_lon, des_lat);</span><br><span class="line">    &#125;</span><br><span class="line">  <span class="comment">//直左的格子</span></span><br><span class="line">  <span class="keyword">else</span> <span class="keyword">if</span> (des_cell_row == src_cell_row) &amp; (des_cell_col &lt; src_cell_col)&#123;</span><br><span class="line">    des_lon = LBS_LON_MIN + (des_cell_col + <span class="number">1</span>) * lbs_grid-&gt;cell_width;</span><br><span class="line">    des_lat = src_lat;</span><br><span class="line">    grid_distance = lbs_distance(src_lon, src_lat, des_lon, des_lat);</span><br><span class="line">    &#125;</span><br><span class="line">  <span class="comment">//直右的格子</span></span><br><span class="line">  <span class="keyword">else</span> <span class="keyword">if</span> (des_cell_row == src_cell_row) &amp; (des_cell_col &gt; src_cell_col)&#123;</span><br><span class="line">    des_lon = LBS_LON_MIN + (des_cell_col) * lbs_grid-&gt;cell_width;</span><br><span class="line">    des_lat = src_lat;</span><br><span class="line">    grid_distance = lbs_distance(src_lon, src_lat, des_lon, des_lat);    </span><br><span class="line">    &#125;</span><br><span class="line">  <span class="comment">//本身的格子</span></span><br><span class="line">  <span class="keyword">else</span> <span class="keyword">if</span> (des_cell_row == src_cell_row) &amp; (des_cell_col == src_cell_col)&#123;</span><br><span class="line">    grid_distance = <span class="number">0</span>;    </span><br><span class="line">    &#125;</span><br><span class="line">  <span class="comment">//左下的格子</span></span><br><span class="line">  <span class="keyword">else</span> <span class="keyword">if</span> (des_cell_row &lt; src_cell_row) &amp; (des_cell_col &lt; src_cell_col)&#123;</span><br><span class="line">    des_lon = LBS_LON_MIN + (des_cell_col + <span class="number">1</span>) * lbs_grid-&gt;cell_width;</span><br><span class="line">    des_lat = LBS_LAT_MIN + (des_cell_row + <span class="number">1</span>) * lbs_grid-&gt;cell_height;</span><br><span class="line">    grid_distance = lbs_distance(src_lon, src_lat, des_lon, des_lat);  </span><br><span class="line">    &#125;</span><br><span class="line">  <span class="comment">//直下的格子</span></span><br><span class="line">  <span class="keyword">else</span> <span class="keyword">if</span> (des_cell_row &lt; src_cell_row) &amp; (des_cell_col == src_cell_col)&#123;</span><br><span class="line">    des_lon = src_lon;</span><br><span class="line">    des_lat = LBS_LAT_MIN + (des_cell_row + <span class="number">1</span>) * lbs_grid-&gt;cell_height;</span><br><span class="line">    grid_distance = lbs_distance(src_lon, src_lat, des_lon, des_lat);   </span><br><span class="line">    &#125;</span><br><span class="line">  <span class="comment">//右下的格子</span></span><br><span class="line">  <span class="keyword">else</span>&#123;</span><br><span class="line">    des_lon = LBS_LON_MIN + (des_cell_col) * lbs_grid-&gt;cell_width;</span><br><span class="line">    des_lat = LBS_LAT_MIN + (des_cell_row + <span class="number">1</span>) * lbs_grid-&gt;cell_height;</span><br><span class="line">    grid_distance = lbs_distance(src_lon, src_lat, des_lon, des_lat);  </span><br><span class="line">    &#125;</span><br><span class="line">  <span class="keyword">return</span> grid_distance</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//结束lbs_distance.h</span></span><br></pre></td></tr></table></figure>
 <h3 id="8-4-实现knn-query"><a href="#8-4-实现knn-query" class="headerlink" title="8.4 实现knn_query"></a>8.4 实现knn_query</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//见第五部分range_query函数,lbs_index.cpp</span></span><br><span class="line"><span class="comment">// NN查询接口[查询离lon,lat最近的出租车]</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lbs_grid_index_nn_query</span><span class="params">(<span class="keyword">double</span> lon, <span class="keyword">double</span> lat, <span class="keyword">lbs_res_node_t</span>* out)</span> </span>&#123;</span><br><span class="line">  <span class="comment">//获取第src车所在的位置和网格信息</span></span><br><span class="line">  <span class="keyword">double</span> src_lon = lon;</span><br><span class="line">  <span class="keyword">double</span> src_lat = lat;</span><br><span class="line">  <span class="keyword">int</span> src_cell_row = lbs_grid_cell_row(&amp;(lbs_grid), src_lat);</span><br><span class="line">  <span class="keyword">int</span> src_cell_col = lbs_grid_cell_col(&amp;(lbs_grid), src_lon);</span><br><span class="line">  <span class="keyword">int</span> src_cell_id = lbs_grid_cell_id(&amp;(lbs_grid), src_cell_row, src_cell_col);</span><br><span class="line">  <span class="comment">//初始化bitmap，并将src车所在的cell0记录在bitmap里</span></span><br><span class="line">  <span class="keyword">lbs_bitmap_t</span> lbs_bitmap;</span><br><span class="line">  <span class="keyword">int</span> ret = lbs_bitmap_init(&amp;(lbs_bitmap), (lbs_grid.col_num*lbs_grid.row_num));</span><br><span class="line">  ret = lbs_bitmap_setbit(lbs_bitmap, src_cell_id);</span><br><span class="line">  <span class="comment">//利用C0构建最小堆</span></span><br><span class="line">  lbs_nnheap_init lbs_nnheap;</span><br><span class="line">  ret = lbs_nnheap(&amp;(lbs_nnheap));</span><br><span class="line">  ret = lbs_nnheap_insert(&amp;(lbs_nnheap), )</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">lbs_mov_node_t</span> lbs_mov_node;</span><br><span class="line">  <span class="keyword">int</span> is_grid = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">double</span> distance = Dist_min(&amp;(lbs_grid), src_lon, src_lat, src_cell_id);</span><br><span class="line">  ret = lbs_nnheap_insert(&amp;(lbs_nnheap), &amp;(lbs_mov_node), src_cell_id, is_grid, distance);</span><br><span class="line">  <span class="comment">//获取头结点</span></span><br><span class="line">  <span class="keyword">lbs_heapnode_t</span>* nnheap_top = lbs_nnheap_top(lbs_nnheap);</span><br><span class="line">  <span class="keyword">int</span> temp_cell_id = src_cell_id;</span><br><span class="line">  <span class="keyword">while</span>(nnheap_top-&gt;is_grid == <span class="number">1</span>)&#123;</span><br><span class="line">    <span class="comment">//pop掉为grid的头结点</span></span><br><span class="line">    lbs_nnheap_pop(&amp;(lbs_nnheap));</span><br><span class="line">    <span class="comment">//找到该cell里的所有车辆信息，并且插入到heap</span></span><br><span class="line">    <span class="keyword">lbs_mov_node_t</span>* headnode = (<span class="keyword">lbs_mov_node_t</span>* )&amp;(lbs_grid-&gt;cell[temp_cell_id].dammy_node.<span class="built_in">queue</span>);</span><br><span class="line">    <span class="keyword">lbs_mov_node_t</span>* currnode = (<span class="keyword">lbs_mov_node_t</span>* )&amp;(lbs_grid-&gt;cell[temp_cell_id].dammy_node.<span class="built_in">queue</span>.next);</span><br><span class="line">    <span class="keyword">while</span>(headnode != curnode)&#123;</span><br><span class="line">      distance = lbs_distance(src_lon, src_lat, currnode-&gt;lon, currnode-&gt;lat);</span><br><span class="line">      ret = lbs_nnheap_insert(&amp;(lbs_nnheap), currnode, src_cell_id, is_grid = <span class="number">1</span>, distance);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//找出目前格子周围的未被检查的格子的cell_id，存入surrounding_id_arr中</span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">-1</span>; i == <span class="number">1</span>; i ++)&#123;</span><br><span class="line">      <span class="keyword">for</span> (j = <span class="number">-1</span>; j == <span class="number">1</span>; j ++)&#123;</span><br><span class="line">        <span class="keyword">int</span> new_cell_id = src_cell_id + (i * LBS_COL_NUM) + j;</span><br><span class="line">        ret = lbs_bitmap_isset(&amp;(lbs_bitmap), new_cell_id);</span><br><span class="line">        <span class="keyword">if</span> ret == <span class="number">0</span>&#123;</span><br><span class="line">          distance = Dist_min(&amp;(lbs_grid), src_lon, src_lat, new_cell_id);</span><br><span class="line">          ret = lbs_nnheap_insert(&amp;(lbs_nnheap), &amp;(lbs_mov_node), new_cell_id, is_grid = <span class="number">1</span>, distance);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">          <span class="keyword">continue</span>    </span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//取出headnode</span></span><br><span class="line">    nnheap_top = lbs_nnheap_top(lbs_nnheap);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 这个out就是list of 符合条件的车</span></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//结束lbs_index.cpp</span></span><br></pre></td></tr></table></figure>
-          
-        
       
     </div>
     
@@ -847,151 +854,28 @@
       
 
       
-
-      
-
       
       
-        <div class="post-eof"></div>
+
       
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/05/Liunx服务器基本操作/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Zhaocheng Du">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blogs of Zhaocheng">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/05/Liunx服务器基本操作/" itemprop="url">Liunx服务器基本操作.md</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
             
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-05T23:13:06+08:00">
-                2018-08-05
-              </time>
+              <a href="/2018/08/05/Liunx服务器基本操作/" rel="next" title="Liunx服务器基本操作.md">
+                <i class="fa fa-chevron-left"></i> Liunx服务器基本操作.md
+              </a>
             
+          </div>
 
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
             
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
+          </div>
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          
-            <p>最近在搬瓦工上购买了一台服务器，主要是为了可以科学上网，但正好最近的项目需要在另一个服务器上完成，所以记录一些登录和在远程服务器上的基本操作。</p>
-<p><strong>登录</strong></p>
-<p>首先是登录，登录使用<code>ssh</code>指令。在这里我还没有分配账户，所以使用超级用户root登录，@后面是我的主机ip地址，属性-p后面主要接我们的服务器端口号，Linux中默认为22。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ssh root@74.82.203.94 -p 26593</span><br></pre></td></tr></table></figure>
-<p>回车后需要你输入该地址的密码，输入后即可进入该服务器的terminal界面。</p>
-<p><strong>退出</strong></p>
-<p>退出is so easy，just <code>logout</code>.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">logout</span></span><br></pre></td></tr></table></figure>
-<p><strong>从网上下载文件</strong></p>
-<p>上传和下载文件使用<code>scp</code>指令，<code>scp</code>全拼(secure copy)。使用以下语法，将temp.txt文件从网上服务器的vincent地址下载到本地的vincent地址。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ scp root@74.82.203.94:/media/vincent/temp.txt /meida/vincent/</span><br></pre></td></tr></table></figure>
-<p><strong>从本地上传文件</strong></p>
-<p>只需将上一条指令的两个文件夹倒过来即可。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ scp /meida/vincent/temp.txt root@74.82.203.94:/media/vincent/</span><br></pre></td></tr></table></figure>
-<p><strong>分配一个新的用户</strong></p>
-<p>在一个大的服务器下，我们常常需要分配多个用户，以方便多个用户对于这个服务器的访问。为了确保可以工作，首先要切换到超级管理员root下，这里就不多赘述了。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ useradd testname <span class="comment">#增加用户</span></span><br><span class="line">$ passwd testname <span class="comment">#为testname设置密码，两次输入</span></span><br><span class="line">输入新的 UNIX 密码： </span><br><span class="line">重新输入新的 UNIX 密码： </span><br><span class="line">passwd：已成功更新密码</span><br></pre></td></tr></table></figure>
-<p>这时就有了一个叫testname的用户。</p>
-<p><strong>删除一个用户</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ userdel testname</span><br><span class="line">$ rm -rf testname <span class="comment">#清空testname的文件家</span></span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -1001,996 +885,11 @@
   </article>
 
 
-    
-      
 
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/26/预习作业——大数据量查找相同数据/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Zhaocheng Du">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blogs of Zhaocheng">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/26/预习作业——大数据量查找相同数据/" itemprop="url">预习作业——大数据量查找相同数据</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-26T09:14:56+08:00">
-                2018-06-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="预习作业1——大数据量查找相同数据"><a href="#预习作业1——大数据量查找相同数据" class="headerlink" title="预习作业1——大数据量查找相同数据"></a>预习作业1——大数据量查找相同数据</h1><p>本次的作业是在大数据实习前的三个预习作业第一项，其问题描述如下：</p>
-<p>有两个文件分别存储着升序排列的整形数据(没有重复的数据),写一个程序将这两个文件的整形数据的交集找出来,要求程序运行速度最优。</p>
-<p>本次编程使用C++完成。</p>
-<p><strong>参考文献</strong></p>
-<p>二叉树算法：<a href="http://blog.jobbole.com/104106/" target="_blank" rel="noopener">http://blog.jobbole.com/104106/</a></p>
-<p>gdb使用教程：<a href="http://witmax.cn/gdb-usage.html" target="_blank" rel="noopener">http://witmax.cn/gdb-usage.html</a></p>
-<h2 id="1-相关概念"><a href="#1-相关概念" class="headerlink" title="1. 相关概念"></a>1. 相关概念</h2><p><strong>时间复杂度</strong>：</p>
-<p>时间复杂度是指执行算法所需要的计算工作量，简单来说，时间复杂度指的是语句执行次数。</p>
-<p><strong>时间复杂度计算方法</strong>：</p>
-<ol>
-<li>用常数1代替运行时间中的所有加法常数 </li>
-<li>修改后的运行次数函数中，只保留最高阶项 </li>
-<li>去除最高阶项的系数</li>
-</ol>
-<h2 id="2-环境配置"><a href="#2-环境配置" class="headerlink" title="2.环境配置"></a>2.环境配置</h2><p>从windows转换为linux之后各种不适应，现在刚刚反应过来，linux系统并不存在windows系统中各种友好的图像化软件，例如<code>Visual Studio 2008</code> 这种鬼，它已经彻底颠覆了我对于计算机的思维…</p>
-<p><strong>C++在linux系统中编译</strong></p>
-<p>在linux中首先要将C++文件<code>.cpp</code> 使用<code>g++</code> 进行编译，什么是编译呢，通过查询，就是将高级语言转化为计算机可识别，可运行的二进制文件。其实我们可以看到在linux系统当中，所有的指令，例如<code>ls</code> ,<code>mv</code> 都是通过编译后将高级语言转化为的简单指令，因为后的文件就可以直接在shell中输入运行了：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$  g++ -g hello.cpp -o hello</span><br></pre></td></tr></table></figure>
-<p>其中 -g是为了能够显示变量名和函数名，不然显示是一段二进制地址。</p>
-<p><strong>C++在linux系统中调试</strong></p>
-<p>在编译之后我们要进行代码的调试，在linux系统当中使用<code>GDB</code>来对已经编译好的代码进行调试，在bash</p>
-<p>中输入<code>GDB</code>即可打开相应界面和指令。</p>
-<table>
-<thead>
-<tr>
-<th>指令</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>file helloworld</td>
-<td>打开已编译完的helloworld可执行文件</td>
-</tr>
-<tr>
-<td>l</td>
-<td>查看源代码</td>
-</tr>
-<tr>
-<td>b func</td>
-<td>在某函数处设置断点</td>
-</tr>
-<tr>
-<td>b 16</td>
-<td>在第16行插入断点</td>
-</tr>
-<tr>
-<td>n</td>
-<td>从断点下一步</td>
-</tr>
-<tr>
-<td>p i</td>
-<td>打印变量i的值</td>
-</tr>
-<tr>
-<td>c</td>
-<td>继续执行下面的</td>
-</tr>
-<tr>
-<td>delete 16</td>
-<td>删除断点16</td>
-</tr>
-</tbody>
-</table>
-<h2 id="3-实现方法"><a href="#3-实现方法" class="headerlink" title="3.实现方法"></a>3.实现方法</h2><p><strong>基本思路</strong></p>
-<p>step1,  先在文档1和文档2中读取一个基本数据</p>
-<p>step2,  将这两个数据进行对比大小</p>
-<p>step3, 若两个数据大小相同，存入output.txt文档当中</p>
-<p>​            若文档1中数据大于文档2中数据，文档2重新读入一个数据(因为这样数据可以数据2变大)</p>
-<p>​            若文档2中数据大于文档2中数据，文档1重新读入一个数据(因为这样数据可以数据1变大)</p>
-<p>step4, 销毁fin1,fin2,fout对象，释放内存</p>
-<p><strong>实现C++代码</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;fstream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">string</span> line1;</span><br><span class="line">    <span class="built_in">string</span> line2;</span><br><span class="line">    <span class="built_in">string</span> line3;</span><br><span class="line">    <span class="keyword">int</span> data1;</span><br><span class="line">    <span class="keyword">int</span> data2;</span><br><span class="line">    <span class="function">ifstream <span class="title">fin1</span><span class="params">(<span class="string">"/media/vincent/新加卷/data/1_1.txt"</span>)</span></span>; <span class="comment">//点1</span></span><br><span class="line">    <span class="function">ifstream <span class="title">fin2</span><span class="params">(<span class="string">"/media/vincent/新加卷/data/1_2.txt"</span>)</span></span>;</span><br><span class="line">    <span class="function">ofstream <span class="title">fout</span><span class="params">(<span class="string">"/media/vincent/新加卷/data/output.txt"</span>)</span></span>;</span><br><span class="line">    fin1 &gt;&gt; line1; <span class="comment">//点2</span></span><br><span class="line">    fin2 &gt;&gt; line2;</span><br><span class="line">    <span class="keyword">while</span> (!fin1.eof() &amp; !fin2.eof()) </span><br><span class="line">    &#123;</span><br><span class="line">        data1 = atoi(line1.c_str()); <span class="comment">//点2</span></span><br><span class="line">        data2 = atoi(line2.c_str());</span><br><span class="line">        <span class="keyword">if</span> (data1 == data2)</span><br><span class="line">        &#123;</span><br><span class="line">            fout &lt;&lt; line1 &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">            fin1 &gt;&gt; line1;</span><br><span class="line">            fin2 &gt;&gt; line2;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="string">"line1"</span> &lt;&lt; line1 &lt;&lt; <span class="string">"line2"</span> &lt;&lt; line2 &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (data1 &lt; data2)</span><br><span class="line">        &#123;</span><br><span class="line">            fin1 &gt;&gt; line1;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="string">"line1"</span> &lt;&lt; line1 &lt;&lt; <span class="string">"line2"</span> &lt;&lt; line2 &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            fin2 &gt;&gt; line2;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="string">"line1"</span> &lt;&lt; line1 &lt;&lt; <span class="string">"line2"</span> &lt;&lt; line2 &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">        &#125;</span><br><span class="line">     &#125;</span><br><span class="line">    fin1.close(); <span class="comment">//点4</span></span><br><span class="line">    fin2.close();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>C++相关示意</strong></p>
-<p>点1：使用<code>ifstream</code>和<code>ofstream</code>定义输入输出文档</p>
-<p>点2：将字符串型数据转化为整形数据，便于后面对比大小</p>
-<p>点3：销毁对象，释放内存</p>
-
-          
-        
+    <div class="post-spread">
       
     </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
   </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/26/opencv-python车辆识别/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Zhaocheng Du">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blogs of Zhaocheng">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/26/opencv-python车辆识别/" itemprop="url">opencv+python车辆识别</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-26T09:07:50+08:00">
-                2018-06-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Opencv-python-视频车辆识别"><a href="#Opencv-python-视频车辆识别" class="headerlink" title="Opencv+python 视频车辆识别"></a>Opencv+python 视频车辆识别</h1><p>最近要做交通管理和控制课程的实验，提到采集数据时老师说可以用多种方法来实现，因此想到自己编写一个车辆识别的程序。第一个想到的是循环神经网络，但是因为自己在机器学习方面造诣还是很浅的，因此选择了比较传统，也是相关论坛比较多的opencv进行实现，这里选用的级联分类器训练(Cascade Classifier)，一路上很多网上的大神的博客给了很详细的指导，记录下来，希望自己以后可以用到。</p>
-<p><strong>参考文献：</strong></p>
-<p>haar特征识别算法原理：<a href="https://blog.csdn.net/jing_xin/article/details/17383161" target="_blank" rel="noopener">https://blog.csdn.net/jing_xin/article/details/17383161</a></p>
-<p>博主提到了很多有用的资源：<a href="https://blog.csdn.net/u014696921/article/details/69935802" target="_blank" rel="noopener">https://blog.csdn.net/u014696921/article/details/69935802</a></p>
-<p>opencv关于Cascade Training的文档：<a href="https://docs.opencv.org/2.4/doc/user_guide/ug_traincascade.html" target="_blank" rel="noopener">https://docs.opencv.org/2.4/doc/user_guide/ug_traincascade.html</a></p>
-<p>opencv关于Cascade detect的文档：<a href="https://docs.opencv.org/3.0-beta/doc/py_tutorials/py_objdetect/py_face_detection/py_face_detection.html?highlight=haar" target="_blank" rel="noopener">https://docs.opencv.org/3.0-beta/doc/py_tutorials/py_objdetect/py_face_detection/py_face_detection.html?highlight=haar</a></p>
-<p>博主提供了详细的实现过程：<a href="https://blog.csdn.net/zhuangxiaobin/article/details/25476833" target="_blank" rel="noopener">https://blog.csdn.net/zhuangxiaobin/article/details/25476833</a></p>
-<p><strong>使用资源：</strong></p>
-<p>opencv软件，cv2模块(在python中使用opencv)，python，正负车辆样品集</p>
-<h2 id="1-搭建需要在python中使用opencv的环境"><a href="#1-搭建需要在python中使用opencv的环境" class="headerlink" title="1. 搭建需要在python中使用opencv的环境"></a>1. 搭建需要在python中使用opencv的环境</h2><p>本次项目不仅需要在python中设置opencv环境，还需要下载opencv的软件到计算机上。因为cv2模块仅仅提供了一些简单的接口，不能够用来创建分类文件xml文件。具体的内容会在后面提到，因此需要下面两个步骤：</p>
-<ul>
-<li>step1： 安装opencv-python</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install opencv-python</span><br></pre></td></tr></table></figure>
-<ul>
-<li>step2：到官网下载opencv，并记住下载后存储的地址。</li>
-</ul>
-<p>我的存储路径为<code>D:\Program Files (x86)</code>随后打开路径<code>D:\Program Files (x86)\opencv\build\x64\vc14\bin</code>，可以看到后面我们需要用到的两个exe文件<code>opencv_createsamples.exe</code>，<code>opencv_traincascade.exe</code>分别用来创建正样品集和训练联机分类器，在bin文件中意味着它可以直接被cmd调用。</p>
-<h2 id="2-创建正负训练样本集"><a href="#2-创建正负训练样本集" class="headerlink" title="2. 创建正负训练样本集"></a>2. 创建正负训练样本集</h2><h3 id="2-1-创建正样本集"><a href="#2-1-创建正样本集" class="headerlink" title="2.1 创建正样本集"></a>2.1 创建正样本集</h3><p><strong>step1：准备数据集</strong></p>
-<p>正样本集可以从网上下载训练的开源数据，数据在前面的参考博客中已经给出，也可以在网上查找一些网友自己做的数据集，正样品应当尽量只包含目标物体，尽量减少周围环境的介入。如果非要自己做的话，可以使用<code>objectmarker.exe</code>一个网上可以下载到的程序，可以在我的github网页上下载，不过相对比较麻烦。注意无论是从网上找到的数据集还是自己创建都尽量创建比例较为近似的图片，以便后面做归一化处理。以下是我选择的数据集：</p>
-<p>注：在未处理以前有很多jpg文件，转化方法可以在该文件夹中创建一个.txt文件，其中输入<code>ren *.jpg *.bmp</code>后将后缀改为.bat(cmd的代码)，点击运行即可将文件夹中的每一个图片修改为.bmp格式。</p>
-<p><img src="/2018/06/26/opencv-python车辆识别/E:/学海无涯\实验\视频数车\实验图片\TIM截图20180608210759.png" alt="TIM截图20180608210759"></p>
-<p><strong>step2：归一化处理</strong></p>
-<p>随后我们需要对数据集中的数据做归一化处理，并且转化为灰度图片，该过程的python代码如下。因为将图片缩小有利于训练的效率，因此将宽和高均设置为25(opencv本身的数据集为24)。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image  </span><br><span class="line"><span class="keyword">import</span> os.path  </span><br><span class="line"><span class="keyword">import</span> glob  </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">convertjpg</span><span class="params">(jpgfile,outdir,width=<span class="number">25</span>,height=<span class="number">25</span>)</span>:</span>  </span><br><span class="line">    print(jpgfile)</span><br><span class="line">    img=Image.open(jpgfile)</span><br><span class="line">    print(img)</span><br><span class="line">    <span class="keyword">try</span>:  </span><br><span class="line">        new_imgt = img.resize((width, height), Image.BILINEAR)</span><br><span class="line">        new_img = new_imgt.convert(<span class="string">'L'</span>)</span><br><span class="line">        print(new_img)</span><br><span class="line">        new_img.save(os.path.join(outdir, os.path.basename(jpgfile)))  </span><br><span class="line">    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:  </span><br><span class="line">        print(e)  </span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> jpgfile <span class="keyword">in</span> glob.glob(<span class="string">"D:/anaconda/gpsdata/*.bmp"</span>):  </span><br><span class="line">    convertjpg(jpgfile,<span class="string">"D:/anaconda/gpsdata1"</span>)</span><br></pre></td></tr></table></figure>
-<p>归一化后的图片如下图所示：</p>
-<p><img src="/2018/06/26/opencv-python车辆识别/E:/学海无涯\实验\视频数车\实验图片\TIM截图20180608210816.png" alt="TIM截图20180608210816"></p>
-<p><strong>step3：创建正样品描述vec文件</strong></p>
-<p>我的归一化正样品的储存目录为<code>D:/anaconda/gpsdata1</code>因此在该文件夹下，<code>shift+右键</code>-&gt;<code>在此处打开命令窗口</code>打开cmd后输入以下指令：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> D:\anaconda\gpsdata1</span><br><span class="line">dir/s/b&gt;pos.txt</span><br></pre></td></tr></table></figure>
-<p>即可在文件夹中得到一个pos.txt样本描述文件，文件记录了目录中的每一个图片的目录和文件名。具体样式如下图所示，虽然这还不是我们想要的格式，注意查看最后一行是不是图片还是txt文件本身：</p>
-<p><img src="/2018/06/26/opencv-python车辆识别/E:/学海无涯\实验\视频数车\实验图片\TIM截图20180608212139.png" alt="TIM截图20180608212139"></p>
-<p>这一步是比较特殊的，因为我的每一个图片大小相等且大小为25才可以这样做。对于一些图片大小非正方形或者大小大于30的慎用。随后我们将这个描述文件复制粘贴到word软件中，使用查找替换功能将每一行替换为如下图的格式，格式从左到右分别描述了表中的属性(此处宽和高均为30其实没有必要，因为图片大小只有25…)：</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">图片相对路径</th>
-<th style="text-align:center">兴趣矩形个数</th>
-<th style="text-align:center">矩形左坐标</th>
-<th style="text-align:center">矩形上坐标</th>
-<th style="text-align:center">矩形宽度</th>
-<th style="text-align:center">矩形高度</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">gpsdata1\1039284.bmp</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">30</td>
-<td style="text-align:center">30</td>
-</tr>
-</tbody>
-</table>
-<p><img src="/2018/06/26/opencv-python车辆识别/E:/学海无涯\实验\视频数车\实验图片\TIM截图20180608212706.png" alt="TIM截图20180608212706"></p>
-<h3 id="2-2-创建负样本集"><a href="#2-2-创建负样本集" class="headerlink" title="2.2 创建负样本集"></a>2.2 创建负样本集</h3><p>创建负样本比创建正样本简单很多，但需要比正样本大很多的样本量，因为在视频/图片当中不是目标物体的实际上是比较多的。负样品的内容应该多是道路上非车辆的物体，例如行人、建筑物等，火星、外太空啥的就算了。以下是我从网上下载的负样品：</p>
-<p><img src="/2018/06/26/opencv-python车辆识别/E:/学海无涯\实验\视频数车\实验图片\TIM截图20180609080723.png" alt="TIM截图20180609080723"></p>
-<p>通过和正样本相同的处理方法，首先将图片转化为bmp文件，在缩小并转化为黑白的图片(此处应按比例转化，并且保证比处理后的大小比正样品大即可)：</p>
-<p><img src="/2018/06/26/opencv-python车辆识别/E:/学海无涯\实验\视频数车\实验图片\TIM截图20180609081342.png" alt="TIM截图20180609081342"></p>
-<p>同样创建一个描述文件(方法和创建正样品是step 3第一步的方法一样)，创建后如图：</p>
-<p><img src="/2018/06/26/opencv-python车辆识别/E:/学海无涯\实验\视频数车\实验图片\TIM截图20180609081806.png" alt="TIM截图20180609081806"></p>
-<h3 id="2-3-生成vec文件"><a href="#2-3-生成vec文件" class="headerlink" title="2.3 生成vec文件"></a>2.3 生成vec文件</h3><p>vec文件是opencv中用来描述图片的矩阵文件，就是将可视的图片转化为矩阵存储。下面分步骤完成。</p>
-<ul>
-<li><strong>step1 创建需要的环境</strong></li>
-</ul>
-<p>首先将正负样本及其描述文件，最开始文中提到的<code>opencv_createsamples.exe</code>文件放在一个文件夹下(很重要！)，如下图所示(忽视那个bat文件，下文会讲到)：</p>
-<p><img src="/2018/06/26/opencv-python车辆识别/E:/学海无涯\实验\视频数车\实验图片\TIM截图20180610171937.png" alt="TIM截图20180610171937"></p>
-<p>修改正负样本描述文件的相对路径，使其指向各自的文件夹，这一步可以在很久以前完成…但自己走了一波弯路…还是在word中使用查找替换。替换后的文件如图所示：</p>
-<p><img src="/2018/06/26/opencv-python车辆识别/E:/学海无涯\实验\视频数车\实验图片\TIM截图20180610172713.png" alt="TIM截图20180610172713"></p>
-<p><img src="/2018/06/26/opencv-python车辆识别/E:/学海无涯\实验\视频数车\实验图片\TIM截图20180610172832.png" alt="TIM截图20180610172832"></p>
-<ul>
-<li><strong>step2 编写创建vec的bat指令</strong></li>
-</ul>
-<p>这就是我们上文提到的bat文件了，在该文件夹下新建一个txt文件，写下如下指令，不同的参数可以自己调整：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#-info 描述文件 -vec vec文件名 -num正样本数量 -h-w分别为样本高宽</span></span><br><span class="line">opencv_createsamples.exe -info pos.txt -vec pos.vec -num 762 -h 24 -w 24</span><br></pre></td></tr></table></figure>
-<p>修改后缀为.bat并且运行就得到一个vec文件。</p>
-<p><img src="/2018/06/26/opencv-python车辆识别/E:/学海无涯\实验\视频数车\实验图片\TIM截图20180610173859.png" alt="TIM截图20180610173859"></p>
-<p>至此，准备工作结束，下面就是训练样品了。</p>
-<h2 id="3-使用adaboost算法训练数据"><a href="#3-使用adaboost算法训练数据" class="headerlink" title="3. 使用adaboost算法训练数据"></a>3. 使用adaboost算法训练数据</h2><p>首先我们在现在的文件夹中新建一个文件夹，命名为cascade_data，其中存储训练后的XML文件数据。然后将文中开头提到的<code>opencv_traincascade.exe</code>放入我们的现在的文件夹。再编写一个我们训练模型用的classify.bat文件，文件的内容如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#bg背景描述文件，</span></span><br><span class="line">opencv_traincascade.exe -data data -vec pos.vec -<span class="built_in">bg</span> neg.txt -numPos 762 -numNeg 7708 -numStages 18 -w 24 -h 24 -minHitRate 0.9999 -maxFalseAlarmRate 0.5 -mode ALL</span><br><span class="line"></span><br><span class="line">pause</span><br></pre></td></tr></table></figure>
-<p>文件夹中的文件有以下几个：</p>
-<p><img src="/2018/06/26/opencv-python车辆识别/E:/学海无涯\实验\视频数车\实验图片\TIM截图20180610183242.png" alt="TIM截图20180610183242"></p>
-<p>点击classify.bat文件就可以开始训练了，我从下午6.30开始训练，训练到</p>
-<h2 id="4-对图片进行初步检测"><a href="#4-对图片进行初步检测" class="headerlink" title="4.对图片进行初步检测"></a>4.对图片进行初步检测</h2><h2 id="5-使用cv2做视频处理"><a href="#5-使用cv2做视频处理" class="headerlink" title="5.使用cv2做视频处理"></a>5.使用cv2做视频处理</h2><ul>
-<li><strong>step1 使用XML文件对cv2的联机分类器进行标定</strong></li>
-</ul>
-<p>这一部分的语法可以参考上面的关于cascade_detection的参考文献，其中有较为详细的语法。我们需要拿我们在上一步训练得到的XML文件首先对识别器进行标定。语法如下：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">car_cascade = cv2.CascadeClassifier(<span class="string">'haarcascade_frontalface_default.xml'</span>)</span><br></pre></td></tr></table></figure>
-<ul>
-<li><strong>step2 创建截取和写入视频的对象</strong></li>
-</ul>
-<p>首先我们知道视频是由一帧帧的图片组成的，衡量的单位为FPS(Frame Per Second)，我们首先导入cv2并且创建视频截取的对象。它的参数可以是设备索引，也可以是要读取的视频文件的名称。</p>
-<p>在大多数情况下，只有一台摄像机连接到系统。 所以，我们所做的只是传递’0’，OpenCV使用连接到计算机的唯一相机。 当多台摄像机连接到电脑时，我们可以通过’1’来选择第二台摄像机，通过’2’来选择第三台摄像机，等等。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建一个视频截取对象和一个视频存储对象</span></span><br><span class="line"><span class="comment"># 如果视频是通过计算机的摄像头识别的，则传入0，这里传入我们录制的车辆视频</span></span><br><span class="line"></span><br><span class="line">fps = <span class="number">24</span>   <span class="comment">#视频帧率</span></span><br><span class="line">fourcc = cv2.cv.CV_FOURCC(<span class="string">'M'</span>,<span class="string">'J'</span>,<span class="string">'P'</span>,<span class="string">'G'</span>) </span><br><span class="line"></span><br><span class="line">cap = cv2.VideoCapture(<span class="string">'chaplin.mp4'</span>)</span><br><span class="line">videoWriter = cv2.VideoWriter(<span class="string">'D:/testResults/match/flower2.avi'</span>, fourcc, fps, (<span class="number">1360</span>,<span class="number">480</span>))</span><br></pre></td></tr></table></figure>
-<ul>
-<li><strong>step3 逐帧处理并写入视频</strong></li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> moviepy.editor <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="comment">#from cv2 import cv</span></span><br><span class="line"></span><br><span class="line">filename = <span class="string">'E:/学海无涯/20180613_IMG_0627 (3).MOV'</span></span><br><span class="line">fps = <span class="number">24</span>   <span class="comment">#视频帧率</span></span><br><span class="line">fourcc = cv2.VideoWriter_fourcc(*<span class="string">'XVID'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#clip = VideoFileClip(filename).subclip(242,291)</span></span><br><span class="line"><span class="comment">#clip.write_videofile("E:/学海无涯/rawvideo.mp4")</span></span><br><span class="line"></span><br><span class="line">car_cascade = cv2.CascadeClassifier(<span class="string">'C:/Users/Administrator/Desktop/lll/haarcascade_eye.xml'</span>)</span><br><span class="line">car_cascade.load(<span class="string">'C:/Users/Administrator/Desktop/lll/haarcascade_eye.xml'</span>)</span><br><span class="line">VideoCap = cv2.VideoCapture(<span class="string">"E:/学海无涯/rawvideo.mp4"</span>)</span><br><span class="line">videoWriter = cv2.VideoWriter(<span class="string">'E:/学海无涯/processedvideo.mp4'</span>, fourcc, fps, (<span class="number">1360</span>,<span class="number">480</span>))</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span>(VideoCap.isOpened()):</span><br><span class="line">  ret, frame = VideoCap.read() <span class="comment">#逐帧获取视频，frame是图片</span></span><br><span class="line">  <span class="keyword">if</span> ret == <span class="keyword">True</span>: <span class="comment">#处理并显示这一帧的图片</span></span><br><span class="line">      gray_img = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY) <span class="comment">#转化为灰度图</span></span><br><span class="line">      cars = car_cascade.detectMultiScale(gray_img, <span class="number">1.3</span>, <span class="number">5</span>) <span class="comment">#车辆检测，返回(x,y,w,h)</span></span><br><span class="line">      <span class="keyword">for</span> (x,y,w,h) <span class="keyword">in</span> cars: <span class="comment">#对每一个兴趣区画框</span></span><br><span class="line">        	cv2.rectangle(frame,(x,y),(x+w,y+h),(<span class="number">255</span>,<span class="number">0</span>,<span class="number">0</span>),<span class="number">2</span>)</span><br><span class="line">      cv2.imshow(<span class="string">'Frame'</span>,frame) <span class="comment">#显示图片</span></span><br><span class="line">      videoWriter.write(frame)</span><br><span class="line">      <span class="keyword">if</span> cv2.waitKey(<span class="number">25</span>) &amp; <span class="number">0xFF</span> == ord(<span class="string">'q'</span>): <span class="comment">#按Q停止</span></span><br><span class="line">          <span class="keyword">break</span></span><br><span class="line">  <span class="keyword">else</span>: <span class="comment">#没有帧后显示循环</span></span><br><span class="line">      <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#处理完后释放所有的对象</span></span><br><span class="line">VideoCap.release()</span><br><span class="line">videoWriter.release()</span><br><span class="line"><span class="comment">#关闭所有帧</span></span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
-<p>在做完了这一波之后越来越觉得掌握算法本身比掌握如何使用算法更加的重要，相比而言现在的东西还是一个半成品，代码什么的后面还需要改进。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/01/交通向参考文献和检索方法汇总/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Zhaocheng Du">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blogs of Zhaocheng">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/01/交通向参考文献和检索方法汇总/" itemprop="url">交通向参考文献和检索方法汇总</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-01T12:14:35+08:00">
-                2018-06-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="参考文献和检索方法汇总"><a href="#参考文献和检索方法汇总" class="headerlink" title="参考文献和检索方法汇总"></a>参考文献和检索方法汇总</h1><p>最近听了很多也问了很多关于信息检索的方法，信息检索的网站以及相关期刊的问题，做一下简单的整理。因为倩妮老铁在之前已经做了一波整理，因此在这里做一波cite。有兴趣的可以通过下面的网页参考并且关注倩妮老铁的博客。</p>
-<p><strong>参考内容 ：</strong></p>
-<p>倩妮老铁的博客: <a href="http://qianni1997.github.io/" target="_blank" rel="noopener">http://qianni1997.github.io/</a></p>
-<p>陈喜群老师个人主页: <a href="http://person.zju.edu.cn/xiqun/687353.html" target="_blank" rel="noopener">http://person.zju.edu.cn/xiqun/687353.html</a></p>
-<h2 id="信息检索的常用网页："><a href="#信息检索的常用网页：" class="headerlink" title="信息检索的常用网页："></a>信息检索的常用网页：</h2><ul>
-<li><p>百度学术或者在百度主页的右上角设置上进行高级检索</p>
-<p>虽然百度学术的质量不高，但有一点好处是在找到想要引用的文章之后，在左侧可自动生成引用论文的格式。</p>
-</li>
-<li><p>中国知网(CNKI)</p>
-<p>这个就不必多说了，注意常看的论文类型为硕博士论文和期刊论文。</p>
-</li>
-<li><p>Web of science</p>
-<p>可以从交大图书馆主页的热门资源中进入，如果自己进入的话需要进行账号登录。主要为SCI数据库。但由于论文发表后需要有一段时间的延迟方可在该网页上找到资源，信息更新相对较慢。</p>
-</li>
-<li><p>Science Direct </p>
-<p>就不多说了，收录论文相当全面，能够覆盖大量的期刊，并且可以在校园网的环境下下载。</p>
-</li>
-<li><p>Google scholar</p>
-<p>覆盖面优于Science direct，但由于需要翻墙加上学校并没有购买使用权，可以在出国后使用。</p>
-</li>
-</ul>
-<h2 id="交通领域的重要外文期刊"><a href="#交通领域的重要外文期刊" class="headerlink" title="交通领域的重要外文期刊"></a>交通领域的重要外文期刊</h2><p>以下期刊是在郑芳芳老师课后提及的几个期刊，由倩妮老铁整理，包含但不限于：</p>
-<ul>
-<li><p>《Transportation Science》</p>
-</li>
-<li><p>《Transportation Research》</p>
-<p>A: Policy and Practice; B: Methodological; C: Emerging technology; </p>
-<p>D: Transport and environment; E: Logistics and Transportation; F: Traffic psychology and behaviors</p>
-</li>
-<li><p>《IEEE Xplore: IEEE Transaction on Intelligent Transportation System》</p>
-<p>此期刊偏向于应用</p>
-</li>
-<li><p>ISTTT—International Symposium on Transportation and Traffic Theory</p>
-</li>
-<li><p>《Journal of Advanced Transportation》</p>
-</li>
-<li><p>TRB会议</p>
-</li>
-</ul>
-<p>以下为陈喜群老师总结的年度科学与技术领域 SCI 和 SSCI 相关内容，具体参见陈喜群老师主页。自左至右各列分别为序号，期刊名称，影响因子(总引用数除以论文数)，可引用项目(论文发表总数)，被引总数。 </p>
-<table>
-<thead>
-<tr>
-<th></th>
-<th>Journal Title</th>
-<th>Impact Factor</th>
-<th>Citable Items</th>
-<th>Total Citations</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1.</td>
-<td>Computer-Aided Civil and Infrastructure Engineering</td>
-<td>5.786</td>
-<td>60</td>
-<td>2444</td>
-</tr>
-<tr>
-<td>2.</td>
-<td>Vehicular Communications</td>
-<td>5.108</td>
-<td>19</td>
-<td>202</td>
-</tr>
-<tr>
-<td>3.</td>
-<td>IEEE Vehicular Technology Magazine</td>
-<td>4.429</td>
-<td>25</td>
-<td>849</td>
-</tr>
-<tr>
-<td>4.</td>
-<td>IEEE Transactions on Vehicular Technology</td>
-<td>4.066</td>
-<td>894</td>
-<td>17010</td>
-</tr>
-<tr>
-<td>5.</td>
-<td>Transportation Research Part C-Emerging Technologies</td>
-<td>3.805</td>
-<td>229</td>
-<td>6122</td>
-</tr>
-<tr>
-<td>6.</td>
-<td>Transportation Research Part B-Methodological</td>
-<td>3.769</td>
-<td>194</td>
-<td>8518</td>
-</tr>
-<tr>
-<td>7.</td>
-<td>IEEE Transactions on Intelligent Transportation Systems</td>
-<td>3.724</td>
-<td>306</td>
-<td>7224</td>
-</tr>
-<tr>
-<td>8.</td>
-<td>IEEE Intelligent Transportation Systems Magazine</td>
-<td>3.654</td>
-<td>27</td>
-<td>384</td>
-</tr>
-<tr>
-<td>9.</td>
-<td>Transportation Science</td>
-<td>3.275</td>
-<td>81</td>
-<td>4456</td>
-</tr>
-<tr>
-<td>10.</td>
-<td>Transportation Research Part E-Logistics and Transportation Review</td>
-<td>2.974</td>
-<td>155</td>
-<td>4427</td>
-</tr>
-<tr>
-<td>11.</td>
-<td>Accident Analysis and Prevention</td>
-<td>2.685</td>
-<td>296</td>
-<td>13131</td>
-</tr>
-<tr>
-<td>12.</td>
-<td>Journal of Transport Geography</td>
-<td>2.675</td>
-<td>162</td>
-<td>4692</td>
-</tr>
-<tr>
-<td>13.</td>
-<td>Networks &amp; Spatial Economics</td>
-<td>2.662</td>
-<td>49</td>
-<td>1041</td>
-</tr>
-<tr>
-<td>14.</td>
-<td>Transportation</td>
-<td>2.633</td>
-<td>51</td>
-<td>2692</td>
-</tr>
-<tr>
-<td>15.</td>
-<td>Transportation Research Part A-Policy and Practice</td>
-<td>2.609</td>
-<td>201</td>
-<td>6615</td>
-</tr>
-<tr>
-<td>16.</td>
-<td>Transportmetrica B-Transport Dynamics</td>
-<td>2.520</td>
-<td>10</td>
-<td>97</td>
-</tr>
-<tr>
-<td>17.</td>
-<td>Journal of Air Transport Management</td>
-<td>2.357</td>
-<td>138</td>
-<td>2383</td>
-</tr>
-<tr>
-<td>18.</td>
-<td>Transportation Research Part D-Transport and Environment</td>
-<td>2.341</td>
-<td>175</td>
-<td>3572</td>
-</tr>
-<tr>
-<td>19.</td>
-<td>Transport Policy</td>
-<td>2.269</td>
-<td>147</td>
-<td>3737</td>
-</tr>
-<tr>
-<td>20.</td>
-<td>International Journal of Engine Research</td>
-<td>2.237</td>
-<td>76</td>
-<td>1232</td>
-</tr>
-<tr>
-<td>21.</td>
-<td>Mobilities</td>
-<td>2.043</td>
-<td>46</td>
-<td>868</td>
-</tr>
-<tr>
-<td>22.</td>
-<td>Transportmetrica A-Transport Science</td>
-<td>2.033</td>
-<td>48</td>
-<td>302</td>
-</tr>
-<tr>
-<td>23.</td>
-<td>International Journal of Sustainable Transportation</td>
-<td>1.973</td>
-<td>87</td>
-<td>504</td>
-</tr>
-<tr>
-<td>24.</td>
-<td>Journal of Safety Research</td>
-<td>1.841</td>
-<td>51</td>
-<td>2604</td>
-</tr>
-<tr>
-<td>25.</td>
-<td>Transportation Research Part F-Traffic Psychology and Behaviour</td>
-<td>1.830</td>
-<td>173</td>
-<td>2637</td>
-</tr>
-<tr>
-<td>26.</td>
-<td>Journal of Advanced Transportation</td>
-<td>1.813</td>
-<td>86</td>
-<td>796</td>
-</tr>
-<tr>
-<td>27.</td>
-<td>Journal of Intelligent Transportation Systems</td>
-<td>1.769</td>
-<td>43</td>
-<td>543</td>
-</tr>
-<tr>
-<td>28.</td>
-<td>Maritime Policy &amp; Management</td>
-<td>1.741</td>
-<td>64</td>
-<td>1171</td>
-</tr>
-<tr>
-<td>29.</td>
-<td>Journal of Transport &amp; Health</td>
-<td>1.718</td>
-<td>54</td>
-<td>251</td>
-</tr>
-<tr>
-<td>30.</td>
-<td>Journal of Transport and Land Use</td>
-<td>1.679</td>
-<td>25</td>
-<td>282</td>
-</tr>
-<tr>
-<td>31.</td>
-<td>Proceedings of The Institution of Mechanical Engineers Part F-Journal of Rail and Rapid Transit</td>
-<td>1.537</td>
-<td>148</td>
-<td>1343</td>
-</tr>
-<tr>
-<td>32.</td>
-<td>Traffic Injury Prevention</td>
-<td>1.677</td>
-<td>156</td>
-<td>1290</td>
-</tr>
-<tr>
-<td>33.</td>
-<td>Proceedings of The Institution of Mechanical Engineers Part F-Journal of Automobile Engineering</td>
-<td>1.253</td>
-<td>143</td>
-<td>2309</td>
-</tr>
-<tr>
-<td>34.</td>
-<td>IET Intelligent Transport Systems</td>
-<td>1.194</td>
-<td>79</td>
-<td>642</td>
-</tr>
-<tr>
-<td>35.</td>
-<td>Transport</td>
-<td>1.163</td>
-<td>45</td>
-<td>424</td>
-</tr>
-<tr>
-<td>36.</td>
-<td>European Transport Research Review</td>
-<td>0.962</td>
-<td>26</td>
-<td>195</td>
-</tr>
-<tr>
-<td>37.</td>
-<td>Journal of Transportation Engineering</td>
-<td>0.962</td>
-<td>98</td>
-<td>3220</td>
-</tr>
-<tr>
-<td>38.</td>
-<td>Maritime Economics &amp; Logistics</td>
-<td>0.939</td>
-<td>26</td>
-<td>519</td>
-</tr>
-<tr>
-<td>39.</td>
-<td>Journal of Transport Economics and Policy</td>
-<td>0.935</td>
-<td>17</td>
-<td>1035</td>
-</tr>
-<tr>
-<td>40.</td>
-<td>International Journal of Automotive Technology</td>
-<td>0.897</td>
-<td>108</td>
-<td>968</td>
-</tr>
-<tr>
-<td>41.</td>
-<td>Transportation Journal</td>
-<td>0.897</td>
-<td>15</td>
-<td>464</td>
-</tr>
-<tr>
-<td>42.</td>
-<td>Research in Transportation Economics</td>
-<td>0.781</td>
-<td>73</td>
-<td>669</td>
-</tr>
-<tr>
-<td>43.</td>
-<td>International Journal of Vehicle Design</td>
-<td>0.713</td>
-<td>54</td>
-<td>709</td>
-</tr>
-<tr>
-<td>44.</td>
-<td>Journal of Public Transportation</td>
-<td>0.710</td>
-<td>27</td>
-<td>544</td>
-</tr>
-<tr>
-<td>45.</td>
-<td>Transportation Letters-The International Journal of Transportation Research</td>
-<td>0.706</td>
-<td>27</td>
-<td>186</td>
-</tr>
-<tr>
-<td>46.</td>
-<td>European Journal of Transport and Infrastructure Research</td>
-<td>0.619</td>
-<td>37</td>
-<td>361</td>
-</tr>
-<tr>
-<td>47.</td>
-<td>International Journal of Shipping and Transport Logistics</td>
-<td>0.609</td>
-<td>23</td>
-<td>173</td>
-</tr>
-<tr>
-<td>48.</td>
-<td>Transportation Research Record</td>
-<td>0.598</td>
-<td>848</td>
-<td>16327</td>
-</tr>
-<tr>
-<td>49.</td>
-<td>Transportation Planning and Technology</td>
-<td>0.474</td>
-<td>50</td>
-<td>550</td>
-</tr>
-<tr>
-<td>50.</td>
-<td>Journal of Transportation Safety &amp; Security</td>
-<td>0.465</td>
-<td>31</td>
-<td>93</td>
-</tr>
-<tr>
-<td>51.</td>
-<td>Promet-Traffic &amp; Transportation</td>
-<td>0.430</td>
-<td>63</td>
-<td>201</td>
-</tr>
-<tr>
-<td>52.</td>
-<td>Proceedings of the Institution of Civil Engineers-Transport</td>
-<td>0.402</td>
-<td>36</td>
-<td>235</td>
-</tr>
-<tr>
-<td>53.</td>
-<td>International Journal of Heavy Vehicle Systems</td>
-<td>0.308</td>
-<td>20</td>
-<td>102</td>
-</tr>
-<tr>
-<td>54.</td>
-<td>ITE Journal-Institute of Transportation Engineers</td>
-<td>0.291</td>
-<td>46</td>
-<td>269</td>
-</tr>
-<tr>
-<td>55.</td>
-<td>International Journal of Transport Economics</td>
-<td>0.220</td>
-<td>16</td>
-<td>189</td>
-</tr>
-<tr>
-<td>56.</td>
-<td>Road &amp; Transport Research</td>
-<td>0.024</td>
-<td>6</td>
-<td>115</td>
-</tr>
-<tr>
-<td></td>
-<td>Summary</td>
-<td>-</td>
-<td>6190</td>
-<td>89669</td>
-</tr>
-</tbody>
-</table>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-  </section>
-
-  
 
 
           </div>
@@ -1998,6 +897,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -2018,8 +921,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -2070,6 +982,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#基于LBS的打车APP开发"><span class="nav-number">1.</span> <span class="nav-text">基于LBS的打车APP开发</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-基本知识"><span class="nav-number">1.1.</span> <span class="nav-text">1.基本知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-索引相关知识"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.1 索引相关知识</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-C中的位操作"><span class="nav-number">1.1.2.</span> <span class="nav-text">1.2 C中的位操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-数据存储相关知识"><span class="nav-number">1.1.3.</span> <span class="nav-text">1.3 数据存储相关知识</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-宏的相关定义"><span class="nav-number">1.1.4.</span> <span class="nav-text">1.4 宏的相关定义</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-双向列表数据结构"><span class="nav-number">1.2.</span> <span class="nav-text">2.双向列表数据结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-双向链表结构设计"><span class="nav-number">1.2.1.</span> <span class="nav-text">2.1 双向链表结构设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-车辆点结构设计"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.2 车辆点结构设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-链表的相关操作"><span class="nav-number">1.2.3.</span> <span class="nav-text">2.3 链表的相关操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-哈希表数据结构"><span class="nav-number">1.3.</span> <span class="nav-text">3.哈希表数据结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-算法原理"><span class="nav-number">1.3.1.</span> <span class="nav-text">3.1 算法原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-哈希表节点结构设计"><span class="nav-number">1.3.2.</span> <span class="nav-text">3.2 哈希表节点结构设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-哈希表结构设计"><span class="nav-number">1.3.3.</span> <span class="nav-text">3.3 哈希表结构设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-哈希表的初始化"><span class="nav-number">1.3.4.</span> <span class="nav-text">3.4 哈希表的初始化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-哈希表析构函数"><span class="nav-number">1.3.5.</span> <span class="nav-text">3.5 哈希表析构函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-6-设置一个哈希节点并插入哈希表"><span class="nav-number">1.3.6.</span> <span class="nav-text">3.6 设置一个哈希节点并插入哈希表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-7-获取哈希节点信息"><span class="nav-number">1.3.7.</span> <span class="nav-text">3.7 获取哈希节点信息</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-二维数组的网格降维处理"><span class="nav-number">1.4.</span> <span class="nav-text">4. 二维数组的网格降维处理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-网格结构设计及其属性"><span class="nav-number">1.4.1.</span> <span class="nav-text">4.1 网格结构设计及其属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2网格数据结构初始化"><span class="nav-number">1.4.2.</span> <span class="nav-text">4.2网格数据结构初始化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-网络数据结构析构"><span class="nav-number">1.4.3.</span> <span class="nav-text">4.3 网络数据结构析构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-在屏幕发生变化时更新节点信息"><span class="nav-number">1.4.4.</span> <span class="nav-text">4.4 在屏幕发生变化时更新节点信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-5-获取网格属性"><span class="nav-number">1.4.5.</span> <span class="nav-text">4.5 获取网格属性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-实现网格范围索引-range-query"><span class="nav-number">1.5.</span> <span class="nav-text">5. 实现网格范围索引(range_query)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1进行网格范围索引的最终结构"><span class="nav-number">1.5.1.</span> <span class="nav-text">5.1进行网格范围索引的最终结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-存储节点结构设计"><span class="nav-number">1.5.2.</span> <span class="nav-text">5.2 存储节点结构设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-定义索引方法"><span class="nav-number">1.5.3.</span> <span class="nav-text">5.3 定义索引方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-4-初始化网格索引"><span class="nav-number">1.5.4.</span> <span class="nav-text">5.4 初始化网格索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-5-定义网格更新接口"><span class="nav-number">1.5.5.</span> <span class="nav-text">5.5 定义网格更新接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-6-实现range-query函数"><span class="nav-number">1.5.6.</span> <span class="nav-text">5.6 实现range_query函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-Bitmap数据结构"><span class="nav-number">1.6.</span> <span class="nav-text">6. Bitmap数据结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-Bitmap算法原理"><span class="nav-number">1.6.1.</span> <span class="nav-text">6.1 Bitmap算法原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-Bitmap结构设计"><span class="nav-number">1.6.2.</span> <span class="nav-text">6.2 Bitmap结构设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-3Bitmap的初始化"><span class="nav-number">1.6.3.</span> <span class="nav-text">6.3Bitmap的初始化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-4-Bitmap的析构函数"><span class="nav-number">1.6.4.</span> <span class="nav-text">6.4 Bitmap的析构函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-5-Bitmap设置位1"><span class="nav-number">1.6.5.</span> <span class="nav-text">6.5 Bitmap设置位1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-5-Bitmap设置位0"><span class="nav-number">1.6.6.</span> <span class="nav-text">6.5 Bitmap设置位0</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-5-Bitmap某位是否设置"><span class="nav-number">1.6.7.</span> <span class="nav-text">6.5 Bitmap某位是否设置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-堆数据结构"><span class="nav-number">1.7.</span> <span class="nav-text">7.堆数据结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#7-1-堆的原理"><span class="nav-number">1.7.1.</span> <span class="nav-text">7.1 堆的原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-2堆的结构设计"><span class="nav-number">1.7.2.</span> <span class="nav-text">7.2堆的结构设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-3-堆的初始化"><span class="nav-number">1.7.3.</span> <span class="nav-text">7.3 堆的初始化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-4-堆的析构"><span class="nav-number">1.7.4.</span> <span class="nav-text">7.4 堆的析构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-5-将一个heapnode插入堆"><span class="nav-number">1.7.5.</span> <span class="nav-text">7.5 将一个heapnode插入堆</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-6-获取堆的头结点"><span class="nav-number">1.7.6.</span> <span class="nav-text">7.6 获取堆的头结点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-7-删除头结点"><span class="nav-number">1.7.7.</span> <span class="nav-text">7.7 删除头结点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-实现knn-query"><span class="nav-number">1.8.</span> <span class="nav-text">8. 实现knn_query</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#8-1算法原理"><span class="nav-number">1.8.1.</span> <span class="nav-text">8.1算法原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-2-定义全局变量和函数"><span class="nav-number">1.8.2.</span> <span class="nav-text">8.2 定义全局变量和函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-3-编写MinDist函数"><span class="nav-number">1.8.3.</span> <span class="nav-text">8.3 编写MinDist函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-4-实现knn-query"><span class="nav-number">1.8.4.</span> <span class="nav-text">8.4 实现knn_query</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -2203,6 +1131,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
