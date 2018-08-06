@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="C++, 算法," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="本次作业是暑假实习项目作业的第二项，问题描述如下： 有一个文件存储的是整形数据(每一行代表一个整形值),写一个程序将最小top-k 的整形数据找出来,这里我们假定 k=10,要求程序运行速度最优。 这是一个典型的top-k问题，常用的算法有quickselect和minheap等。本次决定使用快速排序算法完成，编程使用C++完成。 攻克难点  处理7千万条数据 使用完全不熟练的C++编程 快速选择">
+<meta name="keywords" content="C++, 算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="预习作业2--快速排序算法">
+<meta property="og:url" content="http://yoursite.com/2018/08/06/预习作业2-快速排序算法/index.html">
+<meta property="og:site_name" content="Blogs of Zhaocheng">
+<meta property="og:description" content="本次作业是暑假实习项目作业的第二项，问题描述如下： 有一个文件存储的是整形数据(每一行代表一个整形值),写一个程序将最小top-k 的整形数据找出来,这里我们假定 k=10,要求程序运行速度最优。 这是一个典型的top-k问题，常用的算法有quickselect和minheap等。本次决定使用快速排序算法完成，编程使用C++完成。 攻克难点  处理7千万条数据 使用完全不熟练的C++编程 快速选择">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-08-06T00:04:50.112Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="预习作业2--快速排序算法">
+<meta name="twitter:description" content="本次作业是暑假实习项目作业的第二项，问题描述如下： 有一个文件存储的是整形数据(每一行代表一个整形值),写一个程序将最小top-k 的整形数据找出来,这里我们假定 k=10,要求程序运行速度最优。 这是一个典型的top-k问题，常用的算法有quickselect和minheap等。本次决定使用快速排序算法完成，编程使用C++完成。 攻克难点  处理7千万条数据 使用完全不熟练的C++编程 快速选择">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/08/06/预习作业2-快速排序算法/"/>
+
+
+
+
+
+  <title>预习作业2--快速排序算法 | Blogs of Zhaocheng</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Blogs of Zhaocheng</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/06/预习作业2-快速排序算法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Zhaocheng Du">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blogs of Zhaocheng">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">预习作业2--快速排序算法</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-06T08:01:14+08:00">
+                2018-08-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本次作业是暑假实习项目作业的第二项，问题描述如下：</p>
+<p>有一个文件存储的是整形数据(每一行代表一个整形值),写一个程序将最小top-k 的整形数据找出来,这里我们假定 k=10,要求程序运行速度最优。</p>
+<p>这是一个典型的<code>top-k</code>问题，常用的算法有<code>quickselect</code>和<code>minheap</code>等。本次决定使用快速排序算法完成，编程使用C++完成。</p>
+<p><strong>攻克难点</strong></p>
+<ul>
+<li>处理7千万条数据</li>
+<li>使用完全不熟练的C++编程</li>
+<li>快速选择算法的理解和实现</li>
+</ul>
+<p><strong>参考文献</strong></p>
+<p>快速排序原理：<a href="https://blog.csdn.net/sinat_20177327/article/details/76560079" target="_blank" rel="noopener">https://blog.csdn.net/sinat_20177327/article/details/76560079</a></p>
+<p>模板的相关概念：<a href="https://blog.csdn.net/zqixiao_09/article/details/51474589" target="_blank" rel="noopener">https://blog.csdn.net/zqixiao_09/article/details/51474589</a></p>
+<p>快速选择C++的实现：<a href="https://www.cnblogs.com/whensean/p/selection.html" target="_blank" rel="noopener">https://www.cnblogs.com/whensean/p/selection.html</a></p>
+<p>一些海量数据处理的算法：<a href="https://blog.csdn.net/hguisu/article/details/7856239" target="_blank" rel="noopener">https://blog.csdn.net/hguisu/article/details/7856239</a></p>
+<h2 id="一、所需C-技术"><a href="#一、所需C-技术" class="headerlink" title="一、所需C++技术"></a>一、所需C++技术</h2><p>在C++编程和逻辑实现中遇到了一下的技术问题：</p>
+<h3 id="1-1-使用函数返回数组"><a href="#1-1-使用函数返回数组" class="headerlink" title="1.1 使用函数返回数组"></a>1.1 使用函数返回数组</h3><p>在后面的编程中需要用到一个返回排序后数组的函数，但返回数组的函数并不像python那么简单，需要使用指针函数和指针数组的技术，会在下面进行讨论。</p>
+<h4 id="1-1-1-指针技术"><a href="#1-1-1-指针技术" class="headerlink" title="1.1.1 指针技术"></a>1.1.1 指针技术</h4><p>指针在本质上是一个指向变量所存储地址的东西，下面是它的使用方法：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> *p <span class="comment">//一个指向int类型地址的指针p</span></span><br></pre></td></tr></table></figure>
+<p>有时我们也需要获取一个变量的地址，这是使用取址符<code>&amp;</code></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> *p; <span class="keyword">int</span> a; p = &amp;a;</span><br></pre></td></tr></table></figure>
+<p>声明<strong>指针数组</strong>，在我们声明了一个数组之后<code>a[10]</code>之后，<code>*a[0]</code>就是数组的第一位地址，而<code>*a[0] + 10</code>就是末尾地址再加一。下面是输出数组的一个例子。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(p = a; p &lt;&amp; a + <span class="number">10</span>; p++)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d "</span>,*p);</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(p = *a[<span class="number">0</span>]; p &lt; *a[<span class="number">0</span>] + <span class="number">10</span>; p++)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d"</span>, *p);</span><br></pre></td></tr></table></figure>
+<p>以及可以声明<strong>指针函数</strong>和<strong>返回指针的函数</strong>，使用以下格式（*要在括号外，被认为返回 <code>int*</code> 型）：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> (*Psum)(<span class="keyword">int</span>*, <span class="keyword">int</span>); <span class="comment">//这是一个指针函数</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> *<span class="title">Psum</span><span class="params">(<span class="keyword">int</span>*, <span class="keyword">int</span>)</span></span>; <span class="comment">//这是一个返回指针的函数</span></span><br></pre></td></tr></table></figure>
+<p>在函数想要返回一个数组时，采用的是一个指针函数，基本格式如<code>int *copy()</code></p>
+<h4 id="1-1-2-变量作用域"><a href="#1-1-2-变量作用域" class="headerlink" title="1.1.2 变量作用域"></a>1.1.2 变量作用域</h4><table>
+<thead>
+<tr>
+<th style="text-align:center">变量类型</th>
+<th style="text-align:center">储存区域</th>
+<th style="text-align:center">作用域</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">静态变量</td>
+<td style="text-align:center">数据区</td>
+<td style="text-align:center">独立于对象，存在于全局</td>
+</tr>
+<tr>
+<td style="text-align:center">局部变量</td>
+<td style="text-align:center">栈区(stack)</td>
+<td style="text-align:center">函数内部，函数消失后自动消失</td>
+</tr>
+<tr>
+<td style="text-align:center">动态变量</td>
+<td style="text-align:center">堆区(heap)</td>
+<td style="text-align:center">经常创建的对象、动态的申请的临时空间(程序员决定)</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">代码区</td>
+<td style="text-align:center">代码存放的位置</td>
+</tr>
+</tbody>
+</table>
+<p>这告诉我们，在一个数组返回一个自己的指针的同时，这个代码内部的各个变量都已经销毁了，所以必须使用其他的方法返回一个数组。</p>
+<h4 id="1-1-3-返回数组的函数编写"><a href="#1-1-3-返回数组的函数编写" class="headerlink" title="1.1.3 返回数组的函数编写"></a>1.1.3 返回数组的函数编写</h4><p>通过上面的分析，要想能够接收到返回来的数组，并不能将一整个数组<code>return</code>回来。而应该定义一个返回指针的函数，最后返回数组的第一个元素的指针，并且使用一个指针进行接收。代码如下：</p>
+<p>step1: 定义一个返回指针的函数</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> *<span class="title">copy</span><span class="params">(<span class="keyword">int</span> <span class="built_in">array</span>, <span class="keyword">int</span> a[], <span class="keyword">int</span> n)</span> <span class="comment">//注意定义函数格式和传入数组格式</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) </span><br><span class="line">        a[i] = <span class="built_in">array</span>[i];</span><br><span class="line">    <span class="keyword">return</span> a; <span class="comment">//返回一个头地址</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>step2: 在<code>main</code>函数中使用，赋给<code>p</code>的是一个数字的头地址(指针)<code>a</code>，试想<code>a</code>作为一个地址，可以使用<code>a[0]</code>等调用函数中的值，那么我们也可以使用<code>p[0]</code>做相应的处理。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> size = <span class="number">4</span>;</span><br><span class="line">    <span class="keyword">int</span> a2[<span class="number">4</span>];</span><br><span class="line">    <span class="keyword">int</span> a1[<span class="number">4</span>] = &#123;<span class="number">3</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">8</span>&#125;;</span><br><span class="line">    <span class="keyword">int</span> *p;</span><br><span class="line">    p = copy(a1, a2, size); <span class="comment">//注意此处调用copy函数，传入的是a1和a2，并且赋值给指针p</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; p[<span class="number">0</span>] &lt;&lt; p[<span class="number">1</span>] &lt;&lt; <span class="built_in">endl</span>; <span class="comment">//注意此处p[]亦可作为数组使用</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="1-2-理解Template模板"><a href="#1-2-理解Template模板" class="headerlink" title="1.2 理解Template模板"></a>1.2 理解Template模板</h3><p>这里利用模板有两个目的：</p>
+<ul>
+<li>如果我们使用STL的<code>vector</code>容器，它的本质上是由<code>template</code>编写而成的。</li>
+<li>如果我们自己编写快排算法，可以使用<code>template</code>编写获取数组长度的函数，从而判断是否需要递归。</li>
+</ul>
+<h4 id="1-2-1-什么是模板"><a href="#1-2-1-什么是模板" class="headerlink" title="1.2.1 什么是模板"></a>1.2.1 什么是模板</h4><p>模板可以定义一个我们需要的通用函数，这些函数能够接受任意数据类型的参数，返回任意类型的值，而不需要对函数做重载，其语法可以是下面的两种形式(两种形式等价)：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">general_name</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">template</span> &lt;typename general_name&gt;</span></span><br></pre></td></tr></table></figure>
+<p>在通过模板定义一个多个数据类型都通用的函数时，遵循以下的语法规则(T就是上文当中的<code>general_name</code>，是一种规定俗成的写法)：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function">T <span class="title">getmax</span><span class="params">(T a, T b)</span></span></span><br><span class="line"><span class="function"></span>&#123;<span class="keyword">return</span> a &gt; b ? a :b;&#125;</span><br></pre></td></tr></table></figure>
+<p>一个简单的额理解方式是，这个时候的<code>T</code>可以为任何一种数据类型，比如说<code>int</code>在声明为<code>int</code>后，所有的<code>T</code>都被替换为<code>int</code>，例如我们想要对<code>int</code>型进行比较时可以使用下面这种语法，在参数类型相同时函数后面的<code>int</code>可以省略，但不同时不能够省略。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i,j;</span><br><span class="line">getmax&lt;<span class="keyword">int</span>&gt;(i, j)</span><br></pre></td></tr></table></figure>
+<h4 id="1-2-2-sizeof-函数"><a href="#1-2-2-sizeof-函数" class="headerlink" title="1.2.2 sizeof()函数"></a>1.2.2 sizeof()函数</h4><p><code>sizeof</code>函数是用来计算一个对象的内存大小的函数，我们将它应用于计算一个数组内数字的大小：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">sizeof</span>(<span class="built_in">array</span>) / <span class="keyword">sizeof</span>(<span class="built_in">array</span>[<span class="number">0</span>])</span><br></pre></td></tr></table></figure>
+<h4 id="1-1-3-返回数组大小的函数编写"><a href="#1-1-3-返回数组大小的函数编写" class="headerlink" title="1.1.3 返回数组大小的函数编写"></a>1.1.3 返回数组大小的函数编写</h4><p>在这一部分我们就需要结合<code>sizeof</code>和<code>template</code>编写一个可以返回数组长度的函数，为什么需要用到<code>template</code>呢，在我们声明数组时也有<code>int arr[10]</code>或<code>float arr[10]</code>这种差别：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">int</span> <span class="title">get_arr_length</span>(<span class="title">T</span> &amp; <span class="title">array</span>) //输入<span class="title">array</span>的头地址</span></span><br><span class="line"><span class="class">&#123;</span><span class="keyword">return</span> <span class="keyword">sizeof</span>(<span class="built_in">array</span>) / <span class="keyword">sizeof</span>(<span class="built_in">array</span>[<span class="number">0</span>]);&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="1-3-使用STL的vector容器"><a href="#1-3-使用STL的vector容器" class="headerlink" title="1.3 使用STL的vector容器"></a>1.3 使用STL的vector容器</h3><p>vector是C++中的一种数据结构，确切的说是一个类。它相当于一个动态的数组，当程序员无法知道自己需要的数组的规模多大时,用其来解决问题可以达到最大节约空间的目的。</p>
+<h4 id="1-3-1-vector如何声明和定义"><a href="#1-3-1-vector如何声明和定义" class="headerlink" title="1.3.1 vector如何声明和定义"></a>1.3.1 vector如何声明和定义</h4><p>首先我们需要在最上面对<code>vector</code>类进行<code>#include&lt;vector&gt;</code>，也需要加上<code>using namespace std</code>，随后我们需要对变量进行相应的定义，这里我们从一位数组向多维数组迈进：</p>
+<ul>
+<li>定义一维数组:</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span> &lt;<span class="keyword">int</span>&gt; a; <span class="comment">//等于声明了一个int数组a[],大小没有指定,可以动态的向里面添加删除</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>定义二位数组:</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span> &lt;<span class="keyword">int</span> *&gt; a; <span class="comment">//一个数组的名字其实代表的是它的首地址,这样我们相当于申请了一个数组的首地址</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>定义三维数组:</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span> &lt;<span class="keyword">int</span>**&gt; a; <span class="comment">//定义了一个二维平面的首地址...</span></span><br></pre></td></tr></table></figure>
+<p>剩下的就是依次类推了。</p>
+<h4 id="1-3-2-vector的使用"><a href="#1-3-2-vector的使用" class="headerlink" title="1.3.2 vector的使用"></a>1.3.2 vector的使用</h4><p>这里对使用做了以下的总结：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">方法(method)</th>
+<th style="text-align:center">用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">c.push_back(elem)</td>
+<td style="text-align:center">在数组的最后添加一个数据</td>
+</tr>
+<tr>
+<td style="text-align:center">c.pop_back(elem)</td>
+<td style="text-align:center">去掉数组的最后一个数据</td>
+</tr>
+<tr>
+<td style="text-align:center">at</td>
+<td style="text-align:center">得到编号位置的数据</td>
+</tr>
+<tr>
+<td style="text-align:center">begin</td>
+<td style="text-align:center">得到数组头的指针</td>
+</tr>
+<tr>
+<td style="text-align:center">end</td>
+<td style="text-align:center">得到数组的最后一个单元+1的指针</td>
+</tr>
+<tr>
+<td style="text-align:center">front</td>
+<td style="text-align:center">得到数组头的引用</td>
+</tr>
+<tr>
+<td style="text-align:center">back</td>
+<td style="text-align:center">得到数组的最后一个单元的引用</td>
+</tr>
+<tr>
+<td style="text-align:center">max_size</td>
+<td style="text-align:center">得到vector最大可以是多大</td>
+</tr>
+<tr>
+<td style="text-align:center">capacity</td>
+<td style="text-align:center">当前vector分配的大小</td>
+</tr>
+<tr>
+<td style="text-align:center">size</td>
+<td style="text-align:center">当前使用数据的大小</td>
+</tr>
+<tr>
+<td style="text-align:center">c.resize(num)</td>
+<td style="text-align:center">改变当前使用数据的大小，如果它比当前使用的大，或者填充默认值</td>
+</tr>
+<tr>
+<td style="text-align:center">reserve</td>
+<td style="text-align:center">改变当前vecotr所分配空间的大小</td>
+</tr>
+<tr>
+<td style="text-align:center">c.erase(pos) / c.erase(begin,end)</td>
+<td style="text-align:center">删除指针指向的数据项</td>
+</tr>
+<tr>
+<td style="text-align:center">clear</td>
+<td style="text-align:center">清空当前的vector</td>
+</tr>
+<tr>
+<td style="text-align:center">rbegin</td>
+<td style="text-align:center">将vector反转后的开始指针返回(其实就是原来的end-1)</td>
+</tr>
+<tr>
+<td style="text-align:center">rend</td>
+<td style="text-align:center">将vector反转构的结束指针返回(其实就是原来的begin-1)</td>
+</tr>
+<tr>
+<td style="text-align:center">empty</td>
+<td style="text-align:center">判断vector是否为空</td>
+</tr>
+<tr>
+<td style="text-align:center">swap</td>
+<td style="text-align:center">与另一个vector交换数据</td>
+</tr>
+<tr>
+<td style="text-align:center">c.insert(pos,elem)</td>
+<td style="text-align:center">pos处插入elem</td>
+</tr>
+</tbody>
+</table>
+<h3 id="1-4-读取和处理较大的数据"><a href="#1-4-读取和处理较大的数据" class="headerlink" title="1.4 读取和处理较大的数据"></a>1.4 读取和处理较大的数据</h3><p>在本次作业刚开始便遇到一个很棘手的问题，在<code>linux</code>系统中很难定义一个单一的含有大于2千万个数字的数组，而我的数据量高达7千万，在经过查阅之后，发现了分治算法，但本问题还不是分治算法，因为面对问题是文件读不进来…需要将数组拆分很多次读取进来分别处理最终合成一个整体解决<code>top-k问题</code>，但做一下简单的了解。</p>
+<h4 id="1-4-1-分治思想"><a href="#1-4-1-分治思想" class="headerlink" title="1.4.1 分治思想"></a>1.4.1 分治思想</h4><p>分治思想有三个步骤：</p>
+<p>step1 分–将问题分解为规模更小的子问题。</p>
+<p>step2 治–将这些规模更小的子问题逐个击破。</p>
+<p>step3 合–将已解决的子问题合并，最终得出“母”问题的解。</p>
+<p>但分治思想和本题不相符合的一点是，分治思想当中的每一个子问题都是相互独立的，但是我们要在一个巨大的无须数据集中选择前k个无论如何划分都是难以保证相互独立的。因此也便催生了下面的方法。</p>
+<h4 id="1-4-2-本次处理方法"><a href="#1-4-2-本次处理方法" class="headerlink" title="1.4.2 本次处理方法"></a>1.4.2 本次处理方法</h4><p>step1 将7千多万条数据拆分为4分</p>
+<p>step2 每次读取2千万条数据进行快选(quickselect)</p>
+<p>step3 将每一组数选择出的前k大的数组合并到另一个<code>vector</code>中</p>
+<p>step4 将这一层<code>vector</code>使用快选算法得到最终结果</p>
+<h2 id="二、算法描述"><a href="#二、算法描述" class="headerlink" title="二、算法描述"></a>二、算法描述</h2><p>在网上并没有看到一个详细描述快选算法的博客，<code>Wiki</code>百科上也不是很能看懂，试着自己写一下。</p>
+<h3 id="2-1-快排算法-快选算法的根基"><a href="#2-1-快排算法-快选算法的根基" class="headerlink" title="2.1 快排算法(快选算法的根基)"></a>2.1 快排算法(快选算法的根基)</h3><p>快选算法运用的根基便是分治思想(分治思想及其依赖于递归算法)，其实现的思想如下：</p>
+<h4 id="2-1-1-算法例子及原理"><a href="#2-1-1-算法例子及原理" class="headerlink" title="2.1.1 算法例子及原理"></a>2.1.1 算法例子及原理</h4><p>问题：有这么一组数 6  8  4  2  7  1  9  3  5  0，对其从小到大排序。</p>
+<p>step1 首先我们确定我们需要排序的这一组数字，我们要对他做升序排列：</p>
+<p>​                     6 | 8 | 4 | 2 | 7 | 1 | 9 | 3 | 5 | 0</p>
+<p>step2 选择一个枢纽值，并且确定两个分别指向头和尾的指针，两个指针分别命名为<code>low</code>和<code>high</code>。这然后我们用用<strong>加粗</strong>表示枢纽值，<code>代码框</code>表示两个指针。<strong><em>斜体加粗</em></strong>代表又是枢纽值又是一个指针，6是<strong><em>斜体加粗</em></strong>是因为我选择它作为枢纽值的同时，它是<code>low</code>指向的元素。</p>
+<p>​                         <strong><em>6</em></strong> | 8 | 4 | 2 | 7 | 1 | 9 | 3 | 5 | <code>0</code></p>
+<p>step3 做一次判断，记住升序排列时比6小的应该在6的左边，vice versa。</p>
+<p>如果<code>high</code>指针指向的元素<strong>小于</strong>6，则它应保持不动，继续指向这个数值，就像现在它指向0，下次依然指向0(因为0就是要下次换到6左边的数啊，如果<code>high</code>指针不再指向0，去指向5，0就永远在6的右边了，我们也完不成升序排列了)。如果<code>high</code>指针指向的元素<strong>大于等于</strong>6，则<code>high</code>指针应不断向左移动，直到指向一个<strong>小于</strong>6的数字。</p>
+<p>同理，如果<code>low</code>指向的元素<strong>大于</strong>6，则<code>low</code>指向的元素不变。而如果<code>low</code>指向的元素<strong>小于等于</strong>6，那么我们将<code>low</code>指针向左移动直到它指向一个<strong>大于</strong>6的数字。就像本次，<code>low</code>指针指向的是6，是等于6的，我们将它右移，发现8是<strong>大于</strong>6的，<code>low</code>便指向了8。</p>
+<p>大家一定要记得先移动<code>high</code>指针！！！到step9 大家就明白了。</p>
+<p>随后我们的数组就变成这样了：</p>
+<p>​                     <strong>6</strong> | <code>8</code> | 4 | 2 | 7 | 1 | 9 | 3 | 5 | <code>0</code>                    </p>
+<p>step 4 互换<code>low</code>和<code>high</code>指向的元素：</p>
+<p>​                                         <strong>6</strong> | <code>0</code> | 4 | 2 | 7 | 1 | 9 | 3 | 5 | <code>8</code></p>
+<p>step 5 此时<code>high</code>指向的元素为8，大于6，左移到一个小于6的数字，移动到5。<code>low</code>指向的元素为0，小于6，右移到一个大于6的数，移动到7。</p>
+<p>​                                         <strong>6</strong> | 0 | 4 | 2 | <code>7</code> | 1 | 9 | 3 | <code>5</code> | 8</p>
+<p>step 6 互换<code>low</code>和<code>high</code>指向的元素：</p>
+<p>​                                         <strong>6</strong> | 0 | 4 | 2 | <code>5</code> | 1 | 9 | 3 | <code>7</code> | 8</p>
+<p>step 7 此时<code>high</code>指向的元素为7，大于6，左移到一个小于6的数字，移动到3。<code>low</code>指向的元素为5，小于6，右移到一个大于6的数，移动到9。</p>
+<p>​                                         <strong>6</strong> | 0 | 4 | 2 | 5 | 1 | <code>9</code> | <code>3</code> | 7 | 8</p>
+<p>step 8 互换<code>low</code>和<code>high</code>指向的元素：</p>
+<p>​                                         <strong>6</strong> | 0 | 4 | 2 | 5 | 1 | <code>3</code> | <code>9</code> | 7 | 8</p>
+<p>step 9 此时<code>high</code>指向的元素为9，大于6，左移到一个小于6的数字，移动到3。此时，<code>low</code>指针和<code>high</code>指针重合了，停止<code>low</code>的迭代，不然就错过去了，6永远在第一位。</p>
+<p>​                                         <strong>6</strong> | 0 | 4 | 2 | 5 | 1 | <code>3</code> | 9 | 7 | 8</p>
+<p>step 10 互换<code>low</code>和<code>high</code>指向3和我们的枢纽值6：</p>
+<p>​                                         3 | 0 | 4 | 2 | 5 | 1 | 6 | 9 | 7 | 8</p>
+<p>至此，第一轮迭代结束。下面就是我们需要使用<strong>递归思想</strong>的时候了。这个时候大家可以看到，6已经到了6应该在的位置，但6左边的数字和右边的数字还是混乱的，这样我们就得到了两个新子序列。所以我们要不停递归下去，直到不能再分出新的子序列，并且已有的子序列均已排序完成。下面是第二轮迭代的过程，|||用来划分不同的子序列：</p>
+<p>step 1 初始化，此时左右6两边各有一个独立序列：</p>
+<p>​                                         <strong><em>3</em></strong> | 0 | 4 | 2 | 5 | <code>1</code>  |||  6  |||  <strong><em>9</em></strong> | 7 |<code>8</code></p>
+<p>step 2 <code>high</code>和<code>low</code>的移动，右边的序列的两个指针均指向了8</p>
+<p>​                                         <strong>3</strong> | 0 | <code>4</code> | 2 | 5 | <code>1</code>  |||  6  |||  <strong>9</strong> | 7 |<code>8</code></p>
+<p>step 3 <code>high</code>和<code>low</code>的互换，9不可再分</p>
+<p>​                                         <strong>3</strong> | 0 | <code>1</code> | 2 | 5 | <code>4</code>  |||  6  |||  8 | 7 ||| 9</p>
+<p>step 4 <code>high</code>和<code>low</code>的移动</p>
+<p>​                                         <strong>3</strong> | 0 | 1 | <code>2</code> | 5 |  4  |||  6  ||| <strong><em>8</em></strong> | <code>7</code> ||| 9</p>
+<p>step 6 <code>high</code>和<code>low</code>的互换，第1个序列的<code>low</code>和<code>high</code>都指向2，第3个序列的<code>low</code>和<code>high</code>都指向7。互换后3，8，9不可再分</p>
+<p>​                                        <strong>2</strong> | 0 | <code>1</code> |||  3  ||| <strong><em>5</em></strong> |  <code>4</code>  |||  6  ||| 7 |||  8 ||| 9</p>
+<p>step 7 <code>high</code>和<code>low</code>的移动，第3个序列的<code>low</code>和<code>high</code>都指向4</p>
+<p>​                                        <strong>2</strong> | 0 | <code>1</code> |||  3  ||| <strong>5</strong> |  <code>4</code>  |||  6  ||| 7 |||  8 ||| 9</p>
+<p>step 8 <code>high</code>和<code>low</code>的互换，4，5，2不可再分</p>
+<p>​                                        <strong><em>1</em></strong> | <code>0</code> ||| 2 |||  3  |||  4  |||  5  |||  6  ||| 7 |||  8 ||| 9</p>
+<p>step 9 <code>high</code>和<code>low</code>的移动，第1个序列的<code>high</code>和<code>low</code>均指向0</p>
+<p>​                                        <strong>1</strong> | <code>0</code> ||| 2 |||  3  |||  4  |||  5  |||  6  ||| 7 |||  8 ||| 9</p>
+<p>step 10 <code>high</code>和<code>low</code>的移动，1和0不可再分</p>
+<p>​                                        0 |||  1  |||  2  |||  3  |||  4  |||  5  |||  6  ||| 7 |||  8 ||| 9</p>
+<p>最终排序完成</p>
+<h4 id="2-1-2-代码编写"><a href="#2-1-2-代码编写" class="headerlink" title="2.1.2 代码编写"></a>2.1.2 代码编写</h4><p>首先，我们确定代码编写的逻辑思路，如以下</p>
+<p> 1．low = left_index; high = right_index; 确定枢纽数 temp = left_index</p>
+<p> 2．在low和high不同的情况下 high– 由后向前找比枢纽数小的数，low++由前向后找比枢纽数大的数</p>
+<p> 3．low和high所指代的数互换位置</p>
+<p> 4．在low和high相同的情况下，temp和high互换位置</p>
+<p> 5．对划分后的序列进行递归，直到left不大于right时return</p>
+<p>下面这个代码是在网上摘录下来的，非原创，因为这一次并不会真正用到快排算法。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt; </span></span></span><br><span class="line"><span class="keyword">int</span> a[<span class="number">101</span>],n; <span class="comment">//定义全局变量，这两个变量需要在快排函数中使用 </span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">quicksort</span><span class="params">(<span class="keyword">int</span> left,<span class="keyword">int</span> right)</span> <span class="comment">//left和right是数组的最左边和最右边的数的下标</span></span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">    <span class="keyword">int</span> low, high, t, temp; <span class="comment">//声明下标low和high，temp为枢纽数，t是做数据交换的中间变量</span></span><br><span class="line">    <span class="keyword">if</span>(left &gt; right) <span class="comment">//递归结束条件</span></span><br><span class="line">       <span class="keyword">return</span>; </span><br><span class="line">                                </span><br><span class="line">    temp = a[left]; <span class="comment">//将最左边的数设为枢纽数</span></span><br><span class="line">    low = left; <span class="comment">//设置low为最左边的数字</span></span><br><span class="line">    high = right; <span class="comment">//设置high为最右边的数字</span></span><br><span class="line">    <span class="keyword">while</span>(low != high) </span><br><span class="line">    &#123;    </span><br><span class="line">        <span class="comment">//顺序很重要，要先从右边的high开始找，找到比枢纽数小下标</span></span><br><span class="line">        <span class="keyword">while</span>(a[high] &gt;= temp &amp;&amp; low &lt; high) </span><br><span class="line">            high --; </span><br><span class="line">        <span class="comment">//再找左边的low，指导找到比枢纽数大的下标</span></span><br><span class="line">        <span class="keyword">while</span>(a[low] &lt;= temp &amp;&amp; low &lt; high) </span><br><span class="line">            low ++; </span><br><span class="line">        <span class="keyword">if</span>(low &lt; high) <span class="comment">//交换low和high两个数在数组中的位置 </span></span><br><span class="line">        &#123;</span><br><span class="line">            t = a[low];</span><br><span class="line">            a[low] = a[high];</span><br><span class="line">            a[high] = t; </span><br><span class="line">        &#125; </span><br><span class="line">    &#125; </span><br><span class="line">    </span><br><span class="line">    a[left]=a[i]; <span class="comment">//在low和high终于相等的状况下，最终将枢纽数归位 </span></span><br><span class="line">    a[i]=temp; </span><br><span class="line">                             </span><br><span class="line">    quicksort(left,i<span class="number">-1</span>); <span class="comment">//继续处理左边的，这里是一个递归的过程 </span></span><br><span class="line">    quicksort(i+<span class="number">1</span>,right); <span class="comment">//继续处理右边的 ，这里是一个递归的过程 </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-2快速选择算法"><a href="#2-2快速选择算法" class="headerlink" title="2.2快速选择算法"></a>2.2快速选择算法</h3><p>快速选择算法是脱胎于快速排序算法，两者都由C. A. R. Hoare提出，两者分别都是在排序问题和top-k问题中最高效的算法。同时有了快速排序的基础，快速选择会更加的快速。</p>
+<h4 id="2-2-1算法例子及原理"><a href="#2-2-1算法例子及原理" class="headerlink" title="2.2.1算法例子及原理"></a>2.2.1算法例子及原理</h4><p>我们仍采用上面的一组数据，但换个问题</p>
+<p>问题：有这么一组数 6  8  4  2  7  1  9  3  5  0，选出最大的两个数。</p>
+<p>step1 首先我们确定我们需要选择的这一组数字：</p>
+<p>​                     6 | 8 | 4 | 2 | 7 | 1 | 9 | 3 | 5 | 0</p>
+<p>step2 做一次快排</p>
+<p>​                                         3 | 0 | 4 | 2 | 5 | 1 |||  6  ||| 9 | 7 | 8</p>
+<p>step3 选择6右侧的序列</p>
+<p>​                                         9 | 7 | 8</p>
+<p>step4 判断，3个数字大于2，因此对左边的数再次快排，选出数字9</p>
+<p>​                                         8 | 7 |||  9</p>
+<p>step5 判断，9是一个数字，小于1，开始递归，在9左边的两个数字8和7中选择top - 1，对8, 7做快排，选出８</p>
+<p>​                                        7 ||| 8</p>
+<p>step6 确定为８和９</p>
+<h4 id="2-2-2代码编写"><a href="#2-2-2代码编写" class="headerlink" title="2.2.2代码编写"></a>2.2.2代码编写</h4><p>首先我们确定代码的编写流程</p>
+<p> 1．low = left_index; high = right_index; 确定枢纽数 temp = left_index</p>
+<p> 2．在low和high不同的情况下 high– 由后向前找比枢纽数小的数，low++由前向后找比枢纽数大的数</p>
+<p> 3．low和high所指代的数互换位置</p>
+<p> 4．选出目标的那一部分数组，做大小的判断，我们假设它有ｍ个数据</p>
+<p> 5．若ｍ &gt; k，则重新对目标数组做快排</p>
+<p>　　若m = k，返回该数组</p>
+<p>　　若m &lt; k，对非目标数组的那部分数组对以 k - m为目标做快排</p>
+<p> 5．直到m = k，返回该数组</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> TYPE&gt;</span><br><span class="line"><span class="function">TYPE <span class="title">qselect</span><span class="params">(TYPE* pArray, <span class="keyword">int</span> k, <span class="keyword">int</span> li, <span class="keyword">int</span> hi)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (hi - li &lt;= <span class="number">1</span>) <span class="keyword">return</span> pArray[k];</span><br><span class="line">    <span class="keyword">int</span> j = li; <span class="built_in">std</span>::swap(pArray[j], pArray[k]);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = j = li + <span class="number">1</span>; i &lt; hi; i++)</span><br><span class="line">        <span class="keyword">if</span> (pArray[i] &lt; pArray[li]) <span class="built_in">std</span>::swap(pArray[j++], pArray[i]);</span><br><span class="line">    <span class="built_in">std</span>::swap(pArray[--j], pArray[li]);</span><br><span class="line">    <span class="keyword">if</span> (k &lt; j) <span class="keyword">return</span> qselect(pArray, k, li, j);</span><br><span class="line">    <span class="keyword">if</span> (k &gt; j) <span class="keyword">return</span> qselect(pArray, k - j, j + <span class="number">1</span>, hi);</span><br><span class="line">    <span class="keyword">return</span> pArray[j];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/C-算法/" rel="tag"># C++, 算法</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/05/基于LBS的出租车检索内核实现/" rel="next" title="基于LBS的出租车检索内核实现.md">
+                <i class="fa fa-chevron-left"></i> 基于LBS的出租车检索内核实现.md
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/08/06/预习作业1-大数据量查找重复数据/" rel="prev" title="预习作业1--大数据量查找重复数据">
+                预习作业1--大数据量查找重复数据 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Zhaocheng Du</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、所需C-技术"><span class="nav-number">1.</span> <span class="nav-text">一、所需C++技术</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-使用函数返回数组"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 使用函数返回数组</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-1-指针技术"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.1.1 指针技术</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-2-变量作用域"><span class="nav-number">1.1.2.</span> <span class="nav-text">1.1.2 变量作用域</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-3-返回数组的函数编写"><span class="nav-number">1.1.3.</span> <span class="nav-text">1.1.3 返回数组的函数编写</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-理解Template模板"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 理解Template模板</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-1-什么是模板"><span class="nav-number">1.2.1.</span> <span class="nav-text">1.2.1 什么是模板</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-2-sizeof-函数"><span class="nav-number">1.2.2.</span> <span class="nav-text">1.2.2 sizeof()函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-3-返回数组大小的函数编写"><span class="nav-number">1.2.3.</span> <span class="nav-text">1.1.3 返回数组大小的函数编写</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-使用STL的vector容器"><span class="nav-number">1.3.</span> <span class="nav-text">1.3 使用STL的vector容器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-1-vector如何声明和定义"><span class="nav-number">1.3.1.</span> <span class="nav-text">1.3.1 vector如何声明和定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-2-vector的使用"><span class="nav-number">1.3.2.</span> <span class="nav-text">1.3.2 vector的使用</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-读取和处理较大的数据"><span class="nav-number">1.4.</span> <span class="nav-text">1.4 读取和处理较大的数据</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-4-1-分治思想"><span class="nav-number">1.4.1.</span> <span class="nav-text">1.4.1 分治思想</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-4-2-本次处理方法"><span class="nav-number">1.4.2.</span> <span class="nav-text">1.4.2 本次处理方法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、算法描述"><span class="nav-number">2.</span> <span class="nav-text">二、算法描述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-快排算法-快选算法的根基"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 快排算法(快选算法的根基)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-1-算法例子及原理"><span class="nav-number">2.1.1.</span> <span class="nav-text">2.1.1 算法例子及原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-2-代码编写"><span class="nav-number">2.1.2.</span> <span class="nav-text">2.1.2 代码编写</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2快速选择算法"><span class="nav-number">2.2.</span> <span class="nav-text">2.2快速选择算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-1算法例子及原理"><span class="nav-number">2.2.1.</span> <span class="nav-text">2.2.1算法例子及原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-2代码编写"><span class="nav-number">2.2.2.</span> <span class="nav-text">2.2.2代码编写</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zhaocheng Du</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

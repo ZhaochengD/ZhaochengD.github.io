@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="数据结构, C," />
 
 
 
@@ -80,13 +80,14 @@
 
 
 <meta name="description" content="基于LBS的打车APP开发功能描述：现在我们想要开发一个类似于滴滴打车的软件，主要想要实现下面的两个功能： 在给定的一张北京地图上，有诸多的出租车车辆 功能1: range_query，在一个范围内，例如我们的屏幕范围内，显示出所有的出租车信息 功能2: knn_query，用户指定起点，可以获得距离最近的k辆车 面临问题与解决方案 对于range_query  如何存储北京的地图信息，使得信息检">
+<meta name="keywords" content="数据结构, C">
 <meta property="og:type" content="article">
 <meta property="og:title" content="基于LBS的出租车检索内核实现.md">
 <meta property="og:url" content="http://yoursite.com/2018/08/05/基于LBS的出租车检索内核实现/index.html">
 <meta property="og:site_name" content="Blogs of Zhaocheng">
 <meta property="og:description" content="基于LBS的打车APP开发功能描述：现在我们想要开发一个类似于滴滴打车的软件，主要想要实现下面的两个功能： 在给定的一张北京地图上，有诸多的出租车车辆 功能1: range_query，在一个范围内，例如我们的屏幕范围内，显示出所有的出租车信息 功能2: knn_query，用户指定起点，可以获得距离最近的k辆车 面临问题与解决方案 对于range_query  如何存储北京的地图信息，使得信息检">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/2018/08/05/基于LBS的出租车检索内核实现/E:/学海无涯/Hexo/source/_posts/基于LBS的出租车检索内核实现/2018-07-25%2019-44-37屏幕截图.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/05/基于LBS的出租车检索内核实现/2018-07-25%2019-44-37屏幕截图.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/05/基于LBS的出租车检索内核实现/E:/学海无涯/Hexo/source/_posts/基于LBS的出租车检索内核实现/2018-07-25%2019-47-28屏幕截图.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/05/基于LBS的出租车检索内核实现/E:/学海无涯/Hexo/source/_posts/基于LBS的出租车检索内核实现/2018-07-26%2007-43-43屏幕截图.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/05/基于LBS的出租车检索内核实现/E:/学海无涯/Hexo/source/_posts/基于LBS的出租车检索内核实现/2018-07-30%2000-17-25屏幕截图.png">
@@ -95,11 +96,11 @@
 <meta property="og:image" content="http://yoursite.com/2018/08/05/基于LBS的出租车检索内核实现/E:/学海无涯/Hexo/source/_posts/基于LBS的出租车检索内核实现/2018-08-04%2011-15-06屏幕截图.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/05/基于LBS的出租车检索内核实现/E:/学海无涯/Hexo/source/_posts/基于LBS的出租车检索内核实现/2018-08-04%2021-29-14屏幕截图.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/05/基于LBS的出租车检索内核实现/E:/学海无涯/Hexo/source/_posts/基于LBS的出租车检索内核实现/2018-08-04%2021-29-29屏幕截图.png">
-<meta property="og:updated_time" content="2018-08-05T15:28:02.622Z">
+<meta property="og:updated_time" content="2018-08-06T00:20:24.424Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="基于LBS的出租车检索内核实现.md">
 <meta name="twitter:description" content="基于LBS的打车APP开发功能描述：现在我们想要开发一个类似于滴滴打车的软件，主要想要实现下面的两个功能： 在给定的一张北京地图上，有诸多的出租车车辆 功能1: range_query，在一个范围内，例如我们的屏幕范围内，显示出所有的出租车信息 功能2: knn_query，用户指定起点，可以获得距离最近的k辆车 面临问题与解决方案 对于range_query  如何存储北京的地图信息，使得信息检">
-<meta name="twitter:image" content="http://yoursite.com/2018/08/05/基于LBS的出租车检索内核实现/E:/学海无涯/Hexo/source/_posts/基于LBS的出租车检索内核实现/2018-07-25%2019-44-37屏幕截图.png">
+<meta name="twitter:image" content="http://yoursite.com/2018/08/05/基于LBS的出租车检索内核实现/2018-07-25%2019-44-37屏幕截图.png">
 
 
 
@@ -416,7 +417,7 @@
 <h2 id="2-双向列表数据结构"><a href="#2-双向列表数据结构" class="headerlink" title="2.双向列表数据结构"></a>2.双向列表数据结构</h2><p><strong>双向列表</strong>是在本次实现<strong>网格索引</strong>和<strong>哈希表</strong>的关键以及基础，因此先进行介绍双向列表．</p>
 <h3 id="2-1-双向链表结构设计"><a href="#2-1-双向链表结构设计" class="headerlink" title="2.1 双向链表结构设计"></a>2.1 双向链表结构设计</h3><p><strong>双向列表</strong>的样子如下图所示，一个双向列表由多个<strong>双向列表的节点</strong>组成，在每一个节点当中我们分别使用两个指针指向前面和后面的节点，当我们遍历时，只需要取出该节点当中存储的下一个节点的地址，就可以快速访问下一个节点。</p>
 <p><strong>注意</strong>：头结点(x1, y1)一般设置为空节点，这样方便新的节点的插入操作。</p>
-<p><img src="/2018/08/05/基于LBS的出租车检索内核实现/E:/学海无涯\Hexo\source\_posts\基于LBS的出租车检索内核实现\2018-07-25 19-44-37屏幕截图.png" alt="2018-07-25 19-44-37屏幕截图"></p>
+<p><img src="/2018/08/05/基于LBS的出租车检索内核实现/2018-07-25 19-44-37屏幕截图.png" alt="2018-07-25 19-44-37屏幕截图"></p>
 <p>首先熟悉一下双向列表的组成，双向列表的每一个节点由两部分组成：数据和指针．</p>
 <p><img src="/2018/08/05/基于LBS的出租车检索内核实现/E:/学海无涯\Hexo\source\_posts\基于LBS的出租车检索内核实现\2018-07-25 19-47-28屏幕截图.png" alt="2018-07-25 19-47-28屏幕截图"></p>
 <p>其中：</p>
@@ -852,6 +853,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/数据结构-C/" rel="tag"># 数据结构, C</a>
+          
+        </div>
+      
 
       
       
@@ -870,6 +877,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/08/06/预习作业2-快速排序算法/" rel="prev" title="预习作业2--快速排序算法">
+                预习作业2--快速排序算法 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -946,7 +957,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -959,7 +970,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>

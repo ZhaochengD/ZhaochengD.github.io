@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="C++, Linux," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="本次的作业是在大数据实习前的三个预习作业第一项，其问题描述如下： 有两个文件分别存储着升序排列的整形数据(没有重复的数据),写一个程序将这两个文件的整形数据的交集找出来,要求程序运行速度最优。 本次编程使用C++完成。 参考文献 二叉树算法：http://blog.jobbole.com/104106/ gdb使用教程：http://witmax.cn/gdb-usage.html 1. 相关概念">
+<meta name="keywords" content="C++, Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="预习作业1--大数据量查找重复数据">
+<meta property="og:url" content="http://yoursite.com/2018/08/06/预习作业1-大数据量查找重复数据/index.html">
+<meta property="og:site_name" content="Blogs of Zhaocheng">
+<meta property="og:description" content="本次的作业是在大数据实习前的三个预习作业第一项，其问题描述如下： 有两个文件分别存储着升序排列的整形数据(没有重复的数据),写一个程序将这两个文件的整形数据的交集找出来,要求程序运行速度最优。 本次编程使用C++完成。 参考文献 二叉树算法：http://blog.jobbole.com/104106/ gdb使用教程：http://witmax.cn/gdb-usage.html 1. 相关概念">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-08-06T00:04:02.007Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="预习作业1--大数据量查找重复数据">
+<meta name="twitter:description" content="本次的作业是在大数据实习前的三个预习作业第一项，其问题描述如下： 有两个文件分别存储着升序排列的整形数据(没有重复的数据),写一个程序将这两个文件的整形数据的交集找出来,要求程序运行速度最优。 本次编程使用C++完成。 参考文献 二叉树算法：http://blog.jobbole.com/104106/ gdb使用教程：http://witmax.cn/gdb-usage.html 1. 相关概念">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/08/06/预习作业1-大数据量查找重复数据/"/>
+
+
+
+
+
+  <title>预习作业1--大数据量查找重复数据 | Blogs of Zhaocheng</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Blogs of Zhaocheng</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/06/预习作业1-大数据量查找重复数据/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Zhaocheng Du">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blogs of Zhaocheng">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">预习作业1--大数据量查找重复数据</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-06T08:02:04+08:00">
+                2018-08-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本次的作业是在大数据实习前的三个预习作业第一项，其问题描述如下：</p>
+<p>有两个文件分别存储着升序排列的整形数据(没有重复的数据),写一个程序将这两个文件的整形数据的交集找出来,要求程序运行速度最优。</p>
+<p>本次编程使用C++完成。</p>
+<p><strong>参考文献</strong></p>
+<p>二叉树算法：<a href="http://blog.jobbole.com/104106/" target="_blank" rel="noopener">http://blog.jobbole.com/104106/</a></p>
+<p>gdb使用教程：<a href="http://witmax.cn/gdb-usage.html" target="_blank" rel="noopener">http://witmax.cn/gdb-usage.html</a></p>
+<h2 id="1-相关概念"><a href="#1-相关概念" class="headerlink" title="1. 相关概念"></a>1. 相关概念</h2><p><strong>时间复杂度</strong>：</p>
+<p>时间复杂度是指执行算法所需要的计算工作量，简单来说，时间复杂度指的是语句执行次数。</p>
+<p><strong>时间复杂度计算方法</strong>：</p>
+<ol>
+<li>用常数1代替运行时间中的所有加法常数 </li>
+<li>修改后的运行次数函数中，只保留最高阶项 </li>
+<li>去除最高阶项的系数</li>
+</ol>
+<h2 id="2-环境配置"><a href="#2-环境配置" class="headerlink" title="2.环境配置"></a>2.环境配置</h2><p>从windows转换为linux之后各种不适应，现在刚刚反应过来，linux系统并不存在windows系统中各种友好的图像化软件，例如<code>Visual Studio 2008</code> 这种鬼，它已经彻底颠覆了我对于计算机的思维…</p>
+<p><strong>C++在linux系统中编译</strong></p>
+<p>在linux中首先要将C++文件<code>.cpp</code> 使用<code>g++</code> 进行编译，什么是编译呢，通过查询，就是将高级语言转化为计算机可识别，可运行的二进制文件。其实我们可以看到在linux系统当中，所有的指令，例如<code>ls</code> ,<code>mv</code> 都是通过编译后将高级语言转化为的简单指令，因为后的文件就可以直接在shell中输入运行了：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$  g++ -g hello.cpp -o hello</span><br></pre></td></tr></table></figure>
+<p>其中 -g是为了能够显示变量名和函数名，不然显示是一段二进制地址。</p>
+<p><strong>C++在linux系统中调试</strong></p>
+<p>在编译之后我们要进行代码的调试，在linux系统当中使用<code>GDB</code>来对已经编译好的代码进行调试，在bash</p>
+<p>中输入<code>GDB</code>即可打开相应界面和指令。</p>
+<table>
+<thead>
+<tr>
+<th>指令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>file helloworld</td>
+<td>打开已编译完的helloworld可执行文件</td>
+</tr>
+<tr>
+<td>l</td>
+<td>查看源代码</td>
+</tr>
+<tr>
+<td>b func</td>
+<td>在某函数处设置断点</td>
+</tr>
+<tr>
+<td>b 16</td>
+<td>在第16行插入断点</td>
+</tr>
+<tr>
+<td>n</td>
+<td>从断点下一步</td>
+</tr>
+<tr>
+<td>p i</td>
+<td>打印变量i的值</td>
+</tr>
+<tr>
+<td>c</td>
+<td>继续执行下面的</td>
+</tr>
+<tr>
+<td>delete 16</td>
+<td>删除断点16</td>
+</tr>
+</tbody>
+</table>
+<h2 id="3-实现方法"><a href="#3-实现方法" class="headerlink" title="3.实现方法"></a>3.实现方法</h2><p><strong>基本思路</strong></p>
+<p>step1,  先在文档1和文档2中读取一个基本数据</p>
+<p>step2,  将这两个数据进行对比大小</p>
+<p>step3, 若两个数据大小相同，存入output.txt文档当中</p>
+<p>​            若文档1中数据大于文档2中数据，文档2重新读入一个数据(因为这样数据可以数据2变大)</p>
+<p>​            若文档2中数据大于文档2中数据，文档1重新读入一个数据(因为这样数据可以数据1变大)</p>
+<p>step4, 销毁fin1,fin2,fout对象，释放内存</p>
+<p><strong>实现C++代码</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;fstream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">string</span> line1;</span><br><span class="line">    <span class="built_in">string</span> line2;</span><br><span class="line">    <span class="built_in">string</span> line3;</span><br><span class="line">    <span class="keyword">int</span> data1;</span><br><span class="line">    <span class="keyword">int</span> data2;</span><br><span class="line">    <span class="function">ifstream <span class="title">fin1</span><span class="params">(<span class="string">"/media/vincent/新加卷/data/1_1.txt"</span>)</span></span>; <span class="comment">//点1</span></span><br><span class="line">    <span class="function">ifstream <span class="title">fin2</span><span class="params">(<span class="string">"/media/vincent/新加卷/data/1_2.txt"</span>)</span></span>;</span><br><span class="line">    <span class="function">ofstream <span class="title">fout</span><span class="params">(<span class="string">"/media/vincent/新加卷/data/output.txt"</span>)</span></span>;</span><br><span class="line">    fin1 &gt;&gt; line1; <span class="comment">//点2</span></span><br><span class="line">    fin2 &gt;&gt; line2;</span><br><span class="line">    <span class="keyword">while</span> (!fin1.eof() &amp; !fin2.eof()) </span><br><span class="line">    &#123;</span><br><span class="line">        data1 = atoi(line1.c_str()); <span class="comment">//点2</span></span><br><span class="line">        data2 = atoi(line2.c_str());</span><br><span class="line">        <span class="keyword">if</span> (data1 == data2)</span><br><span class="line">        &#123;</span><br><span class="line">            fout &lt;&lt; line1 &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">            fin1 &gt;&gt; line1;</span><br><span class="line">            fin2 &gt;&gt; line2;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="string">"line1"</span> &lt;&lt; line1 &lt;&lt; <span class="string">"line2"</span> &lt;&lt; line2 &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (data1 &lt; data2)</span><br><span class="line">        &#123;</span><br><span class="line">            fin1 &gt;&gt; line1;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="string">"line1"</span> &lt;&lt; line1 &lt;&lt; <span class="string">"line2"</span> &lt;&lt; line2 &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            fin2 &gt;&gt; line2;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="string">"line1"</span> &lt;&lt; line1 &lt;&lt; <span class="string">"line2"</span> &lt;&lt; line2 &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">        &#125;</span><br><span class="line">     &#125;</span><br><span class="line">    fin1.close(); <span class="comment">//点4</span></span><br><span class="line">    fin2.close();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>C++相关示意</strong></p>
+<p>点1：使用<code>ifstream</code>和<code>ofstream</code>定义输入输出文档</p>
+<p>点2：将字符串型数据转化为整形数据，便于后面对比大小</p>
+<p>点3：销毁对象，释放内存</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/C-Linux/" rel="tag"># C++, Linux</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/06/预习作业2-快速排序算法/" rel="next" title="预习作业2--快速排序算法">
+                <i class="fa fa-chevron-left"></i> 预习作业2--快速排序算法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Zhaocheng Du</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-相关概念"><span class="nav-number">1.</span> <span class="nav-text">1. 相关概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-环境配置"><span class="nav-number">2.</span> <span class="nav-text">2.环境配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-实现方法"><span class="nav-number">3.</span> <span class="nav-text">3.实现方法</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zhaocheng Du</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
