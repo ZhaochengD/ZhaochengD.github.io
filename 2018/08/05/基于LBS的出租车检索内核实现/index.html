@@ -88,15 +88,15 @@
 <meta property="og:description" content="基于LBS的打车APP开发功能描述：现在我们想要开发一个类似于滴滴打车的软件，主要想要实现下面的两个功能： 在给定的一张北京地图上，有诸多的出租车车辆 功能1: range_query，在一个范围内，例如我们的屏幕范围内，显示出所有的出租车信息 功能2: knn_query，用户指定起点，可以获得距离最近的k辆车 面临问题与解决方案 对于range_query  如何存储北京的地图信息，使得信息检">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2018/08/05/基于LBS的出租车检索内核实现/2018-07-25%2019-44-37屏幕截图.png">
-<meta property="og:image" content="http://yoursite.com/2018/08/05/基于LBS的出租车检索内核实现/E:/学海无涯/Hexo/source/_posts/基于LBS的出租车检索内核实现/2018-07-25%2019-47-28屏幕截图.png">
-<meta property="og:image" content="http://yoursite.com/2018/08/05/基于LBS的出租车检索内核实现/E:/学海无涯/Hexo/source/_posts/基于LBS的出租车检索内核实现/2018-07-26%2007-43-43屏幕截图.png">
-<meta property="og:image" content="http://yoursite.com/2018/08/05/基于LBS的出租车检索内核实现/E:/学海无涯/Hexo/source/_posts/基于LBS的出租车检索内核实现/2018-07-30%2000-17-25屏幕截图.png">
-<meta property="og:image" content="http://yoursite.com/2018/08/05/基于LBS的出租车检索内核实现/E:/学海无涯/Hexo/source/_posts/基于LBS的出租车检索内核实现/2018-08-04%2023-06-02屏幕截图.png">
-<meta property="og:image" content="http://yoursite.com/2018/08/05/基于LBS的出租车检索内核实现/E:/学海无涯/Hexo/source/_posts/基于LBS的出租车检索内核实现/2018-08-04%2011-12-37屏幕截图.png">
-<meta property="og:image" content="http://yoursite.com/2018/08/05/基于LBS的出租车检索内核实现/E:/学海无涯/Hexo/source/_posts/基于LBS的出租车检索内核实现/2018-08-04%2011-15-06屏幕截图.png">
-<meta property="og:image" content="http://yoursite.com/2018/08/05/基于LBS的出租车检索内核实现/E:/学海无涯/Hexo/source/_posts/基于LBS的出租车检索内核实现/2018-08-04%2021-29-14屏幕截图.png">
-<meta property="og:image" content="http://yoursite.com/2018/08/05/基于LBS的出租车检索内核实现/E:/学海无涯/Hexo/source/_posts/基于LBS的出租车检索内核实现/2018-08-04%2021-29-29屏幕截图.png">
-<meta property="og:updated_time" content="2018-08-06T00:20:24.424Z">
+<meta property="og:image" content="http://yoursite.com/2018/08/05/基于LBS的出租车检索内核实现/2018-07-25%2019-47-28屏幕截图.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/05/基于LBS的出租车检索内核实现/2018-07-26%2007-43-43屏幕截图.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/05/基于LBS的出租车检索内核实现/2018-07-30%2000-17-25屏幕截图.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/05/基于LBS的出租车检索内核实现/2018-08-04%2023-06-02屏幕截图.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/05/基于LBS的出租车检索内核实现/2018-08-04%2011-12-37屏幕截图.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/05/基于LBS的出租车检索内核实现/2018-08-04%2011-15-06屏幕截图.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/05/基于LBS的出租车检索内核实现/2018-08-04%2021-29-14屏幕截图.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/05/基于LBS的出租车检索内核实现/2018-08-04%2021-29-29屏幕截图.png">
+<meta property="og:updated_time" content="2018-08-06T00:25:30.473Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="基于LBS的出租车检索内核实现.md">
 <meta name="twitter:description" content="基于LBS的打车APP开发功能描述：现在我们想要开发一个类似于滴滴打车的软件，主要想要实现下面的两个功能： 在给定的一张北京地图上，有诸多的出租车车辆 功能1: range_query，在一个范围内，例如我们的屏幕范围内，显示出所有的出租车信息 功能2: knn_query，用户指定起点，可以获得距离最近的k辆车 面临问题与解决方案 对于range_query  如何存储北京的地图信息，使得信息检">
@@ -419,7 +419,7 @@
 <p><strong>注意</strong>：头结点(x1, y1)一般设置为空节点，这样方便新的节点的插入操作。</p>
 <p><img src="/2018/08/05/基于LBS的出租车检索内核实现/2018-07-25 19-44-37屏幕截图.png" alt="2018-07-25 19-44-37屏幕截图"></p>
 <p>首先熟悉一下双向列表的组成，双向列表的每一个节点由两部分组成：数据和指针．</p>
-<p><img src="/2018/08/05/基于LBS的出租车检索内核实现/E:/学海无涯\Hexo\source\_posts\基于LBS的出租车检索内核实现\2018-07-25 19-47-28屏幕截图.png" alt="2018-07-25 19-47-28屏幕截图"></p>
+<p><img src="/2018/08/05/基于LBS的出租车检索内核实现/2018-07-25 19-47-28屏幕截图.png" alt="2018-07-25 19-47-28屏幕截图"></p>
 <p>其中：</p>
 <p>data属于数据域，是记录车辆的数据的区域；</p>
 <p>prev属于指针域，是指向前一个node的指针；</p>
@@ -514,7 +514,7 @@
 </tbody>
 </table>
 <p>转化一下形式就成了下图的样子:</p>
-<p><img src="/2018/08/05/基于LBS的出租车检索内核实现/E:/学海无涯\Hexo\source\_posts\基于LBS的出租车检索内核实现\2018-07-26 07-43-43屏幕截图.png" alt="2018-07-26 07-43-43屏幕截图"></p>
+<p><img src="/2018/08/05/基于LBS的出租车检索内核实现/2018-07-26 07-43-43屏幕截图.png" alt="2018-07-26 07-43-43屏幕截图"></p>
 <h3 id="3-2-哈希表节点结构设计"><a href="#3-2-哈希表节点结构设计" class="headerlink" title="3.2 哈希表节点结构设计"></a>3.2 哈希表节点结构设计</h3><p>首先我们看到在每一个<strong>链表节点</strong>的最前面有一个都有一个<strong>哈希表节点</strong>，下面我们首先实现哈希表节点，哈希节点主要需要存储</p>
 <ul>
 <li>一个可以进行链接<strong>前节点</strong>和<strong>后节点</strong>的双向列表queue结构</li>
@@ -551,7 +551,7 @@
 <li>每一个cell里存储这个cell里的车辆的信息</li>
 <li>注意cell的编号从0—12，在物理存储中是连续的，因此转化为了一维的数组</li>
 </ul>
-<p><img src="/2018/08/05/基于LBS的出租车检索内核实现/E:/学海无涯\Hexo\source\_posts\基于LBS的出租车检索内核实现\2018-07-30 00-17-25屏幕截图.png" alt="2018-07-30 00-17-25屏幕截图"></p>
+<p><img src="/2018/08/05/基于LBS的出租车检索内核实现/2018-07-30 00-17-25屏幕截图.png" alt="2018-07-30 00-17-25屏幕截图"></p>
 <h3 id="4-1-网格结构设计及其属性"><a href="#4-1-网格结构设计及其属性" class="headerlink" title="4.1 网格结构设计及其属性"></a>4.1 网格结构设计及其属性</h3><ul>
 <li>每一个网格都有很多的cell</li>
 <li>每一个cell里都要初始化一个<strong>空的双向列表</strong>(dammy node)来存储出租车信息。</li>
@@ -598,7 +598,7 @@
 </ul>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//见上，lbs_grid.cpp</span></span><br><span class="line"><span class="comment">//获取cell id 里面的 cell</span></span><br><span class="line"><span class="keyword">lbs_cell_t</span>* lbs_grid_cell(<span class="keyword">lbs_grid_t</span>* lbs_grid, <span class="keyword">int</span> cell_id)&#123;</span><br><span class="line">  <span class="keyword">if</span> (lbs_grid!= <span class="literal">NULL</span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> &amp;(lbs_grid-&gt;cell[cell_id]);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//lbs_grid.cpp结束</span></span><br></pre></td></tr></table></figure>
 <h2 id="5-实现网格范围索引-range-query"><a href="#5-实现网格范围索引-range-query" class="headerlink" title="5. 实现网格范围索引(range_query)"></a>5. 实现网格范围索引(range_query)</h2><h3 id="5-1进行网格范围索引的最终结构"><a href="#5-1进行网格范围索引的最终结构" class="headerlink" title="5.1进行网格范围索引的最终结构"></a>5.1进行网格范围索引的最终结构</h3><p>终于到了可以实现range_query的时候了，上面讲解了许多的数据结构都是为了可以实现这个功能服务的，下面首先看一下在我们构建了所有的数据结构以后，获得的最终结构的图像：</p>
-<p><img src="/2018/08/05/基于LBS的出租车检索内核实现/E:/学海无涯\Hexo\source\_posts\基于LBS的出租车检索内核实现\2018-08-04 23-06-02屏幕截图.png" alt="2018-08-04 23-06-02屏幕截图"></p>
+<p><img src="/2018/08/05/基于LBS的出租车检索内核实现/2018-08-04 23-06-02屏幕截图.png" alt="2018-08-04 23-06-02屏幕截图"></p>
 <p>分别解说：</p>
 <ol>
 <li>在左侧红白相间的是<strong>哈希表</strong>结构，<strong>哈希表</strong>的是一串具有连续地址的数组，每一个地址当中存了一个空的哈希表节点(包含<strong>双向列表</strong>)。在它的后面使用<strong>哈希节点</strong>存储了车辆的信息，每一个节点是一个车辆，<strong>哈希节点</strong>之间使用<strong>双向列表</strong>链接。那么我们是怎么确定一个车辆的信息是挂载在哪个节点上的呢？就是对车辆ID进行求余，例如对第1辆车的ID求余以后得到了1，我们就把它挂载在第一个哈希节点上。</li>
@@ -806,18 +806,18 @@
 <h2 id="8-实现knn-query"><a href="#8-实现knn-query" class="headerlink" title="8. 实现knn_query"></a>8. 实现knn_query</h2><h3 id="8-1算法原理"><a href="#8-1算法原理" class="headerlink" title="8.1算法原理"></a>8.1算法原理</h3><p>knn_query，就是选择距离最近的k辆车，那么我们的思路是一个什么样的呢，最简单的方法当然是对每一辆车进行遍历，着这样的速度太慢，于是我们可以<strong>借助网格</strong>对<strong>堆数据结构</strong>进行剪枝的处理。</p>
 <p>处理之前，因为我们要借助网格剪枝，所以首先需要了解一个MinDist的概念。</p>
 <p><strong>MinDist等于点P与O的边界上任意点之间的最小距离。若P在O内，则距离为0</strong></p>
-<p><img src="/2018/08/05/基于LBS的出租车检索内核实现/E:/学海无涯\Hexo\source\_posts\基于LBS的出租车检索内核实现\2018-08-04 11-12-37屏幕截图.png" alt="2018-08-04 11-12-37屏幕截图"></p>
+<p><img src="/2018/08/05/基于LBS的出租车检索内核实现/2018-08-04 11-12-37屏幕截图.png" alt="2018-08-04 11-12-37屏幕截图"></p>
 <p><strong>step1</strong> 在了解这个概念以后，我们就可以最近邻算法的书写了，假设我们的起始地点为q，q点位于Cell01(C0)处</p>
 <ul>
 <li>我们首先使用C0建一个堆，此时距离为0，此时的堆如下：</li>
 </ul>
 <p>​                                                                           C0</p>
-<p><img src="/2018/08/05/基于LBS的出租车检索内核实现/E:/学海无涯\Hexo\source\_posts\基于LBS的出租车检索内核实现\2018-08-04 11-15-06屏幕截图.png" alt="2018-08-04 11-15-06屏幕截图"></p>
+<p><img src="/2018/08/05/基于LBS的出租车检索内核实现/2018-08-04 11-15-06屏幕截图.png" alt="2018-08-04 11-15-06屏幕截图"></p>
 <p><strong>step2</strong> 弹出堆中的头元素(这里就是C0)，如果是个格子，则遍历C0中的每一辆车插入到堆当中；如果头结点是辆车，则说明我们已经找到最近的车了。此处C0是一个格子，我们删去C0，并将C0当中的两辆车a和b插入到堆当中，此处的堆就成为下面这个结构：</p>
 <p>​                                                                           a</p>
 <p>​                                                                       |</p>
 <p>​                                                                       b</p>
-<p><img src="/2018/08/05/基于LBS的出租车检索内核实现/E:/学海无涯\Hexo\source\_posts\基于LBS的出租车检索内核实现\2018-08-04 21-29-14屏幕截图.png" alt="2018-08-04 21-29-14屏幕截图"></p>
+<p><img src="/2018/08/05/基于LBS的出租车检索内核实现/2018-08-04 21-29-14屏幕截图.png" alt="2018-08-04 21-29-14屏幕截图"></p>
 <p><strong>step3</strong> 随后检测C0周围的每一个格子，总共有八个我们将他们命名为C11－C18，计算他们的MinDist，插入堆当中，并将相应的Bitmap位设置为1，下一次再遇到这这些格子就可以不必检查了</p>
 <p><strong>注意</strong>：此处由于是第一个格子C0，其周围的8个格子均未被检测，所以可以直接插入，如果在后面需要先在Bitmap中查看是否为1再决定是否插入。</p>
 <p>插入后的堆如下图所示:</p>
@@ -828,7 +828,7 @@
 <p>​                                                            C15   C11   C13      b</p>
 <p>​                                                        |       |     |</p>
 <p>​                                                   C17    C16   C18</p>
-<p><img src="/2018/08/05/基于LBS的出租车检索内核实现/E:/学海无涯\Hexo\source\_posts\基于LBS的出租车检索内核实现\2018-08-04 21-29-29屏幕截图.png" alt="2018-08-04 21-29-29屏幕截图"></p>
+<p><img src="/2018/08/05/基于LBS的出租车检索内核实现/2018-08-04 21-29-29屏幕截图.png" alt="2018-08-04 21-29-29屏幕截图"></p>
 <p><strong>step4</strong> 重复step2，指导弹出的是一个车辆就是我们想要找到的目标车辆。   </p>
 <h3 id="8-2-定义全局变量和函数"><a href="#8-2-定义全局变量和函数" class="headerlink" title="8.2 定义全局变量和函数"></a>8.2 定义全局变量和函数</h3><p>这里主要完成了2个工作</p>
 <ul>
@@ -957,7 +957,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -970,7 +970,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>

@@ -229,6 +229,225 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/06/opencv车辆识别/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Zhaocheng Du">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blogs of Zhaocheng">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/06/opencv车辆识别/" itemprop="url">opencv车辆识别</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-06T08:26:57+08:00">
+                2018-08-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>最近要做交通管理和控制课程的实验，提到采集数据时老师说可以用多种方法来实现，因此想到自己编写一个车辆识别的程序。第一个想到的是循环神经网络，但是因为自己在机器学习方面造诣还是很浅的，因此选择了比较传统，也是相关论坛比较多的opencv进行实现，这里选用的级联分类器训练(Cascade Classifier)，一路上很多网上的大神的博客给了很详细的指导，记录下来，希望自己以后可以用到。</p>
+<p><strong>参考文献：</strong></p>
+<p>haar特征识别算法原理：<a href="https://blog.csdn.net/jing_xin/article/details/17383161" target="_blank" rel="noopener">https://blog.csdn.net/jing_xin/article/details/17383161</a></p>
+<p>博主提到了很多有用的资源：<a href="https://blog.csdn.net/u014696921/article/details/69935802" target="_blank" rel="noopener">https://blog.csdn.net/u014696921/article/details/69935802</a></p>
+<p>opencv关于Cascade Training的文档：<a href="https://docs.opencv.org/2.4/doc/user_guide/ug_traincascade.html" target="_blank" rel="noopener">https://docs.opencv.org/2.4/doc/user_guide/ug_traincascade.html</a></p>
+<p>opencv关于Cascade detect的文档：<a href="https://docs.opencv.org/3.0-beta/doc/py_tutorials/py_objdetect/py_face_detection/py_face_detection.html?highlight=haar" target="_blank" rel="noopener">https://docs.opencv.org/3.0-beta/doc/py_tutorials/py_objdetect/py_face_detection/py_face_detection.html?highlight=haar</a></p>
+<p>博主提供了详细的实现过程：<a href="https://blog.csdn.net/zhuangxiaobin/article/details/25476833" target="_blank" rel="noopener">https://blog.csdn.net/zhuangxiaobin/article/details/25476833</a></p>
+<p><strong>使用资源：</strong></p>
+<p>opencv软件，cv2模块(在python中使用opencv)，python，正负车辆样品集</p>
+<h2 id="1-搭建需要在python中使用opencv的环境"><a href="#1-搭建需要在python中使用opencv的环境" class="headerlink" title="1. 搭建需要在python中使用opencv的环境"></a>1. 搭建需要在python中使用opencv的环境</h2><p>本次项目不仅需要在python中设置opencv环境，还需要下载opencv的软件到计算机上。因为cv2模块仅仅提供了一些简单的接口，不能够用来创建分类文件xml文件。具体的内容会在后面提到，因此需要下面两个步骤：</p>
+<ul>
+<li>step1： 安装opencv-python</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install opencv-python</span><br></pre></td></tr></table></figure>
+<ul>
+<li>step2：到官网下载opencv，并记住下载后存储的地址。</li>
+</ul>
+<p>我的存储路径为<code>D:\Program Files (x86)</code>随后打开路径<code>D:\Program Files (x86)\opencv\build\x64\vc14\bin</code>，可以看到后面我们需要用到的两个exe文件<code>opencv_createsamples.exe</code>，<code>opencv_traincascade.exe</code>分别用来创建正样品集和训练联机分类器，在bin文件中意味着它可以直接被cmd调用。</p>
+<h2 id="2-创建正负训练样本集"><a href="#2-创建正负训练样本集" class="headerlink" title="2. 创建正负训练样本集"></a>2. 创建正负训练样本集</h2><h3 id="2-1-创建正样本集"><a href="#2-1-创建正样本集" class="headerlink" title="2.1 创建正样本集"></a>2.1 创建正样本集</h3><p><strong>step1：准备数据集</strong></p>
+<p>正样本集可以从网上下载训练的开源数据，数据在前面的参考博客中已经给出，也可以在网上查找一些网友自己做的数据集，正样品应当尽量只包含目标物体，尽量减少周围环境的介入。如果非要自己做的话，可以使用<code>objectmarker.exe</code>一个网上可以下载到的程序，可以在我的github网页上下载，不过相对比较麻烦。注意无论是从网上找到的数据集还是自己创建都尽量创建比例较为近似的图片，以便后面做归一化处理。以下是我选择的数据集：</p>
+<p>注：在未处理以前有很多jpg文件，转化方法可以在该文件夹中创建一个.txt文件，其中输入<code>ren *.jpg *.bmp</code>后将后缀改为.bat(cmd的代码)，点击运行即可将文件夹中的每一个图片修改为.bmp格式。</p>
+<p><img src="/2018/08/06/opencv车辆识别/TIM截图20180608210759.png" alt="TIM截图20180608210759"></p>
+<p><strong>step2：归一化处理</strong></p>
+<p>随后我们需要对数据集中的数据做归一化处理，并且转化为灰度图片，该过程的python代码如下。因为将图片缩小有利于训练的效率，因此将宽和高均设置为25(opencv本身的数据集为24)。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image  </span><br><span class="line"><span class="keyword">import</span> os.path  </span><br><span class="line"><span class="keyword">import</span> glob  </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">convertjpg</span><span class="params">(jpgfile,outdir,width=<span class="number">25</span>,height=<span class="number">25</span>)</span>:</span>  </span><br><span class="line">    print(jpgfile)</span><br><span class="line">    img=Image.open(jpgfile)</span><br><span class="line">    print(img)</span><br><span class="line">    <span class="keyword">try</span>:  </span><br><span class="line">        new_imgt = img.resize((width, height), Image.BILINEAR)</span><br><span class="line">        new_img = new_imgt.convert(<span class="string">'L'</span>)</span><br><span class="line">        print(new_img)</span><br><span class="line">        new_img.save(os.path.join(outdir, os.path.basename(jpgfile)))  </span><br><span class="line">    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:  </span><br><span class="line">        print(e)  </span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> jpgfile <span class="keyword">in</span> glob.glob(<span class="string">"D:/anaconda/gpsdata/*.bmp"</span>):  </span><br><span class="line">    convertjpg(jpgfile,<span class="string">"D:/anaconda/gpsdata1"</span>)</span><br></pre></td></tr></table></figure>
+<p>归一化后的图片如下图所示：</p>
+<p><img src="/2018/08/06/opencv车辆识别/TIM截图20180608210816.png" alt="TIM截图20180608210816"></p>
+<p><strong>step3：创建正样品描述vec文件</strong></p>
+<p>我的归一化正样品的储存目录为<code>D:/anaconda/gpsdata1</code>因此在该文件夹下，<code>shift+右键</code>-&gt;<code>在此处打开命令窗口</code>打开cmd后输入以下指令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> D:\anaconda\gpsdata1</span><br><span class="line">dir/s/b&gt;pos.txt</span><br></pre></td></tr></table></figure>
+<p>即可在文件夹中得到一个pos.txt样本描述文件，文件记录了目录中的每一个图片的目录和文件名。具体样式如下图所示，虽然这还不是我们想要的格式，注意查看最后一行是不是图片还是txt文件本身：</p>
+<p><img src="/2018/08/06/opencv车辆识别/TIM截图20180608212139.png" alt="TIM截图20180608212139"></p>
+<p>这一步是比较特殊的，因为我的每一个图片大小相等且大小为25才可以这样做。对于一些图片大小非正方形或者大小大于30的慎用。随后我们将这个描述文件复制粘贴到word软件中，使用查找替换功能将每一行替换为如下图的格式，格式从左到右分别描述了表中的属性(此处宽和高均为30其实没有必要，因为图片大小只有25…)：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">图片相对路径</th>
+<th style="text-align:center">兴趣矩形个数</th>
+<th style="text-align:center">矩形左坐标</th>
+<th style="text-align:center">矩形上坐标</th>
+<th style="text-align:center">矩形宽度</th>
+<th style="text-align:center">矩形高度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">gpsdata1\1039284.bmp</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">30</td>
+<td style="text-align:center">30</td>
+</tr>
+</tbody>
+</table>
+<p><img src="/2018/08/06/opencv车辆识别/TIM截图20180608212706.png" alt="TIM截图20180608212706"></p>
+<h3 id="2-2-创建负样本集"><a href="#2-2-创建负样本集" class="headerlink" title="2.2 创建负样本集"></a>2.2 创建负样本集</h3><p>创建负样本比创建正样本简单很多，但需要比正样本大很多的样本量，因为在视频/图片当中不是目标物体的实际上是比较多的。负样品的内容应该多是道路上非车辆的物体，例如行人、建筑物等，火星、外太空啥的就算了。以下是我从网上下载的负样品：</p>
+<p><img src="/2018/08/06/opencv车辆识别/TIM截图20180609080723.png" alt="TIM截图20180609080723"></p>
+<p>通过和正样本相同的处理方法，首先将图片转化为bmp文件，在缩小并转化为黑白的图片(此处应按比例转化，并且保证比处理后的大小比正样品大即可)：</p>
+<p><img src="/2018/08/06/opencv车辆识别/TIM截图20180609081342.png" alt="TIM截图20180609081342"></p>
+<p>同样创建一个描述文件(方法和创建正样品是step 3第一步的方法一样)，创建后如图：</p>
+<p><img src="/2018/08/06/opencv车辆识别/TIM截图20180609081806.png" alt="TIM截图20180609081806"></p>
+<h3 id="2-3-生成vec文件"><a href="#2-3-生成vec文件" class="headerlink" title="2.3 生成vec文件"></a>2.3 生成vec文件</h3><p>vec文件是opencv中用来描述图片的矩阵文件，就是将可视的图片转化为矩阵存储。下面分步骤完成。</p>
+<ul>
+<li><strong>step1 创建需要的环境</strong></li>
+</ul>
+<p>首先将正负样本及其描述文件，最开始文中提到的<code>opencv_createsamples.exe</code>文件放在一个文件夹下(很重要！)，如下图所示(忽视那个bat文件，下文会讲到)：</p>
+<p><img src="/2018/08/06/opencv车辆识别/TIM截图20180610171937.png" alt="TIM截图20180610171937"></p>
+<p>修改正负样本描述文件的相对路径，使其指向各自的文件夹，这一步可以在很久以前完成…但自己走了一波弯路…还是在word中使用查找替换。替换后的文件如图所示：</p>
+<p><img src="/2018/08/06/opencv车辆识别/TIM截图20180610172713.png" alt="TIM截图20180610172713"></p>
+<p><img src="/2018/08/06/opencv车辆识别/TIM截图20180610172832.png" alt="TIM截图20180610172832"></p>
+<ul>
+<li><strong>step2 编写创建vec的bat指令</strong></li>
+</ul>
+<p>这就是我们上文提到的bat文件了，在该文件夹下新建一个txt文件，写下如下指令，不同的参数可以自己调整：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#-info 描述文件 -vec vec文件名 -num正样本数量 -h-w分别为样本高宽</span></span><br><span class="line">opencv_createsamples.exe -info pos.txt -vec pos.vec -num 762 -h 24 -w 24</span><br></pre></td></tr></table></figure>
+<p>修改后缀为.bat并且运行就得到一个vec文件。</p>
+<p><img src="/2018/08/06/opencv车辆识别/TIM截图20180610173859.png" alt="TIM截图20180610173859"></p>
+<p>至此，准备工作结束，下面就是训练样品了。</p>
+<h2 id="3-使用adaboost算法训练数据"><a href="#3-使用adaboost算法训练数据" class="headerlink" title="3. 使用adaboost算法训练数据"></a>3. 使用adaboost算法训练数据</h2><p>首先我们在现在的文件夹中新建一个文件夹，命名为cascade_data，其中存储训练后的XML文件数据。然后将文中开头提到的<code>opencv_traincascade.exe</code>放入我们的现在的文件夹。再编写一个我们训练模型用的classify.bat文件，文件的内容如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#bg背景描述文件，</span></span><br><span class="line">opencv_traincascade.exe -data data -vec pos.vec -<span class="built_in">bg</span> neg.txt -numPos 762 -numNeg 7708 -numStages 18 -w 24 -h 24 -minHitRate 0.9999 -maxFalseAlarmRate 0.5 -mode ALL</span><br><span class="line"></span><br><span class="line">pause</span><br></pre></td></tr></table></figure>
+<p>文件夹中的文件有以下几个：</p>
+<p><img src="/2018/08/06/opencv车辆识别/TIM截图20180610183242.png" alt="TIM截图20180610183242"></p>
+<p>点击classify.bat文件就可以开始训练了，我从下午6.30开始训练，训练到</p>
+<h2 id="4-使用cv2做视频处理"><a href="#4-使用cv2做视频处理" class="headerlink" title="4.使用cv2做视频处理"></a>4.使用cv2做视频处理</h2><ul>
+<li><strong>step1 使用XML文件对cv2的联机分类器进行标定</strong></li>
+</ul>
+<p>这一部分的语法可以参考上面的关于cascade_detection的参考文献，其中有较为详细的语法。我们需要拿我们在上一步训练得到的XML文件首先对识别器进行标定。语法如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">car_cascade = cv2.CascadeClassifier(<span class="string">'haarcascade_frontalface_default.xml'</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>step2 创建截取和写入视频的对象</strong></li>
+</ul>
+<p>首先我们知道视频是由一帧帧的图片组成的，衡量的单位为FPS(Frame Per Second)，我们首先导入cv2并且创建视频截取的对象。它的参数可以是设备索引，也可以是要读取的视频文件的名称。</p>
+<p>在大多数情况下，只有一台摄像机连接到系统。 所以，我们所做的只是传递’0’，OpenCV使用连接到计算机的唯一相机。 当多台摄像机连接到电脑时，我们可以通过’1’来选择第二台摄像机，通过’2’来选择第三台摄像机，等等。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建一个视频截取对象和一个视频存储对象</span></span><br><span class="line"><span class="comment"># 如果视频是通过计算机的摄像头识别的，则传入0，这里传入我们录制的车辆视频</span></span><br><span class="line"></span><br><span class="line">fps = <span class="number">24</span>   <span class="comment">#视频帧率</span></span><br><span class="line">fourcc = cv2.cv.CV_FOURCC(<span class="string">'M'</span>,<span class="string">'J'</span>,<span class="string">'P'</span>,<span class="string">'G'</span>) </span><br><span class="line"></span><br><span class="line">cap = cv2.VideoCapture(<span class="string">'chaplin.mp4'</span>)</span><br><span class="line">videoWriter = cv2.VideoWriter(<span class="string">'D:/testResults/match/flower2.avi'</span>, fourcc, fps, (<span class="number">1360</span>,<span class="number">480</span>))</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>step3 逐帧处理并写入视频</strong></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> moviepy.editor <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="comment">#from cv2 import cv</span></span><br><span class="line"></span><br><span class="line">filename = <span class="string">'E:/学海无涯/20180613_IMG_0627 (3).MOV'</span></span><br><span class="line">fps = <span class="number">24</span>   <span class="comment">#视频帧率</span></span><br><span class="line">fourcc = cv2.VideoWriter_fourcc(*<span class="string">'XVID'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#clip = VideoFileClip(filename).subclip(242,291)</span></span><br><span class="line"><span class="comment">#clip.write_videofile("E:/学海无涯/rawvideo.mp4")</span></span><br><span class="line"></span><br><span class="line">car_cascade = cv2.CascadeClassifier(<span class="string">'C:/Users/Administrator/Desktop/lll/haarcascade_eye.xml'</span>)</span><br><span class="line">car_cascade.load(<span class="string">'C:/Users/Administrator/Desktop/lll/haarcascade_eye.xml'</span>)</span><br><span class="line">VideoCap = cv2.VideoCapture(<span class="string">"E:/学海无涯/rawvideo.mp4"</span>)</span><br><span class="line">videoWriter = cv2.VideoWriter(<span class="string">'E:/学海无涯/processedvideo.mp4'</span>, fourcc, fps, (<span class="number">1360</span>,<span class="number">480</span>))</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span>(VideoCap.isOpened()):</span><br><span class="line">  ret, frame = VideoCap.read() <span class="comment">#逐帧获取视频，frame是图片</span></span><br><span class="line">  <span class="keyword">if</span> ret == <span class="keyword">True</span>: <span class="comment">#处理并显示这一帧的图片</span></span><br><span class="line">      gray_img = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY) <span class="comment">#转化为灰度图</span></span><br><span class="line">      cars = car_cascade.detectMultiScale(gray_img, <span class="number">1.3</span>, <span class="number">5</span>) <span class="comment">#车辆检测，返回(x,y,w,h)</span></span><br><span class="line">      <span class="keyword">for</span> (x,y,w,h) <span class="keyword">in</span> cars: <span class="comment">#对每一个兴趣区画框</span></span><br><span class="line">        	cv2.rectangle(frame,(x,y),(x+w,y+h),(<span class="number">255</span>,<span class="number">0</span>,<span class="number">0</span>),<span class="number">2</span>)</span><br><span class="line">      cv2.imshow(<span class="string">'Frame'</span>,frame) <span class="comment">#显示图片</span></span><br><span class="line">      videoWriter.write(frame)</span><br><span class="line">      <span class="keyword">if</span> cv2.waitKey(<span class="number">25</span>) &amp; <span class="number">0xFF</span> == ord(<span class="string">'q'</span>): <span class="comment">#按Q停止</span></span><br><span class="line">          <span class="keyword">break</span></span><br><span class="line">  <span class="keyword">else</span>: <span class="comment">#没有帧后显示循环</span></span><br><span class="line">      <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#处理完后释放所有的对象</span></span><br><span class="line">VideoCap.release()</span><br><span class="line">videoWriter.release()</span><br><span class="line"><span class="comment">#关闭所有帧</span></span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+<p>在做完了这一波之后越来越觉得掌握算法本身比掌握如何使用算法更加的重要，相比而言现在的东西还是一个半成品，代码什么的后面还需要改进。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/06/预习作业1-大数据量查找重复数据/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -991,7 +1210,7 @@
 <p><strong>注意</strong>：头结点(x1, y1)一般设置为空节点，这样方便新的节点的插入操作。</p>
 <p><img src="/2018/08/05/基于LBS的出租车检索内核实现/2018-07-25 19-44-37屏幕截图.png" alt="2018-07-25 19-44-37屏幕截图"></p>
 <p>首先熟悉一下双向列表的组成，双向列表的每一个节点由两部分组成：数据和指针．</p>
-<p><img src="/2018/08/05/基于LBS的出租车检索内核实现/E:/学海无涯\Hexo\source\_posts\基于LBS的出租车检索内核实现\2018-07-25 19-47-28屏幕截图.png" alt="2018-07-25 19-47-28屏幕截图"></p>
+<p><img src="/2018/08/05/基于LBS的出租车检索内核实现/2018-07-25 19-47-28屏幕截图.png" alt="2018-07-25 19-47-28屏幕截图"></p>
 <p>其中：</p>
 <p>data属于数据域，是记录车辆的数据的区域；</p>
 <p>prev属于指针域，是指向前一个node的指针；</p>
@@ -1086,7 +1305,7 @@
 </tbody>
 </table>
 <p>转化一下形式就成了下图的样子:</p>
-<p><img src="/2018/08/05/基于LBS的出租车检索内核实现/E:/学海无涯\Hexo\source\_posts\基于LBS的出租车检索内核实现\2018-07-26 07-43-43屏幕截图.png" alt="2018-07-26 07-43-43屏幕截图"></p>
+<p><img src="/2018/08/05/基于LBS的出租车检索内核实现/2018-07-26 07-43-43屏幕截图.png" alt="2018-07-26 07-43-43屏幕截图"></p>
 <h3 id="3-2-哈希表节点结构设计"><a href="#3-2-哈希表节点结构设计" class="headerlink" title="3.2 哈希表节点结构设计"></a>3.2 哈希表节点结构设计</h3><p>首先我们看到在每一个<strong>链表节点</strong>的最前面有一个都有一个<strong>哈希表节点</strong>，下面我们首先实现哈希表节点，哈希节点主要需要存储</p>
 <ul>
 <li>一个可以进行链接<strong>前节点</strong>和<strong>后节点</strong>的双向列表queue结构</li>
@@ -1123,7 +1342,7 @@
 <li>每一个cell里存储这个cell里的车辆的信息</li>
 <li>注意cell的编号从0—12，在物理存储中是连续的，因此转化为了一维的数组</li>
 </ul>
-<p><img src="/2018/08/05/基于LBS的出租车检索内核实现/E:/学海无涯\Hexo\source\_posts\基于LBS的出租车检索内核实现\2018-07-30 00-17-25屏幕截图.png" alt="2018-07-30 00-17-25屏幕截图"></p>
+<p><img src="/2018/08/05/基于LBS的出租车检索内核实现/2018-07-30 00-17-25屏幕截图.png" alt="2018-07-30 00-17-25屏幕截图"></p>
 <h3 id="4-1-网格结构设计及其属性"><a href="#4-1-网格结构设计及其属性" class="headerlink" title="4.1 网格结构设计及其属性"></a>4.1 网格结构设计及其属性</h3><ul>
 <li>每一个网格都有很多的cell</li>
 <li>每一个cell里都要初始化一个<strong>空的双向列表</strong>(dammy node)来存储出租车信息。</li>
@@ -1170,7 +1389,7 @@
 </ul>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//见上，lbs_grid.cpp</span></span><br><span class="line"><span class="comment">//获取cell id 里面的 cell</span></span><br><span class="line"><span class="keyword">lbs_cell_t</span>* lbs_grid_cell(<span class="keyword">lbs_grid_t</span>* lbs_grid, <span class="keyword">int</span> cell_id)&#123;</span><br><span class="line">  <span class="keyword">if</span> (lbs_grid!= <span class="literal">NULL</span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> &amp;(lbs_grid-&gt;cell[cell_id]);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//lbs_grid.cpp结束</span></span><br></pre></td></tr></table></figure>
 <h2 id="5-实现网格范围索引-range-query"><a href="#5-实现网格范围索引-range-query" class="headerlink" title="5. 实现网格范围索引(range_query)"></a>5. 实现网格范围索引(range_query)</h2><h3 id="5-1进行网格范围索引的最终结构"><a href="#5-1进行网格范围索引的最终结构" class="headerlink" title="5.1进行网格范围索引的最终结构"></a>5.1进行网格范围索引的最终结构</h3><p>终于到了可以实现range_query的时候了，上面讲解了许多的数据结构都是为了可以实现这个功能服务的，下面首先看一下在我们构建了所有的数据结构以后，获得的最终结构的图像：</p>
-<p><img src="/2018/08/05/基于LBS的出租车检索内核实现/E:/学海无涯\Hexo\source\_posts\基于LBS的出租车检索内核实现\2018-08-04 23-06-02屏幕截图.png" alt="2018-08-04 23-06-02屏幕截图"></p>
+<p><img src="/2018/08/05/基于LBS的出租车检索内核实现/2018-08-04 23-06-02屏幕截图.png" alt="2018-08-04 23-06-02屏幕截图"></p>
 <p>分别解说：</p>
 <ol>
 <li>在左侧红白相间的是<strong>哈希表</strong>结构，<strong>哈希表</strong>的是一串具有连续地址的数组，每一个地址当中存了一个空的哈希表节点(包含<strong>双向列表</strong>)。在它的后面使用<strong>哈希节点</strong>存储了车辆的信息，每一个节点是一个车辆，<strong>哈希节点</strong>之间使用<strong>双向列表</strong>链接。那么我们是怎么确定一个车辆的信息是挂载在哪个节点上的呢？就是对车辆ID进行求余，例如对第1辆车的ID求余以后得到了1，我们就把它挂载在第一个哈希节点上。</li>
@@ -1378,18 +1597,18 @@
 <h2 id="8-实现knn-query"><a href="#8-实现knn-query" class="headerlink" title="8. 实现knn_query"></a>8. 实现knn_query</h2><h3 id="8-1算法原理"><a href="#8-1算法原理" class="headerlink" title="8.1算法原理"></a>8.1算法原理</h3><p>knn_query，就是选择距离最近的k辆车，那么我们的思路是一个什么样的呢，最简单的方法当然是对每一辆车进行遍历，着这样的速度太慢，于是我们可以<strong>借助网格</strong>对<strong>堆数据结构</strong>进行剪枝的处理。</p>
 <p>处理之前，因为我们要借助网格剪枝，所以首先需要了解一个MinDist的概念。</p>
 <p><strong>MinDist等于点P与O的边界上任意点之间的最小距离。若P在O内，则距离为0</strong></p>
-<p><img src="/2018/08/05/基于LBS的出租车检索内核实现/E:/学海无涯\Hexo\source\_posts\基于LBS的出租车检索内核实现\2018-08-04 11-12-37屏幕截图.png" alt="2018-08-04 11-12-37屏幕截图"></p>
+<p><img src="/2018/08/05/基于LBS的出租车检索内核实现/2018-08-04 11-12-37屏幕截图.png" alt="2018-08-04 11-12-37屏幕截图"></p>
 <p><strong>step1</strong> 在了解这个概念以后，我们就可以最近邻算法的书写了，假设我们的起始地点为q，q点位于Cell01(C0)处</p>
 <ul>
 <li>我们首先使用C0建一个堆，此时距离为0，此时的堆如下：</li>
 </ul>
 <p>​                                                                           C0</p>
-<p><img src="/2018/08/05/基于LBS的出租车检索内核实现/E:/学海无涯\Hexo\source\_posts\基于LBS的出租车检索内核实现\2018-08-04 11-15-06屏幕截图.png" alt="2018-08-04 11-15-06屏幕截图"></p>
+<p><img src="/2018/08/05/基于LBS的出租车检索内核实现/2018-08-04 11-15-06屏幕截图.png" alt="2018-08-04 11-15-06屏幕截图"></p>
 <p><strong>step2</strong> 弹出堆中的头元素(这里就是C0)，如果是个格子，则遍历C0中的每一辆车插入到堆当中；如果头结点是辆车，则说明我们已经找到最近的车了。此处C0是一个格子，我们删去C0，并将C0当中的两辆车a和b插入到堆当中，此处的堆就成为下面这个结构：</p>
 <p>​                                                                           a</p>
 <p>​                                                                       |</p>
 <p>​                                                                       b</p>
-<p><img src="/2018/08/05/基于LBS的出租车检索内核实现/E:/学海无涯\Hexo\source\_posts\基于LBS的出租车检索内核实现\2018-08-04 21-29-14屏幕截图.png" alt="2018-08-04 21-29-14屏幕截图"></p>
+<p><img src="/2018/08/05/基于LBS的出租车检索内核实现/2018-08-04 21-29-14屏幕截图.png" alt="2018-08-04 21-29-14屏幕截图"></p>
 <p><strong>step3</strong> 随后检测C0周围的每一个格子，总共有八个我们将他们命名为C11－C18，计算他们的MinDist，插入堆当中，并将相应的Bitmap位设置为1，下一次再遇到这这些格子就可以不必检查了</p>
 <p><strong>注意</strong>：此处由于是第一个格子C0，其周围的8个格子均未被检测，所以可以直接插入，如果在后面需要先在Bitmap中查看是否为1再决定是否插入。</p>
 <p>插入后的堆如下图所示:</p>
@@ -1400,7 +1619,7 @@
 <p>​                                                            C15   C11   C13      b</p>
 <p>​                                                        |       |     |</p>
 <p>​                                                   C17    C16   C18</p>
-<p><img src="/2018/08/05/基于LBS的出租车检索内核实现/E:/学海无涯\Hexo\source\_posts\基于LBS的出租车检索内核实现\2018-08-04 21-29-29屏幕截图.png" alt="2018-08-04 21-29-29屏幕截图"></p>
+<p><img src="/2018/08/05/基于LBS的出租车检索内核实现/2018-08-04 21-29-29屏幕截图.png" alt="2018-08-04 21-29-29屏幕截图"></p>
 <p><strong>step4</strong> 重复step2，指导弹出的是一个车辆就是我们想要找到的目标车辆。   </p>
 <h3 id="8-2-定义全局变量和函数"><a href="#8-2-定义全局变量和函数" class="headerlink" title="8.2 定义全局变量和函数"></a>8.2 定义全局变量和函数</h3><p>这里主要完成了2个工作</p>
 <ul>
@@ -1668,7 +1887,7 @@
       
         
           
-            <h1 id="Opencv-python-视频车辆识别"><a href="#Opencv-python-视频车辆识别" class="headerlink" title="Opencv+python 视频车辆识别"></a>Opencv+python 视频车辆识别</h1><p>最近要做交通管理和控制课程的实验，提到采集数据时老师说可以用多种方法来实现，因此想到自己编写一个车辆识别的程序。第一个想到的是循环神经网络，但是因为自己在机器学习方面造诣还是很浅的，因此选择了比较传统，也是相关论坛比较多的opencv进行实现，这里选用的级联分类器训练(Cascade Classifier)，一路上很多网上的大神的博客给了很详细的指导，记录下来，希望自己以后可以用到。</p>
+            <p>最近要做交通管理和控制课程的实验，提到采集数据时老师说可以用多种方法来实现，因此想到自己编写一个车辆识别的程序。第一个想到的是循环神经网络，但是因为自己在机器学习方面造诣还是很浅的，因此选择了比较传统，也是相关论坛比较多的opencv进行实现，这里选用的级联分类器训练(Cascade Classifier)，一路上很多网上的大神的博客给了很详细的指导，记录下来，希望自己以后可以用到。</p>
 <p><strong>参考文献：</strong></p>
 <p>haar特征识别算法原理：<a href="https://blog.csdn.net/jing_xin/article/details/17383161" target="_blank" rel="noopener">https://blog.csdn.net/jing_xin/article/details/17383161</a></p>
 <p>博主提到了很多有用的资源：<a href="https://blog.csdn.net/u014696921/article/details/69935802" target="_blank" rel="noopener">https://blog.csdn.net/u014696921/article/details/69935802</a></p>
@@ -2420,7 +2639,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -2433,7 +2652,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>
