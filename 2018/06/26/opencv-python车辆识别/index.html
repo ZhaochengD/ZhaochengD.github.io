@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="python, computer vision," />
+  <meta name="keywords" content="python,Opencv," />
 
 
 
@@ -79,13 +79,13 @@
 
 
 
-<meta name="description" content="最近要做交通管理和控制课程的实验，提到采集数据时老师说可以用多种方法来实现，因此想到自己编写一个车辆识别的程序。第一个想到的是循环神经网络，但是因为自己在机器学习方面造诣还是很浅的，因此选择了比较传统，也是相关论坛比较多的opencv进行实现，这里选用的级联分类器训练(Cascade Classifier)，一路上很多网上的大神的博客给了很详细的指导，记录下来，希望自己以后可以用到。 参考文献：">
-<meta name="keywords" content="python, computer vision">
+<meta name="description" content="最近要做交通管理和控制课程的实验，提到采集数据时老师说可以用多种方法来实现，因此想到自己编写一个车辆识别的程序。第一个想到的是循环神经网络，但是因为自己在机器学习方面造诣还是很浅的，因此选择了比较传统，也是相关论坛比较多的opencv进行实现，这里选用的级联分类器训练(Cascade Classifier)，一路上很多网上的大神的博客给了很详细的指导，记录下来，希望自己以后可以用到。">
+<meta name="keywords" content="python,Opencv">
 <meta property="og:type" content="article">
 <meta property="og:title" content="opencv+python车辆识别">
 <meta property="og:url" content="http://yoursite.com/2018/06/26/opencv-python车辆识别/index.html">
 <meta property="og:site_name" content="Blogs of Zhaocheng">
-<meta property="og:description" content="最近要做交通管理和控制课程的实验，提到采集数据时老师说可以用多种方法来实现，因此想到自己编写一个车辆识别的程序。第一个想到的是循环神经网络，但是因为自己在机器学习方面造诣还是很浅的，因此选择了比较传统，也是相关论坛比较多的opencv进行实现，这里选用的级联分类器训练(Cascade Classifier)，一路上很多网上的大神的博客给了很详细的指导，记录下来，希望自己以后可以用到。 参考文献：">
+<meta property="og:description" content="最近要做交通管理和控制课程的实验，提到采集数据时老师说可以用多种方法来实现，因此想到自己编写一个车辆识别的程序。第一个想到的是循环神经网络，但是因为自己在机器学习方面造诣还是很浅的，因此选择了比较传统，也是相关论坛比较多的opencv进行实现，这里选用的级联分类器训练(Cascade Classifier)，一路上很多网上的大神的博客给了很详细的指导，记录下来，希望自己以后可以用到。">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2018/06/26/opencv-python车辆识别/img/TIM截图20180608210759.png">
 <meta property="og:image" content="http://yoursite.com/2018/06/26/opencv-python车辆识别/E:/学海无涯/实验/视频数车/实验图片/TIM截图20180608210816.png">
@@ -99,10 +99,10 @@
 <meta property="og:image" content="http://yoursite.com/2018/06/26/opencv-python车辆识别/E:/学海无涯/实验/视频数车/实验图片/TIM截图20180610172832.png">
 <meta property="og:image" content="http://yoursite.com/2018/06/26/opencv-python车辆识别/E:/学海无涯/实验/视频数车/实验图片/TIM截图20180610173859.png">
 <meta property="og:image" content="http://yoursite.com/2018/06/26/opencv-python车辆识别/E:/学海无涯/实验/视频数车/实验图片/TIM截图20180610183242.png">
-<meta property="og:updated_time" content="2018-08-06T00:27:42.615Z">
+<meta property="og:updated_time" content="2018-08-07T09:07:50.570Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="opencv+python车辆识别">
-<meta name="twitter:description" content="最近要做交通管理和控制课程的实验，提到采集数据时老师说可以用多种方法来实现，因此想到自己编写一个车辆识别的程序。第一个想到的是循环神经网络，但是因为自己在机器学习方面造诣还是很浅的，因此选择了比较传统，也是相关论坛比较多的opencv进行实现，这里选用的级联分类器训练(Cascade Classifier)，一路上很多网上的大神的博客给了很详细的指导，记录下来，希望自己以后可以用到。 参考文献：">
+<meta name="twitter:description" content="最近要做交通管理和控制课程的实验，提到采集数据时老师说可以用多种方法来实现，因此想到自己编写一个车辆识别的程序。第一个想到的是循环神经网络，但是因为自己在机器学习方面造诣还是很浅的，因此选择了比较传统，也是相关论坛比较多的opencv进行实现，这里选用的级联分类器训练(Cascade Classifier)，一路上很多网上的大神的博客给了很详细的指导，记录下来，希望自己以后可以用到。">
 <meta name="twitter:image" content="http://yoursite.com/2018/06/26/opencv-python车辆识别/img/TIM截图20180608210759.png">
 
 
@@ -314,6 +314,7 @@
 
       
         <p>最近要做交通管理和控制课程的实验，提到采集数据时老师说可以用多种方法来实现，因此想到自己编写一个车辆识别的程序。第一个想到的是循环神经网络，但是因为自己在机器学习方面造诣还是很浅的，因此选择了比较传统，也是相关论坛比较多的opencv进行实现，这里选用的级联分类器训练(Cascade Classifier)，一路上很多网上的大神的博客给了很详细的指导，记录下来，希望自己以后可以用到。</p>
+<a id="more"></a>
 <p><strong>参考文献：</strong></p>
 <p>haar特征识别算法原理：<a href="https://blog.csdn.net/jing_xin/article/details/17383161" target="_blank" rel="noopener">https://blog.csdn.net/jing_xin/article/details/17383161</a></p>
 <p>博主提到了很多有用的资源：<a href="https://blog.csdn.net/u014696921/article/details/69935802" target="_blank" rel="noopener">https://blog.csdn.net/u014696921/article/details/69935802</a></p>
@@ -430,7 +431,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/python-computer-vision/" rel="tag"># python, computer vision</a>
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+            <a href="/tags/Opencv/" rel="tag"># Opencv</a>
           
         </div>
       
@@ -532,7 +535,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
