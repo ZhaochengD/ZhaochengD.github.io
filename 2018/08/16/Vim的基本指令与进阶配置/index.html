@@ -1,0 +1,1239 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Linux," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="在上一次实习的时候深深感受到Vim的强大之处因次萌生了好好使用Vim的念头 本博客主分为两个部分：  一个是记录Vim的常用基本指令(注意是常用指令，Vim博大精深) 二个是记录自己配置的Vim环境，以后换了电脑配置Vim也更方便">
+<meta name="keywords" content="Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vim的基本指令与进阶配置">
+<meta property="og:url" content="http://yoursite.com/2018/08/16/Vim的基本指令与进阶配置/index.html">
+<meta property="og:site_name" content="Blogs of Zhaocheng">
+<meta property="og:description" content="在上一次实习的时候深深感受到Vim的强大之处因次萌生了好好使用Vim的念头 本博客主分为两个部分：  一个是记录Vim的常用基本指令(注意是常用指令，Vim博大精深) 二个是记录自己配置的Vim环境，以后换了电脑配置Vim也更方便">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-08-16T02:56:17.833Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Vim的基本指令与进阶配置">
+<meta name="twitter:description" content="在上一次实习的时候深深感受到Vim的强大之处因次萌生了好好使用Vim的念头 本博客主分为两个部分：  一个是记录Vim的常用基本指令(注意是常用指令，Vim博大精深) 二个是记录自己配置的Vim环境，以后换了电脑配置Vim也更方便">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/08/16/Vim的基本指令与进阶配置/"/>
+
+
+
+
+
+  <title>Vim的基本指令与进阶配置 | Blogs of Zhaocheng</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Blogs of Zhaocheng</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/16/Vim的基本指令与进阶配置/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Zhaocheng Du">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blogs of Zhaocheng">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Vim的基本指令与进阶配置</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-16T10:54:04+08:00">
+                2018-08-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>在上一次实习的时候深深感受到Vim的强大之处因次萌生了好好使用Vim的念头</p>
+<p>本博客主分为两个部分：</p>
+<ul>
+<li>一个是记录Vim的常用基本指令(注意是常用指令，Vim博大精深)</li>
+<li>二个是记录自己配置的Vim环境，以后换了电脑配置Vim也更方便</li>
+</ul>
+<a id="more"></a>
+<p><strong>参考文献</strong></p>
+<p>鸟哥的Linux私房菜</p>
+<p>“Linxu中国”公众号</p>
+<p>以及大牛的博客(具体链接在第二部分给出)</p>
+<h2 id="1-Vim的基本指令"><a href="#1-Vim的基本指令" class="headerlink" title="1. Vim的基本指令"></a>1. Vim的基本指令</h2><p>在新接触Vim的时候，诸多指令令人难以入手，最有效的办法就是多加练习和使用，这次的<code>Markdown</code>文件就是使用VIM编写，记录下来以方便查找，如果以后使用到了其他的指令再更新。</p>
+<p><strong>1、文件定位</strong></p>
+<table>
+<thead>
+<tr>
+<th>指令</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>行号 + G</td>
+<td>定位到具体行</td>
+</tr>
+<tr>
+<td>G</td>
+<td>定位到文件最后一行</td>
+</tr>
+<tr>
+<td>gg</td>
+<td>定位到文件第一行</td>
+</tr>
+<tr>
+<td>CTRL + G</td>
+<td>显示当前打开的文件名和所在行</td>
+</tr>
+<tr>
+<td>$</td>
+<td>行的末尾</td>
+</tr>
+<tr>
+<td>0</td>
+<td>行的开头</td>
+</tr>
+<tr>
+<td>w</td>
+<td>移到下一个词的词首</td>
+</tr>
+<tr>
+<td>W</td>
+<td>移到下一个词的词首</td>
+</tr>
+<tr>
+<td>b</td>
+<td>移到上一个词的词首:</td>
+</tr>
+<tr>
+<td>B</td>
+<td>移到上一个词的词首</td>
+</tr>
+<tr>
+<td>e</td>
+<td>移到下一个词的词尾</td>
+</tr>
+<tr>
+<td>E</td>
+<td>移到下一个词的词尾</td>
+</tr>
+<tr>
+<td>ge</td>
+<td>移到上一个词的词尾</td>
+</tr>
+<tr>
+<td>gE</td>
+<td>移到上一个词的词尾</td>
+</tr>
+<tr>
+<td>5w</td>
+<td>向前移动五个单词，其他的类似</td>
+</tr>
+</tbody>
+</table>
+<p><strong>注意</strong>w与W，b与B，e与E，ge与gE的区别以如下案例阐述：</p>
+<p>例如对于字符串root/usr bin，光标在r处，w移动到/处，W移动到b。</p>
+<p><strong>2、滚屏</strong></p>
+<table>
+<thead>
+<tr>
+<th>指令</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ctrl-u</td>
+<td>文本向下滚到半屏。光标不随文本移动。相当于文本的窗口上移半屏</td>
+</tr>
+<tr>
+<td>ctrl-d</td>
+<td>窗口向下移动半屏，相当于文本向上滚动了半屏</td>
+</tr>
+<tr>
+<td>ctrl-e</td>
+<td>向上滚动一行</td>
+</tr>
+<tr>
+<td>ctrl-y</td>
+<td>向下滚动一行</td>
+</tr>
+<tr>
+<td>ctrl-f</td>
+<td>向前滚动一屏(forward)</td>
+</tr>
+<tr>
+<td>ctrl-b</td>
+<td>向后滚动一屏(backward)</td>
+</tr>
+<tr>
+<td>zt</td>
+<td>把当前行置于屏幕顶端</td>
+</tr>
+<tr>
+<td>zb</td>
+<td>把当前行置于屏幕底</td>
+</tr>
+<tr>
+<td>zz</td>
+<td>把当前行置于屏幕中央</td>
+</tr>
+</tbody>
+</table>
+<p><strong>3、浏览文档</strong></p>
+<table>
+<thead>
+<tr>
+<th>指令</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>(</td>
+<td>跳到上一句</td>
+</tr>
+<tr>
+<td>)</td>
+<td>跳到下一句</td>
+</tr>
+<tr>
+<td>{</td>
+<td>跳到上一段</td>
+</tr>
+<tr>
+<td>}</td>
+<td>跳到下一段</td>
+</tr>
+<tr>
+<td>[[</td>
+<td>调到上一部分</td>
+</tr>
+<tr>
+<td>]]</td>
+<td>跳到下一部分</td>
+</tr>
+<tr>
+<td>[]</td>
+<td>跳到上一部分末尾</td>
+</tr>
+<tr>
+<td>][</td>
+<td>调到上一部分开头</td>
+</tr>
+</tbody>
+</table>
+<p><strong>4、插入模式</strong></p>
+<table>
+<thead>
+<tr>
+<th>指令</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>i</td>
+<td>在光标所在字符 进入insert模式</td>
+</tr>
+<tr>
+<td>a</td>
+<td>在光标的下一个字符 进入insert模式</td>
+</tr>
+<tr>
+<td>A</td>
+<td>光标所在行末插入一行 进入insert模式</td>
+</tr>
+<tr>
+<td>o</td>
+<td>在光标下一行新建一行 进入insert模式</td>
+</tr>
+<tr>
+<td>O</td>
+<td>在光标上一行新建一行 进入insert模式</td>
+</tr>
+</tbody>
+</table>
+<p><strong>5、特殊插入</strong></p>
+<table>
+<thead>
+<tr>
+<th>指令</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>:r [filename]</td>
+<td>将该file里的内容插入到<strong>光标下方</strong></td>
+</tr>
+<tr>
+<td>:r ![command]</td>
+<td>将command(Linux指令)的结果插入到<strong>光标下方</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>6、可视化模式(用来选中文本)</strong></p>
+<table>
+<thead>
+<tr>
+<th>指令</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>v</td>
+<td>在光标所在字符 进入visual模式</td>
+</tr>
+<tr>
+<td>V</td>
+<td>在光标所在的行 进入visual模式</td>
+</tr>
+<tr>
+<td>Ctrl + v</td>
+<td>在光标处进入块选中模式</td>
+</tr>
+</tbody>
+</table>
+<p><strong>7、复制黏贴剪</strong></p>
+<table>
+<thead>
+<tr>
+<th>指令</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>y</td>
+<td>点击v进入可视模式，复制选中文本</td>
+</tr>
+<tr>
+<td>p</td>
+<td>在当前行之后粘贴寄存器当中的内容</td>
+</tr>
+<tr>
+<td>P</td>
+<td>在当前行之前粘贴寄存器当中的内容</td>
+</tr>
+<tr>
+<td>dd</td>
+<td>既是删除行，也是剪切，使用p粘贴</td>
+</tr>
+</tbody>
+</table>
+<p><strong>8、删除</strong></p>
+<table>
+<thead>
+<tr>
+<th>指令</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>X</td>
+<td>删除光标所在位置的字符</td>
+</tr>
+<tr>
+<td>dw</td>
+<td>删除光标所在位置的单词</td>
+</tr>
+<tr>
+<td>d0</td>
+<td>删除光标至行首</td>
+</tr>
+<tr>
+<td>d$</td>
+<td>删除光标至行末</td>
+</tr>
+<tr>
+<td>dd</td>
+<td>删除整行</td>
+</tr>
+<tr>
+<td>3dd</td>
+<td>删除光标后三整行</td>
+</tr>
+<tr>
+<td>dgg</td>
+<td>删至文件开头</td>
+</tr>
+<tr>
+<td>dG</td>
+<td>删至文件结尾</td>
+</tr>
+<tr>
+<td>d)</td>
+<td>删至句末</td>
+</tr>
+</tbody>
+</table>
+<p><strong>9、查找和替换</strong></p>
+<table>
+<thead>
+<tr>
+<th>指令</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>/   +  查找的字符（进入查找模式）</td>
+<td>从前向后查找文件中所有的该字符</td>
+</tr>
+<tr>
+<td>下一个对象：n</td>
+<td>移动到下一个该字符处</td>
+</tr>
+<tr>
+<td>上一个对象：N</td>
+<td>移动到上一个该字符处</td>
+</tr>
+<tr>
+<td>?  +  查找的字符（进入查找模式）</td>
+<td>从后向前查找文件中所有的该字符</td>
+</tr>
+<tr>
+<td>r{text}</td>
+<td>将该光标的字符替换成 text</td>
+</tr>
+<tr>
+<td>R</td>
+<td>进入覆写模式</td>
+</tr>
+<tr>
+<td>%s /original/replacement</td>
+<td>将第一个original词替换成replacement</td>
+</tr>
+<tr>
+<td>%s /original/replacement/g</td>
+<td>将所有的original词替换成replacement</td>
+</tr>
+<tr>
+<td>%s /original/replacement/gc</td>
+<td>将所有的original词替换成replacement，替换前先询问</td>
+</tr>
+</tbody>
+</table>
+<p><strong>10、设置书签</strong></p>
+<table>
+<thead>
+<tr>
+<th>指令</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>m {a~zA~Z}</td>
+<td>当前光标处设置一个名为…的书签</td>
+</tr>
+<tr>
+<td>:marks</td>
+<td>列出所有书签</td>
+</tr>
+<tr>
+<td>{a~zA~Z}</td>
+<td>跳转至…书签</td>
+</tr>
+</tbody>
+</table>
+<p><strong>11、编辑</strong></p>
+<table>
+<thead>
+<tr>
+<th>指令</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>~</td>
+<td>变化为大写</td>
+</tr>
+<tr>
+<td>J</td>
+<td>合并下一行到上一行</td>
+</tr>
+<tr>
+<td>[N]&gt;&gt;</td>
+<td>将一行或N行右移一个tab</td>
+</tr>
+<tr>
+<td>[N]&lt;&lt;</td>
+<td>将一行或N行左移一个tab</td>
+</tr>
+</tbody>
+</table>
+<p><strong>12、撤销与重做</strong></p>
+<table>
+<thead>
+<tr>
+<th>指令</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>u</td>
+<td>撤销最后执行的命令（最后一次的命令）</td>
+</tr>
+<tr>
+<td>U</td>
+<td>撤销对整行的修改（最后一次的批量命令）</td>
+</tr>
+<tr>
+<td>Ctrl + r</td>
+<td>重做最后撤销的操作</td>
+</tr>
+<tr>
+<td>.</td>
+<td>重做上一个指令</td>
+</tr>
+</tbody>
+</table>
+<p><strong>13、保存退出</strong></p>
+<table>
+<thead>
+<tr>
+<th>指令</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>:q</td>
+<td>退出</td>
+</tr>
+<tr>
+<td>:w</td>
+<td>保存</td>
+</tr>
+<tr>
+<td>:wq</td>
+<td>保存退出</td>
+</tr>
+<tr>
+<td>:q!</td>
+<td>强制退出</td>
+</tr>
+<tr>
+<td>:w new_name</td>
+<td>另存为new_name</td>
+</tr>
+</tbody>
+</table>
+<p><strong>14、配对字符查找</strong></p>
+<p>在一行中的任何一个 (、[ 或 { 处，输入 % 可以查找配对的括号 )、]、}</p>
+<p><strong>15、vim多窗口模式</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vim  -o  file1 file2 <span class="comment">#竖直拆分两个窗口</span></span><br><span class="line">vim  -O  file1 file2 <span class="comment">#水平拆分两个窗口</span></span><br><span class="line">vim  -o5 file1  file2 <span class="comment">#分配５个窗口</span></span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>指令</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>:vs newfile</td>
+<td>水平打开一个新窗口</td>
+</tr>
+<tr>
+<td>:sp newfile</td>
+<td>竖直打开一个新窗口</td>
+</tr>
+<tr>
+<td>:split</td>
+<td>水平分割出一个窗口(同一文件)</td>
+</tr>
+<tr>
+<td>:vsplit</td>
+<td>竖直分割出一个窗口(同一文件)</td>
+</tr>
+<tr>
+<td>Ctrl + w</td>
+<td>换窗口</td>
+</tr>
+<tr>
+<td>Ctrl + w + h</td>
+<td>向左移动窗口</td>
+</tr>
+<tr>
+<td>Ctrl + w + j</td>
+<td>向下移动窗口</td>
+</tr>
+<tr>
+<td>Ctrl + w + l</td>
+<td>向上移动窗口</td>
+</tr>
+<tr>
+<td>Ctrl + w + k</td>
+<td>向右移动窗口</td>
+</tr>
+<tr>
+<td>Ctrl + w + w</td>
+<td>这个命令会在所有窗口中循环移动</td>
+</tr>
+<tr>
+<td>Ctrl + w + t</td>
+<td>移动到最左上角的窗口</td>
+</tr>
+<tr>
+<td>Ctrl + w + b</td>
+<td>移动到最左上角的窗口</td>
+</tr>
+<tr>
+<td>Ctrl + w + p</td>
+<td>移动到前一个访问的窗口</td>
+</tr>
+</tbody>
+</table>
+<p><strong>16、其他</strong></p>
+<table>
+<thead>
+<tr>
+<th>指令</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>:!   + xxx外部命令</td>
+<td>如 :!ls，在shell中执行ls</td>
+</tr>
+</tbody>
+</table>
+<h2 id="2-VIM的进阶配置"><a href="#2-VIM的进阶配置" class="headerlink" title="2. VIM的进阶配置"></a>2. VIM的进阶配置</h2><p>前段时间在网络上看到使用VIM打造IDE的方法，感觉煞是高端，也自行配置了一把，基本的思路如下，具体的细节在网上有很多，大家可以自行Google，这里只是提供一个极简单的思路。细节可参考：</p>
+<p>大牛的博客：<a href="http://python.jobbole.com/86384/" target="_blank" rel="noopener">http://python.jobbole.com/86384/</a></p>
+<ul>
+<li>step1 在家目录~里创建一个<code>.vimrc文件</code>和一个<code>.vim</code>文件夹.</li>
+<li>step2 从<code>Git</code>上<code>clone</code>神一样的插件<code>Vundle</code>并安装</li>
+<li>step3 使用<code>Vundle</code>下载配置其他的插件</li>
+</ul>
+<p>以下是我的插件目录：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Plugin <span class="string">'VundleVim/Vundle.vim'</span> <span class="string">"Vundle插件"</span></span><br><span class="line">Plugin <span class="string">'Valloric/YouCompleteMe'</span> <span class="string">"代码补全插件，但没有配置成功"</span></span><br><span class="line">Plugin <span class="string">'Lokaltog/vim-powerline'</span> <span class="string">"美化vim状态栏"</span></span><br><span class="line">Plugin <span class="string">'scrooloose/nerdtree'</span> <span class="string">"点击F2(自己的配置)打开文件树"</span></span><br><span class="line">Plugin <span class="string">'Yggdroot/indentLine'</span> <span class="string">"缩进标识线"</span></span><br><span class="line">Plugin <span class="string">'jiangmiao/auto-pairs'</span> <span class="string">"自动补全括号和引号等"</span></span><br><span class="line">Plugin <span class="string">'tell-k/vim-autopep8'</span> <span class="string">"将代码转化为pep8格式"</span></span><br><span class="line">Plugin <span class="string">'scrooloose/nerdcommenter'</span> <span class="string">"方便代码标注"</span></span><br><span class="line">Plugin <span class="string">'majutsushi/tagbar'</span> <span class="string">"点击F3(自己的配置)显示代码结构"</span></span><br><span class="line"><span class="string">"Plugin 'altercation/vim-colors-solarized'"</span> <span class="string">"使用solarize配色，被我关掉了"</span></span><br></pre></td></tr></table></figure>
+<p>以下是我的<code>.vimrc</code>文件的全部内容，也是在网上做一个自己<code>.vimrc</code>文件的备份。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"----------------------------------------------------------"</span></span><br><span class="line"><span class="string">" 以下配置Vundle"</span></span><br><span class="line">filetype off</span><br><span class="line"><span class="built_in">set</span> rtp+=~/.vim/bundle/Vundle.vim</span><br><span class="line">call vundle<span class="comment">#begin()</span></span><br><span class="line"></span><br><span class="line">Plugin <span class="string">'VundleVim/Vundle.vim'</span></span><br><span class="line">Plugin <span class="string">'Valloric/YouCompleteMe'</span></span><br><span class="line">Plugin <span class="string">'Lokaltog/vim-powerline'</span></span><br><span class="line">Plugin <span class="string">'scrooloose/nerdtree'</span></span><br><span class="line">Plugin <span class="string">'Yggdroot/indentLine'</span></span><br><span class="line">Plugin <span class="string">'jiangmiao/auto-pairs'</span></span><br><span class="line">Plugin <span class="string">'tell-k/vim-autopep8'</span></span><br><span class="line">Plugin <span class="string">'scrooloose/nerdcommenter'</span></span><br><span class="line">Plugin <span class="string">'majutsushi/tagbar'</span></span><br><span class="line"><span class="string">"Plugin 'altercation/vim-colors-solarized'"</span></span><br><span class="line"></span><br><span class="line">call vundle<span class="comment">#end()</span></span><br><span class="line">filetype plugin indent on</span><br><span class="line"></span><br><span class="line"><span class="string">"----------------------------------------------------------"</span></span><br><span class="line"><span class="string">" 以下配置vim环境"</span></span><br><span class="line"><span class="built_in">set</span> nocompatible</span><br><span class="line"><span class="string">"显示行号"</span></span><br><span class="line"><span class="built_in">set</span> number</span><br><span class="line"><span class="string">" 隐藏滚动条"</span>    </span><br><span class="line"><span class="built_in">set</span> guioptions-=r </span><br><span class="line"><span class="built_in">set</span> guioptions-=L</span><br><span class="line"><span class="built_in">set</span> guioptions-=b</span><br><span class="line"><span class="string">"隐藏顶部标签栏"</span></span><br><span class="line"><span class="built_in">set</span> showtabline=0</span><br><span class="line"><span class="string">"设置字体"</span></span><br><span class="line"><span class="built_in">set</span> guifont=Monaco:h13         </span><br><span class="line">syntax on   <span class="string">"开启语法高亮"</span></span><br><span class="line"><span class="built_in">let</span> g:solarized_termcolors=256  <span class="string">"solarized主题设置在终端下的设置"</span></span><br><span class="line"><span class="string">"set background=dark 设置背景色"</span><span class="string">"</span></span><br><span class="line"><span class="string">"</span>colorscheme solarized<span class="string">"</span></span><br><span class="line"><span class="string">set nowrap  "</span>设置不折行<span class="string">"</span></span><br><span class="line"><span class="string">set fileformat=unix "</span>设置以unix的格式保存文件<span class="string">"</span></span><br><span class="line"><span class="string">set cindent     "</span>设置C样式的缩进格式<span class="string">"</span></span><br><span class="line"><span class="string">set tabstop=4   "</span>设置table长度<span class="string">"</span></span><br><span class="line"><span class="string">set shiftwidth=4        "</span>同上<span class="string">"</span></span><br><span class="line"><span class="string">set showmatch   "</span>显示匹配的括号<span class="string">"</span></span><br><span class="line"><span class="string">set scrolloff=5     "</span>距离顶部和底部5行<span class="string">"</span></span><br><span class="line"><span class="string">set laststatus=2    "</span>命令行为两行<span class="string">"</span></span><br><span class="line"><span class="string">set fenc=utf-8      "</span>文件编码<span class="string">"</span></span><br><span class="line"><span class="string">set backspace=2</span></span><br><span class="line"><span class="string">set mouse=a     "</span>启用鼠标<span class="string">"</span></span><br><span class="line"><span class="string">set selection=exclusive</span></span><br><span class="line"><span class="string">set selectmode=mouse,key</span></span><br><span class="line"><span class="string">set matchtime=5</span></span><br><span class="line"><span class="string">set ignorecase      "</span>忽略大小写<span class="string">"</span></span><br><span class="line"><span class="string">set incsearch</span></span><br><span class="line"><span class="string">set hlsearch        "</span>高亮搜索项<span class="string">"</span></span><br><span class="line"><span class="string">set noexpandtab     "</span>不允许扩展table<span class="string">"</span></span><br><span class="line"><span class="string">set whichwrap+=&lt;,&gt;,h,l</span></span><br><span class="line"><span class="string">set autoread</span></span><br><span class="line"><span class="string">set cursorline      "</span>突出显示当前行<span class="string">"</span></span><br><span class="line"><span class="string">set cursorcolumn        "</span>突出显示当前列<span class="string">"</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">"</span>----------------------------------------------------------<span class="string">"</span></span><br><span class="line"><span class="string">"</span> 以下配置下载的插件<span class="string">"</span></span><br><span class="line"><span class="string">"</span>配置NERDTree<span class="string">"</span></span><br><span class="line"><span class="string">"</span>F2开启和关闭树<span class="string">"</span></span><br><span class="line"><span class="string">map &lt;F2&gt; :NERDTreeToggle&lt;CR&gt;</span></span><br><span class="line"><span class="string">let NERDTreeChDirMode=1</span></span><br><span class="line"><span class="string">"</span>显示书签<span class="string">"</span></span><br><span class="line"><span class="string">let NERDTreeShowBookmarks=1</span></span><br><span class="line"><span class="string">"</span>设置忽略文件类型<span class="string">"</span></span><br><span class="line"><span class="string">let NERDTreeIgnore=['\~$', '\.pyc$', '\.swp$']</span></span><br><span class="line"><span class="string">"</span>窗口大小<span class="string">"</span></span><br><span class="line"><span class="string">let NERDTreeWinSize=25</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">"</span>配置tagbar<span class="string">"</span></span><br><span class="line"><span class="string">let g:tagbar_width=35</span></span><br><span class="line"><span class="string">let g:tagbar_autofocus=1</span></span><br><span class="line"><span class="string">let g:tagbar_right=1</span></span><br><span class="line"><span class="string">map &lt;F3&gt; :TagbarToggle&lt;CR&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">"</span>配置indentLine、vim-autopep8<span class="string">"</span></span><br><span class="line"><span class="string">"</span>缩进指示线<span class="string">"</span></span><br><span class="line"><span class="string">let g:indentLine_char='┆'</span></span><br><span class="line"><span class="string">let g:indentLine_enabled = 1</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">"</span>配置auto-pairs、nerdcommenter<span class="string">"</span></span><br><span class="line"><span class="string">let mapleader=','</span></span><br><span class="line"><span class="string">map &lt;F4&gt; &lt;leader&gt;ci &lt;CR&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">"</span>autopep8设置<span class="string">"</span></span><br><span class="line"><span class="string">let g:autopep8_disable_show_diff=1</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag"># Linux</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/06/预习作业1-大数据量查找重复数据/" rel="next" title="预习作业1--大数据量查找重复数据">
+                <i class="fa fa-chevron-left"></i> 预习作业1--大数据量查找重复数据
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Zhaocheng Du</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Vim的基本指令"><span class="nav-number">1.</span> <span class="nav-text">1. Vim的基本指令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-VIM的进阶配置"><span class="nav-number">2.</span> <span class="nav-text">2. VIM的进阶配置</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zhaocheng Du</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
