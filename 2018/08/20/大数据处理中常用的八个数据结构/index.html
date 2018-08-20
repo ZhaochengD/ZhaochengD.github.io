@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Data Structure," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="大数据处理中常用的八个数据结构本次主要记录读到的八个数据结构，以及对八中数据结构的功能和实现方法的简要介绍。并且在后期的学习实验当中，尽可能回答本文中提出的相关数据结构的问题。">
+<meta name="keywords" content="Data Structure">
+<meta property="og:type" content="article">
+<meta property="og:title" content="大数据处理中常用的八个数据结构">
+<meta property="og:url" content="http://yoursite.com/2018/08/20/大数据处理中常用的八个数据结构/index.html">
+<meta property="og:site_name" content="Blogs of Zhaocheng">
+<meta property="og:description" content="大数据处理中常用的八个数据结构本次主要记录读到的八个数据结构，以及对八中数据结构的功能和实现方法的简要介绍。并且在后期的学习实验当中，尽可能回答本文中提出的相关数据结构的问题。">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2018/08/20/大数据处理中常用的八个数据结构/2005517971.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/08/20/大数据处理中常用的八个数据结构/1776994978.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/08/20/大数据处理中常用的八个数据结构/1140702807.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/08/20/大数据处理中常用的八个数据结构/111984510.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/08/20/大数据处理中常用的八个数据结构/2140132607.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/08/20/大数据处理中常用的八个数据结构/1364612602.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/08/20/大数据处理中常用的八个数据结构/223434787.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/08/20/大数据处理中常用的八个数据结构/214335332.jpg">
+<meta property="og:updated_time" content="2018-08-20T08:54:58.315Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="大数据处理中常用的八个数据结构">
+<meta name="twitter:description" content="大数据处理中常用的八个数据结构本次主要记录读到的八个数据结构，以及对八中数据结构的功能和实现方法的简要介绍。并且在后期的学习实验当中，尽可能回答本文中提出的相关数据结构的问题。">
+<meta name="twitter:image" content="http://yoursite.com/2018/08/20/大数据处理中常用的八个数据结构/2005517971.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/08/20/大数据处理中常用的八个数据结构/"/>
+
+
+
+
+
+  <title>大数据处理中常用的八个数据结构 | Blogs of Zhaocheng</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Blogs of Zhaocheng</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/20/大数据处理中常用的八个数据结构/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Zhaocheng Du">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blogs of Zhaocheng">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">大数据处理中常用的八个数据结构</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-20T16:35:47+08:00">
+                2018-08-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="大数据处理中常用的八个数据结构"><a href="#大数据处理中常用的八个数据结构" class="headerlink" title="大数据处理中常用的八个数据结构"></a>大数据处理中常用的八个数据结构</h1><p>本次主要记录读到的八个数据结构，以及对八中数据结构的功能和实现方法的简要介绍。并且在后期的学习实验当中，尽可能回答本文中提出的相关数据结构的问题。</p>
+<a id="more"></a>
+<p><strong>参考文献</strong></p>
+<p><a href="https://medium.freecodecamp.org/the-top-data-structures-you-should-know-for-your-next-coding-interview-36af0831f5e3" target="_blank" rel="noopener">https://medium.freecodecamp.org/the-top-data-structures-you-should-know-for-your-next-coding-interview-36af0831f5e3</a> </p>
+<h2 id="1-前言"><a href="#1-前言" class="headerlink" title="1. 前言"></a>1. 前言</h2><p>瑞士计算机科学家Niklaus Wirth在1976年写了一本书，名为《算法+数据结构=编程》。</p>
+<p>40多年后，这个等式仍被奉为真理。这就是为什么在面试过程中，需要考察软件工程师对数据结构的理解。</p>
+<p>几乎所有的问题都需要面试者对数据结构有深刻的理解。无论你是初入职场的新兵（刚从大学或者编程培训班毕业），还是拥有几十年经验的职场老鸟。</p>
+<p>有些面试题会明确提及某种数据结构，例如，“给定一个二叉树。”而另一些则隐含在面试题中，例如，“我们希望记录每个作者相关的书籍数量。”</p>
+<p>即便是对于一些非常基础的工作来说，学习数据结构也是必须的。那么，就让我们先从一些基本概念开始入手。</p>
+<h3 id="1-1-什么是数据结构？"><a href="#1-1-什么是数据结构？" class="headerlink" title="1.1 什么是数据结构？"></a>1.1 <strong>什么是数据结构？</strong></h3><p>简单地说，数据结构是以某种特定的布局方式存储数据的容器。这种“布局方式”决定了数据结构对于某些操作是高效的，而对于其他操作则是低效的。首先我们需要理解各种数据结构，才能在处理实际问题时选取最合适的数据结构。</p>
+<h3 id="1-2-为什么我们需要数据结构？"><a href="#1-2-为什么我们需要数据结构？" class="headerlink" title="1.2 为什么我们需要数据结构？"></a>1.2 <strong>为什么我们需要数据结构？</strong></h3><p>数据是计算机科学当中最关键的实体，而数据结构则可以将数据以某种组织形式存储，因此，数据结构的价值不言而喻。</p>
+<p>无论你以何种方式解决何种问题，你都需要处理数据——无论是涉及员工薪水、股票价格、购物清单，还是只是简单的电话簿问题。</p>
+<p>数据需要根据不同的场景，按照特定的格式进行存储。有很多数据结构能够满足以不同格式存储数据的需求。</p>
+<h3 id="1-3-常见的数据结构"><a href="#1-3-常见的数据结构" class="headerlink" title="1.3 常见的数据结构"></a>1.3 <strong>常见的数据结构</strong></h3><p>首先列出一些最常见的数据结构，我们将逐一说明：</p>
+<ul>
+<li>数组</li>
+<li>栈</li>
+<li>队列</li>
+<li>链表</li>
+<li>树</li>
+<li>图</li>
+<li>字典树（这是一种高效的树形结构，但值得单独说明）</li>
+<li>散列表（哈希表）</li>
+</ul>
+<h2 id="2-数组"><a href="#2-数组" class="headerlink" title="2. 数组"></a>2. <strong>数组</strong></h2><p>数组是最简单、也是使用最广泛的数据结构。栈、队列等其他数据结构均由数组演变而来。下图是一个包含元素（1，2，3和4）的简单数组，数组长度为4。</p>
+<p><img src="/2018/08/20/大数据处理中常用的八个数据结构/2005517971.jpg" alt="2005517971"></p>
+<p>每个数据元素都关联一个正数值，我们称之为索引，它表明数组中每个元素所在的位置。大部分语言将初始索引定义为零。</p>
+<p>以下是数组的两种类型：</p>
+<ul>
+<li>一维数组（如上所示）</li>
+<li>多维数组（数组的数组）</li>
+</ul>
+<h3 id="2-1数组的基本操作"><a href="#2-1数组的基本操作" class="headerlink" title="2.1数组的基本操作"></a>2.1<strong>数组的基本操作</strong></h3><ul>
+<li>Insert——在指定索引位置插入一个元素</li>
+<li>Get——返回指定索引位置的元素</li>
+<li>Delete——删除指定索引位置的元素</li>
+<li>Size——得到数组所有元素的数量</li>
+</ul>
+<h3 id="2-2面试中关于数组的常见问题"><a href="#2-2面试中关于数组的常见问题" class="headerlink" title="2.2面试中关于数组的常见问题"></a>2.2<strong>面试中关于数组的常见问题</strong></h3><ul>
+<li>寻找数组中第二小的元素</li>
+<li>找到数组中第一个不重复出现的整数</li>
+<li>合并两个有序数组</li>
+<li>重新排列数组中的正值和负值</li>
+</ul>
+<h2 id="3-栈"><a href="#3-栈" class="headerlink" title="3. 栈"></a>3. <strong>栈</strong></h2><p>著名的撤销操作几乎遍布任意一个应用。但你有没有思考过它是如何工作的呢？这个问题的解决思路是按照将最后的状态排列在先的顺序，在内存中存储历史工作状态（当然，它会受限于一定的数量）。这没办法用数组实现。但有了栈，这就变得非常方便了。</p>
+<p>可以把栈想象成一列垂直堆放的书。为了拿到中间的书，你需要移除放置在这上面的所有书。这就是LIFO（后进先出）的工作原理。</p>
+<p>下图是包含三个数据元素（1，2和3）的栈，其中顶部的3将被最先移除：</p>
+<p><img src="/2018/08/20/大数据处理中常用的八个数据结构/1776994978.jpg" alt="2005517971"></p>
+<h3 id="3-1-栈的基本操作"><a href="#3-1-栈的基本操作" class="headerlink" title="3.1 栈的基本操作"></a>3.1 <strong>栈的基本操作</strong></h3><ul>
+<li>Push——在顶部插入一个元素</li>
+<li>Pop——返回并移除栈顶元素</li>
+<li>isEmpty——如果栈为空，则返回true</li>
+<li>Top——返回顶部元素，但并不移除它</li>
+</ul>
+<h3 id="3-1-面试中关于栈的常见问题"><a href="#3-1-面试中关于栈的常见问题" class="headerlink" title="3.1 面试中关于栈的常见问题"></a>3.1 <strong>面试中关于栈的常见问题</strong></h3><ul>
+<li>使用栈计算后缀表达式</li>
+<li>对栈的元素进行排序</li>
+<li>判断表达式是否括号平衡</li>
+</ul>
+<h2 id="4-队列"><a href="#4-队列" class="headerlink" title="4. 队列"></a>4. <strong>队列</strong></h2><p>与栈相似，队列是另一种顺序存储元素的线性数据结构。栈与队列的最大差别在于栈是LIFO（后进先出），而队列是FIFO，即先进先出。</p>
+<p>一个完美的队列现实例子：售票亭排队队伍。如果有新人加入，他需要到队尾去排队，而非队首——排在前面的人会先拿到票，然后离开队伍。</p>
+<p>下图是包含四个元素（1，2，3和4）的队列，其中在顶部的1将被最先移除：</p>
+<p><img src="/2018/08/20/大数据处理中常用的八个数据结构/1140702807.jpg" alt="2005517971"></p>
+<p>移除先入队的元素、插入新元素</p>
+<h3 id="4-1-队列的基本操作"><a href="#4-1-队列的基本操作" class="headerlink" title="4.1 队列的基本操作"></a>4.1 <strong>队列的基本操作</strong></h3><ul>
+<li>Enqueue() —— 在队列尾部插入元素</li>
+<li>Dequeue() ——移除队列头部的元素</li>
+<li>isEmpty()——如果队列为空，则返回true</li>
+<li>Top() ——返回队列的第一个元素</li>
+</ul>
+<h3 id="4-2-面试中关于队列的常见问题"><a href="#4-2-面试中关于队列的常见问题" class="headerlink" title="4.2 面试中关于队列的常见问题"></a>4.2 <strong>面试中关于队列的常见问题</strong></h3><ul>
+<li>使用队列表示栈</li>
+<li>对队列的前k个元素倒序</li>
+<li>使用队列生成从1到n的二进制数</li>
+</ul>
+<h2 id="5-链表"><a href="#5-链表" class="headerlink" title="5. 链表"></a>5. <strong>链表</strong></h2><p>链表是另一个重要的线性数据结构，乍一看可能有点像数组，但在内存分配、内部结构以及数据插入和删除的基本操作方面均有所不同。</p>
+<p>链表就像一个节点链，其中每个节点包含着数据和指向后续节点的指针。 链表还包含一个头指针，它指向链表的第一个元素，但当列表为空时，它指向null或无具体内容。</p>
+<p>链表一般用于实现文件系统、哈希表和邻接表。</p>
+<p>这是链表内部结构的展示：</p>
+<p><img src="/2018/08/20/大数据处理中常用的八个数据结构/111984510.jpg" alt="2005517971"></p>
+<p>链表包括以下类型：</p>
+<ul>
+<li>单链表（单向）</li>
+<li>双向链表（双向）</li>
+</ul>
+<h3 id="5-1-链表的基本操作："><a href="#5-1-链表的基本操作：" class="headerlink" title="5.1 链表的基本操作："></a>5.1 <strong>链表的基本操作：</strong></h3><ul>
+<li>InsertAtEnd - 在链表的末尾插入指定元素</li>
+<li>InsertAtHead - 在链接列表的开头/头部插入指定元素</li>
+<li>Delete  - 从链接列表中删除指定元素</li>
+<li>DeleteAtHead - 删除链接列表的第一个元素</li>
+<li>Search  - 从链表中返回指定元素</li>
+<li>isEmpty - 如果链表为空，则返回true</li>
+</ul>
+<h3 id="5-2-面试中关于链表的常见问题"><a href="#5-2-面试中关于链表的常见问题" class="headerlink" title="5.2 面试中关于链表的常见问题"></a>5.2 <strong>面试中关于链表的常见问题</strong></h3><ul>
+<li>反转链表</li>
+<li>检测链表中的循环</li>
+<li>返回链表倒数第N个节点</li>
+<li>删除链表中的重复项</li>
+</ul>
+<h2 id="6-图"><a href="#6-图" class="headerlink" title="6. 图"></a>6. <strong>图</strong></h2><p>图是一组以网络形式相互连接的节点。节点也称为顶点。 一对节点（x，y）称为边（edge），表示顶点x连接到顶点y。边可以包含权重/成本，显示从顶点x到y所需的成本。</p>
+<p><img src="/2018/08/20/大数据处理中常用的八个数据结构/2140132607.jpg" alt="2005517971"></p>
+<h3 id="6-1-图的类型"><a href="#6-1-图的类型" class="headerlink" title="6.1 图的类型"></a>6.1 <strong>图的类型</strong></h3><ul>
+<li>无向图</li>
+<li>有向图</li>
+</ul>
+<p><strong>在程序语言中，图可以用两种形式表示：</strong></p>
+<ul>
+<li>邻接矩阵</li>
+<li>邻接表</li>
+</ul>
+<p><strong>常见图遍历算法</strong></p>
+<ul>
+<li>广度优先搜索</li>
+<li>深度优先搜索</li>
+</ul>
+<h3 id="6-2-面试中关于图的常见问题"><a href="#6-2-面试中关于图的常见问题" class="headerlink" title="6.2 面试中关于图的常见问题"></a>6.2 <strong>面试中关于图的常见问题</strong></h3><ul>
+<li>实现广度和深度优先搜索</li>
+<li>检查图是否为树</li>
+<li>计算图的边数</li>
+<li>找到两个顶点之间的最短路径</li>
+</ul>
+<h2 id="7-树"><a href="#7-树" class="headerlink" title="7. 树"></a>7. <strong>树</strong></h2><p>树形结构是一种层级式的数据结构，由顶点（节点）和连接它们的边组成。 树类似于图，但区分树和图的重要特征是树中不存在环路。</p>
+<p>树形结构被广泛应用于人工智能和复杂算法，它可以提供解决问题的有效存储机制。</p>
+<p>这是一个简单树的示意图，以及树数据结构中使用的基本术语：</p>
+<p><img src="/2018/08/20/大数据处理中常用的八个数据结构/1364612602.jpg" alt="2005517971"></p>
+<p>Root - 根节点</p>
+<p>Parent - 父节点</p>
+<p>Child - 子节点</p>
+<p>Leaf - 叶子节点</p>
+<p>Sibling - 兄弟节点</p>
+<h3 id="7-1-以下是树形结构的主要类型："><a href="#7-1-以下是树形结构的主要类型：" class="headerlink" title="7.1 以下是树形结构的主要类型："></a>7.1 <strong>以下是树形结构的主要类型：</strong></h3><ul>
+<li>N元树</li>
+<li>平衡树</li>
+<li>二叉树</li>
+<li>二叉搜索树</li>
+<li>AVL树</li>
+<li>红黑树</li>
+<li>2-3树</li>
+</ul>
+<p>其中，二叉树和二叉搜索树是最常用的树。</p>
+<h3 id="7-2-面试中关于树结构的常见问题："><a href="#7-2-面试中关于树结构的常见问题：" class="headerlink" title="7.2 面试中关于树结构的常见问题："></a>7.2 <strong>面试中关于树结构的常见问题：</strong></h3><ul>
+<li>求二叉树的高度</li>
+<li>在二叉搜索树中查找第k个最大值</li>
+<li>查找与根节点距离k的节点</li>
+<li>在二叉树中查找给定节点的祖先节点</li>
+</ul>
+<h2 id="8-字典树（Trie）"><a href="#8-字典树（Trie）" class="headerlink" title="8. 字典树（Trie）"></a>8. <strong>字典树（Trie）</strong></h2><p>字典树，也称为“前缀树”，是一种特殊的树状数据结构，对于解决字符串相关问题非常有效。它能够提供快速检索，主要用于搜索字典中的单词，在搜索引擎中自动提供建议，甚至被用于IP的路由。</p>
+<p>以下是在字典树中存储三个单词“top”，“so”和“their”的例子：</p>
+<p><img src="/2018/08/20/大数据处理中常用的八个数据结构/223434787.jpg" alt="2005517971"></p>
+<p>这些单词以顶部到底部的方式存储，其中绿色节点“p”，“s”和“r”分别表示“top”，“thus”和“theirs”的底部。</p>
+<h3 id="8-1-面试中关于字典树的常见问题"><a href="#8-1-面试中关于字典树的常见问题" class="headerlink" title="8.1 面试中关于字典树的常见问题"></a>8.1 <strong>面试中关于字典树的常见问题</strong></h3><ul>
+<li>计算字典树中的总单词数</li>
+<li>打印存储在字典树中的所有单词</li>
+<li>使用字典树对数组的元素进行排序</li>
+<li>使用字典树从字典中形成单词</li>
+<li>构建T9字典（字典树+ DFS ）</li>
+</ul>
+<h2 id="9-哈希表"><a href="#9-哈希表" class="headerlink" title="9. 哈希表"></a>9. <strong>哈希表</strong></h2><p>哈希法（Hashing）是一个用于唯一标识对象并将每个对象存储在一些预先计算的唯一索引（称为“键（key）”）中的过程。因此，对象以键值对的形式存储，这些键值对的集合被称为“字典”。可以使用键搜索每个对象。基于哈希法有很多不同的数据结构，但最常用的数据结构是哈希表。</p>
+<p>哈希表通常使用数组实现。</p>
+<h3 id="9-1-散列数据结构的性能取决于以下三个因素："><a href="#9-1-散列数据结构的性能取决于以下三个因素：" class="headerlink" title="9.1 散列数据结构的性能取决于以下三个因素："></a>9.1 <strong>散列数据结构的性能取决于以下三个因素：</strong></h3><ul>
+<li>哈希函数</li>
+<li>哈希表的大小</li>
+<li>碰撞处理方法</li>
+</ul>
+<p>下图为如何在数组中映射哈希键值对的说明。该数组的索引是通过哈希函数计算的。</p>
+<p><img src="/2018/08/20/大数据处理中常用的八个数据结构/214335332.jpg" alt="2005517971"></p>
+<h3 id="9-2-面试中关于哈希结构的常见问题："><a href="#9-2-面试中关于哈希结构的常见问题：" class="headerlink" title="9.2 面试中关于哈希结构的常见问题："></a>9.2 <strong>面试中关于哈希结构的常见问题：</strong></h3><ul>
+<li>在数组中查找对称键值对</li>
+<li>追踪遍历的完整路径</li>
+<li>查找数组是否是另一个数组的子集</li>
+<li>检查给定的数组是否不相交</li>
+</ul>
+<p>以上是在编程面试之前你应该知晓的八大数据结构。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Data-Structure/" rel="tag"># Data Structure</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/20/Linux根目录下文件夹含义/" rel="next" title="Linux根目录下文件夹含义">
+                <i class="fa fa-chevron-left"></i> Linux根目录下文件夹含义
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Zhaocheng Du</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#大数据处理中常用的八个数据结构"><span class="nav-number">1.</span> <span class="nav-text">大数据处理中常用的八个数据结构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-前言"><span class="nav-number">1.1.</span> <span class="nav-text">1. 前言</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-什么是数据结构？"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.1 什么是数据结构？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-为什么我们需要数据结构？"><span class="nav-number">1.1.2.</span> <span class="nav-text">1.2 为什么我们需要数据结构？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-常见的数据结构"><span class="nav-number">1.1.3.</span> <span class="nav-text">1.3 常见的数据结构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-数组"><span class="nav-number">1.2.</span> <span class="nav-text">2. 数组</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1数组的基本操作"><span class="nav-number">1.2.1.</span> <span class="nav-text">2.1数组的基本操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2面试中关于数组的常见问题"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.2面试中关于数组的常见问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-栈"><span class="nav-number">1.3.</span> <span class="nav-text">3. 栈</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-栈的基本操作"><span class="nav-number">1.3.1.</span> <span class="nav-text">3.1 栈的基本操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-面试中关于栈的常见问题"><span class="nav-number">1.3.2.</span> <span class="nav-text">3.1 面试中关于栈的常见问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-队列"><span class="nav-number">1.4.</span> <span class="nav-text">4. 队列</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-队列的基本操作"><span class="nav-number">1.4.1.</span> <span class="nav-text">4.1 队列的基本操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-面试中关于队列的常见问题"><span class="nav-number">1.4.2.</span> <span class="nav-text">4.2 面试中关于队列的常见问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-链表"><span class="nav-number">1.5.</span> <span class="nav-text">5. 链表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-链表的基本操作："><span class="nav-number">1.5.1.</span> <span class="nav-text">5.1 链表的基本操作：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-面试中关于链表的常见问题"><span class="nav-number">1.5.2.</span> <span class="nav-text">5.2 面试中关于链表的常见问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-图"><span class="nav-number">1.6.</span> <span class="nav-text">6. 图</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-图的类型"><span class="nav-number">1.6.1.</span> <span class="nav-text">6.1 图的类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-面试中关于图的常见问题"><span class="nav-number">1.6.2.</span> <span class="nav-text">6.2 面试中关于图的常见问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-树"><span class="nav-number">1.7.</span> <span class="nav-text">7. 树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#7-1-以下是树形结构的主要类型："><span class="nav-number">1.7.1.</span> <span class="nav-text">7.1 以下是树形结构的主要类型：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-2-面试中关于树结构的常见问题："><span class="nav-number">1.7.2.</span> <span class="nav-text">7.2 面试中关于树结构的常见问题：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-字典树（Trie）"><span class="nav-number">1.8.</span> <span class="nav-text">8. 字典树（Trie）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#8-1-面试中关于字典树的常见问题"><span class="nav-number">1.8.1.</span> <span class="nav-text">8.1 面试中关于字典树的常见问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-哈希表"><span class="nav-number">1.9.</span> <span class="nav-text">9. 哈希表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#9-1-散列数据结构的性能取决于以下三个因素："><span class="nav-number">1.9.1.</span> <span class="nav-text">9.1 散列数据结构的性能取决于以下三个因素：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-2-面试中关于哈希结构的常见问题："><span class="nav-number">1.9.2.</span> <span class="nav-text">9.2 面试中关于哈希结构的常见问题：</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zhaocheng Du</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
