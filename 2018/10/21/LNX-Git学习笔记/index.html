@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Linux," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Git 不仅仅是一个多人合作工具，更是一个开源项目的聚集地，可以看到很多开源的计算机项目，包括机器学习，人工智能等等，这里简单记录了在学习廖雪峰的Git教程的要点，图文均来自廖雪峰的教程。">
+<meta name="keywords" content="Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LNX-Git学习笔记">
+<meta property="og:url" content="http://yoursite.com/2018/10/21/LNX-Git学习笔记/index.html">
+<meta property="og:site_name" content="Blogs of Zhaocheng">
+<meta property="og:description" content="Git 不仅仅是一个多人合作工具，更是一个开源项目的聚集地，可以看到很多开源的计算机项目，包括机器学习，人工智能等等，这里简单记录了在学习廖雪峰的Git教程的要点，图文均来自廖雪峰的教程。">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2018/10/21/LNX-Git学习笔记/0.png">
+<meta property="og:image" content="http://yoursite.com/2018/10/21/LNX-Git学习笔记/0%20(1">
+<meta property="og:image" content="http://yoursite.com/2018/10/21/LNX-Git学习笔记/0%20(2">
+<meta property="og:image" content="http://yoursite.com/2018/10/21/LNX-Git学习笔记/0(5">
+<meta property="og:image" content="http://yoursite.com/2018/10/21/LNX-Git学习笔记/0%20(3">
+<meta property="og:image" content="http://yoursite.com/2018/10/21/LNX-Git学习笔记/0%20(4">
+<meta property="og:image" content="http://yoursite.com/2018/10/21/LNX-Git学习笔记/0(7">
+<meta property="og:image" content="http://yoursite.com/2018/10/21/LNX-Git学习笔记/0(8">
+<meta property="og:image" content="http://yoursite.com/2018/10/21/LNX-Git学习笔记/0(9">
+<meta property="og:image" content="http://yoursite.com/2018/10/21/LNX-Git学习笔记/0(10">
+<meta property="og:updated_time" content="2018-10-21T03:12:39.575Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="LNX-Git学习笔记">
+<meta name="twitter:description" content="Git 不仅仅是一个多人合作工具，更是一个开源项目的聚集地，可以看到很多开源的计算机项目，包括机器学习，人工智能等等，这里简单记录了在学习廖雪峰的Git教程的要点，图文均来自廖雪峰的教程。">
+<meta name="twitter:image" content="http://yoursite.com/2018/10/21/LNX-Git学习笔记/0.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/10/21/LNX-Git学习笔记/"/>
+
+
+
+
+
+  <title>LNX-Git学习笔记 | Blogs of Zhaocheng</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Blogs of Zhaocheng</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/21/LNX-Git学习笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Zhaocheng Du">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blogs of Zhaocheng">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">LNX-Git学习笔记</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-21T02:59:49+08:00">
+                2018-10-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Git 不仅仅是一个多人合作工具，更是一个开源项目的聚集地，可以看到很多开源的计算机项目，包括机器学习，人工智能等等，这里简单记录了在学习廖雪峰的Git教程的要点，图文均来自廖雪峰的教程。</p>
+<a id="more"></a>
+<h2 id="1-玩转本地仓库"><a href="#1-玩转本地仓库" class="headerlink" title="1. 玩转本地仓库"></a>1. 玩转本地仓库</h2><h3 id="1-1-初始化一个Git仓库"><a href="#1-1-初始化一个Git仓库" class="headerlink" title="1.1 初始化一个Git仓库"></a>1.1 初始化一个Git仓库</h3><p>首先转移到一个目录当中，例如我的目录是<code>/media/vincent/桌面/learngit</code>，在该文件夹中使用以下指令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git init</span><br><span class="line">初始化空的 Git 仓库于 /home/vincent/桌面/learngit/.git/</span><br></pre></td></tr></table></figure>
+<p>这里现在我们的目录就变成了一个Git仓库。在这里面的文本文件(word并不是)，里的每次修改都可以被记录下来。我们发现哟了一个新的<code>.git</code>文件。<code>.git</code>是一个隐藏文件，需要使用<code>ls -a</code>指令才能看到。这个文件是用来追踪管理我们新建的<code>git</code>仓库的，不应该随意修改。</p>
+<p>注意，所有的版本控制系统(Version control system，例如Git)只能记录文本文件(例如txt文件，代码文件)的改动，不能够记录Word啊，图片啊之类的改动。其中文本文件最好都使用<code>utf-8</code>的编码格式，因为所用平台都是支持的。</p>
+<h3 id="1-2-在Git仓库中增加文件"><a href="#1-2-在Git仓库中增加文件" class="headerlink" title="1.2 在Git仓库中增加文件"></a>1.2 在Git仓库中增加文件</h3><p>这里以新增加一个<code>readme.txt</code>为例。</p>
+<p>首先我们要在<code>/media/vincent/桌面/learngit</code>的目录或者子目录下创建一个<code>readme.txt</code>文件。编写一些你认为可以编写的东西，例如：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Git is a version control system</span><br><span class="line">Git is a free software</span><br></pre></td></tr></table></figure>
+<p>然后，我们需要将这个文件传到Git仓库当中。需要以下两部：</p>
+<p>Step 1: 使用<code>add</code>增加到Git仓库</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git add readme.txt</span><br></pre></td></tr></table></figure>
+<p>Step2 : 然后就像在Oracle数据库当中一样，你需要提交修改。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ git commit -m <span class="string">"write a readme file"</span></span><br><span class="line">[master （根提交） 17e2492] 写入readme文件</span><br><span class="line"> 1 file changed, 2 insertions(+)</span><br><span class="line"> create mode 100644 readme.txt</span><br></pre></td></tr></table></figure>
+<p>这里的<code>-m</code>参数是为了记录下来我们这一步是做了什么，方便查找错误时的阅读，从而修改错误。这里可以看到</p>
+<ul>
+<li>我们做了一个提交</li>
+<li>1一个文件改变了，这个文件增加了两行</li>
+</ul>
+<p>那么我们为什么需要这两步呢？因为我们可以先做很多的改变，例如我们先<code>add</code>很多的文件，最后统一执行一次<code>commit</code>就可以了。</p>
+<h3 id="1-3-查看Git仓库状态"><a href="#1-3-查看Git仓库状态" class="headerlink" title="1.3 查看Git仓库状态"></a>1.3 查看Git仓库状态</h3><p>首先我们修改<code>readme.txt</code>文件的内容，加一个<code>distributed</code>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Git is a distributed version control system</span><br><span class="line">Git is a free software</span><br></pre></td></tr></table></figure>
+<p>现在使用指令<code>git status</code>查看结果：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ git status</span><br><span class="line">位于分支 master</span><br><span class="line">尚未暂存以备提交的变更：</span><br><span class="line">  （使用 <span class="string">"git add &lt;文件&gt;..."</span> 更新要提交的内容）</span><br><span class="line">  （使用 <span class="string">"git checkout -- &lt;文件&gt;..."</span> 丢弃工作区的改动）</span><br><span class="line"></span><br><span class="line">	修改：     readme.txt</span><br><span class="line"></span><br><span class="line">修改尚未加入提交（使用 <span class="string">"git add"</span> 和/或 <span class="string">"git commit -a"</span>）</span><br></pre></td></tr></table></figure>
+<p>可以看到一个文件readme.txt被改动了，但还没提交修改。我们先不急着修改，如果我们想要看到到底是那两行发生了改动该怎么办呢，使用<code>git diff +文件名</code>指令即可。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$ git diff readme.txt</span><br><span class="line">diff --git a/readme.txt b/readme.txt</span><br><span class="line">index 97ba126..b4886b9 100644</span><br><span class="line">--- a/readme.txt</span><br><span class="line">+++ b/readme.txt</span><br><span class="line">@@ -1,5 +1,4 @@</span><br><span class="line"> git is a distributed free software</span><br><span class="line"> vim is so powerful</span><br><span class="line">-I am so cool</span><br><span class="line">-I </span><br><span class="line">+</span><br></pre></td></tr></table></figure>
+<p>例如在这个案例中(和上一个不同)，我们删去了<code>I am so cool</code>和<code>I</code>这两行。</p>
+<h3 id="1-4-Git文件版本回退"><a href="#1-4-Git文件版本回退" class="headerlink" title="1.4 Git文件版本回退"></a>1.4 Git文件版本回退</h3><p>首先我们使用<code>git log</code>指令查看我们共经历了多少个状态，可以看到共经历了4个不同的状态，最近的一次时间是<code>Sun Aug 19 17:20:32 2018 +0800</code>状态是<code>delete line</code>，而最远的状态是<code>写入readme文件</code>。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">log</span></span><br><span class="line">commit 68209a69e052907e4199fada4e9c2812f2c9d196</span><br><span class="line">Author: zhaochengd &lt;1969694704@qq.com&gt;</span><br><span class="line">Date:   Sun Aug 19 17:20:32 2018 +0800</span><br><span class="line"></span><br><span class="line">    delete line</span><br><span class="line"></span><br><span class="line">commit 814a62e7234184ea83328c0071d80803e314d349</span><br><span class="line">Author: zhaochengd &lt;1969694704@qq.com&gt;</span><br><span class="line">Date:   Sun Aug 19 17:07:05 2018 +0800</span><br><span class="line"></span><br><span class="line">    append GPL</span><br><span class="line"></span><br><span class="line">commit 1b3b05e380824574c8aa1087676456159a938451</span><br><span class="line">Author: zhaochengd &lt;1969694704@qq.com&gt;</span><br><span class="line">Date:   Mon Aug 13 23:53:34 2018 +0800</span><br><span class="line"></span><br><span class="line">    add distributed</span><br><span class="line"></span><br><span class="line">commit 17e2492ff9421d211d2ad242a41a905451f21abb</span><br><span class="line">Author: zhaochengd &lt;1969694704@qq.com&gt;</span><br><span class="line">Date:   Mon Aug 13 23:38:16 2018 +0800</span><br><span class="line"></span><br><span class="line">    写入readme文件</span><br></pre></td></tr></table></figure>
+<p>现在我们想要想要将我们的文件退到上一个版本<code>append GPL</code>，首先我们需要让<code>Git</code>直到我们想要回到哪一个版本，在<code>Git</code>中，用<code>Head</code>表示当前的状态，在这里就是<code>68209a69e052907e4199fada4e9c2812f2c9d196</code>这个版本号对应的版本。上一个版本使用<code>Head^</code>，上上个版本<code>Head^^</code>，再往前100个版本，由于写<code>^</code>过多，使用<code>Head -100</code>指令代替。</p>
+<p>我们可以使用<code>git reset</code>命令，从当前版本<code>delete line</code>回到<code>append GPL</code>，语法如下(注意HEAD要大写)：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git reset --hard HEAD^</span><br><span class="line">HEAD 现在位于 814a62e append GPL</span><br></pre></td></tr></table></figure>
+<p><code>--hard</code>在后面我们可以慢慢的理解。</p>
+<p>现在我们再来使用<code>git log</code>看一下我们的状态日志：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">log</span></span><br><span class="line">commit 814a62e7234184ea83328c0071d80803e314d349</span><br><span class="line">Author: zhaochengd &lt;1969694704@qq.com&gt;</span><br><span class="line">Date:   Sun Aug 19 17:07:05 2018 +0800</span><br><span class="line"></span><br><span class="line">    append GPL</span><br><span class="line"></span><br><span class="line">commit 1b3b05e380824574c8aa1087676456159a938451</span><br><span class="line">Author: zhaochengd &lt;1969694704@qq.com&gt;</span><br><span class="line">Date:   Mon Aug 13 23:53:34 2018 +0800</span><br><span class="line"></span><br><span class="line">    add distributed</span><br><span class="line"></span><br><span class="line">commit 17e2492ff9421d211d2ad242a41a905451f21abb</span><br><span class="line">Author: zhaochengd &lt;1969694704@qq.com&gt;</span><br><span class="line">Date:   Mon Aug 13 23:38:16 2018 +0800</span><br><span class="line"></span><br><span class="line">    写入readme文件</span><br></pre></td></tr></table></figure>
+<p>我们可以看到最新的版本已经不见，那么我们怎么再跳转回到我们回退的状态呢。这个需要我们还保留着上一次的版本号截图。例如我们上一次的版本号是<code>68209a69e052907e4199fada4e9c2812f2c9d196</code>，我们只要输入以下指令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git reset --hard 68209</span><br><span class="line">HEAD 现在位于 68209a6 delete line</span><br></pre></td></tr></table></figure>
+<p>这样我们就回到<code>delete line</code>的状态。只输入部分的ID号，<code>Git</code>可以自行检索是处在哪个状态。</p>
+<p>但如果我们忘记了我们的上一个ID，想要再返回最新的版本该怎么办？我们可以使用<code>git reflog</code>查看我们执行的每一个指令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ git reflog</span><br><span class="line">814a62e HEAD@&#123;0&#125;: reset: moving to HEAD^</span><br><span class="line">68209a6 HEAD@&#123;1&#125;: reset: moving to 68209</span><br><span class="line">814a62e HEAD@&#123;2&#125;: reset: moving to HEAD^</span><br><span class="line">68209a6 HEAD@&#123;3&#125;: commit: delete line</span><br><span class="line">814a62e HEAD@&#123;4&#125;: commit: append GPL</span><br><span class="line">1b3b05e HEAD@&#123;5&#125;: commit: add distributed</span><br><span class="line">17e2492 HEAD@&#123;6&#125;: commit (initial): 写入readme文件</span><br></pre></td></tr></table></figure>
+<p>可以看到<code>delete line</code>的ID是<code>68209a6</code>，我们就可以使用<code>reset</code>重新回退到<code>delete line</code>的状态。</p>
+<h3 id="1-5-Git的工作区与暂存区"><a href="#1-5-Git的工作区与暂存区" class="headerlink" title="1.5 Git的工作区与暂存区"></a>1.5 Git的工作区与暂存区</h3><p>Git 是<strong>面向修改的管理</strong>，而不是<strong>面向文件的管理</strong>，也就是说每一次我们做了修改以后，需要将修改<code>add</code>到暂存区，在暂存区的修改点击<code>commit</code>才到我们的<code>master</code>分支，也就是将暂存区的所有修改都进行提交。如果仅仅修改文件，而不<code>add</code>到缓存区，即使<code>commmit</code>也不会有任何的好处。</p>
+<h3 id="1-6-Git的撤销修改"><a href="#1-6-Git的撤销修改" class="headerlink" title="1.6 Git的撤销修改"></a>1.6 Git的撤销修改</h3><p>当我们对文件做了一次修改，例如我在<code>readme.txt</code>文件中增加一行<code>I am a fool</code>，此时<strong>我还没有<code>add</code>或者此时我<code>add</code>了但又做了修改</strong>。然后我忽然想要删除这句话。当然我们可以手动的修改回去，我们也可以使用Vim的<code>u</code>指令回跳，但是当我们做了几百行的修改这样就会很耗时间。Git中提供了一个简单的方法<code>checkout</code>。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ git checkout -- readme.txt</span><br><span class="line">$ git cat readme.txt</span><br><span class="line">git is a distributed free software</span><br><span class="line">vim is so powerful</span><br><span class="line">I am so cool</span><br></pre></td></tr></table></figure>
+<p>checkout会使我们的文件到达最近的一次<code>commit</code>或者<code>add</code>的状态，记住这里是<strong>或者</strong>，看离你<code>checkout</code>最近的指令是哪个。</p>
+<p>与上面的情况不同，我已经修改并且<code>add</code>了，但我想回到<code>add</code>前的状态，我们可以使用<code>git reset HEAD &lt;file&gt;</code>将暂存区的file文件的改动撤销掉。例如：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git reset HEAD readme.txt</span><br></pre></td></tr></table></figure>
+<p>这样就完成了。</p>
+<h3 id="1-7-Git的文件删除"><a href="#1-7-Git的文件删除" class="headerlink" title="1.7 Git的文件删除"></a>1.7 Git的文件删除</h3><p>首先我们创建一个新的文件<code>test.txt</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git add test.txt</span><br><span class="line">$ git commit -m <span class="string">'add test.txt'</span></span><br></pre></td></tr></table></figure>
+<p>其次我们要删除这个文件，我们可以使用<code>git rm</code>指令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git rm test.txt</span><br><span class="line">$ git commit</span><br></pre></td></tr></table></figure>
+<p>这个时候，版本库和工作区路的test文件就都没了，除了使用<code>reset</code>难以找回来，但如果我们还没有<code>commit</code>发现误删了。我们可以使用<code>checkout</code>把它找回来。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ git rm test.txt</span><br><span class="line">$ git status</span><br><span class="line">位于分支 master</span><br><span class="line">要提交的变更：</span><br><span class="line">  （使用 <span class="string">"git reset HEAD &lt;文件&gt;..."</span> 以取消暂存）</span><br><span class="line"></span><br><span class="line">	删除：     test.txt</span><br><span class="line">$ git checkout test.txt</span><br></pre></td></tr></table></figure>
+<p>可以看到版本库里这个时候还保存着test.txt，<code>checkout</code>可以让test.txt回到上一次的<code>add</code>或者<code>commit</code>的状态。</p>
+<h2 id="2-玩转远程仓库"><a href="#2-玩转远程仓库" class="headerlink" title="2. 玩转远程仓库"></a>2. 玩转远程仓库</h2><p>Git最厉害的是远程仓库，以下话语引用自廖雪峰的博客：实际情况往往是这样，找一台电脑充当服务器的角色，每天24小时开机，其他每个人都从这个“服务器”仓库克隆一份到自己的电脑上，并且各自把各自的提交推送到服务器仓库里，也从服务器仓库中拉取别人的提交。<br>首先我们需要我们的计算机上从<code>ssh</code>申请一对公密匙</p>
+<ul>
+<li>step 1 在家目录里查看是否有<code>.ssh</code>文件夹</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ la | grep ssh</span><br></pre></td></tr></table></figure>
+<p>如果有的话，查看里面是否有<code>id_rsa</code>和<code>id_rsa.pub</code>问件，有的话就说明该你已经有密匙了，没有的话就是用下面的指令申请一个，一直回车即可。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-keygen -t rsa -C <span class="string">"1969694704@qq.com"</span></span><br></pre></td></tr></table></figure>
+<p>申请后<code>id_rsa</code>就是密匙，在自己的家目录中保存，而<code>id_rsa.pub</code>就是公匙，供外界使用。<br>使用这对公密匙可以在Github上进行配置(我们也可以自己搭建一个git服务器)暂时实验用Github</p>
+<h3 id="2-1添加远程库"><a href="#2-1添加远程库" class="headerlink" title="2.1添加远程库"></a>2.1添加远程库</h3><p>首先我们在Github官网上创建一个新的<code>respondary</code>库，我给它命名为<code>Learn_Git</code>，现在我们可以把这个库克隆到本地，也可以把我们的本地库关联上去，<br>首先我们把本地的库关联上去。在本地库的终端里输入以下指令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git remote add origin git@github.com:zhaochengd/Learn_Git</span><br></pre></td></tr></table></figure>
+<p>orgin使我们的远程库名称，<a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a>是用户加服务器的格式这样我们就添加了一个远程仓库<code>origin</code>,它在<code>Github</code>就是<code>Learn_Git</code>仓库。<br>随后，就可以把我们的本地的内容推送到远程库上，使用以下指令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git push -u origin master</span><br></pre></td></tr></table></figure>
+<p>这是把我们的<code>master</code>推送到远程仓库<code>origin</code>。由于第一次推送，<code>origin</code>的内容还是空的，我们需要使用<code>-u</code>指令将我们本地的<code>master</code>分支和远程的<code>master</code>分支关联起来。后面就不需要参数<code>-u</code>了。<br>以后，我们只需要输入以下指令即可:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git push origin master</span><br></pre></td></tr></table></figure>
+<h3 id="2-2-从远程库进行克隆"><a href="#2-2-从远程库进行克隆" class="headerlink" title="2.2 从远程库进行克隆"></a>2.2 从远程库进行克隆</h3><p>这次实验我们首先在远程建一个新库。再克隆下来。建新库需要在网页上建。我们给新库命名为<code>gitskill</code>，并且初始化一个<code>README</code>文件，现在我们要把这个库克隆下来</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">clone</span> git@github.com:zhaochengd/gitskill.git</span><br></pre></td></tr></table></figure>
+<p>这个时候我们的工作文件夹里就有了一个gitskill文件夹。打开里面就是<code>README</code>文件。</p>
+<h2 id="3-分支管理"><a href="#3-分支管理" class="headerlink" title="3. 分支管理"></a>3. 分支管理</h2><h3 id="3-1-创建和合并分支"><a href="#3-1-创建和合并分支" class="headerlink" title="3.1 创建和合并分支"></a>3.1 创建和合并分支</h3><p>我们之前知到，<code>Git</code>里把我们每次的<code>command</code>都穿成了一个时间线，而我们每次<code>commit</code>都在原基础上增加了一个时间节点。现在我们都只有一个主分支<code>master</code>，而我们的<code>HEAD</code>就指向<code>master</code>而<code>master</code>则指向提交。如下图所示：</p>
+<p><img src="/2018/10/21/LNX-Git学习笔记/0.png" alt="0"></p>
+<p>这个时候我们可以为这个<code>master</code>主线分支创建一个新的分支<code>dev</code>，并把<code>HEAD</code>指针指向<code>dev</code>这样我们就可以针对<code>dev</code>进行修改了。这一步的指令如下，<code>-b</code>代表着创建并转向这个分支：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$git</span> checkout -b dev</span><br><span class="line">Switch to a new branch <span class="string">'dev'</span></span><br></pre></td></tr></table></figure>
+<p>等同于以下的两个语句：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$git</span> branch dev</span><br><span class="line"><span class="variable">$git</span> checkout dev</span><br><span class="line">Switch to branch dev</span><br></pre></td></tr></table></figure>
+<p>可以使用<code>git branch</code>查看当前的分支是哪个，它会列出所有分支，并在当前分支前加上<code>*</code>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$git</span> branch</span><br><span class="line">* dev</span><br><span class="line">  master</span><br></pre></td></tr></table></figure>
+<p>此时的状态如下图所示：</p>
+<p><img src="/2018/10/21/LNX-Git学习笔记/0 (1" alt="0">.png)</p>
+<p>这个时候我们就可以在<code>dev</code>分支上作相应的改动并且进行提交了，例如我们修改<code>README.txt</code>文件，并且进行一次提交，指令如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ vim readme.txt <span class="comment">#增加一行</span></span><br><span class="line">$ git commit -m <span class="string">'branch test'</span></span><br></pre></td></tr></table></figure>
+<p>此时Git的状态如下：</p>
+<p><img src="/2018/10/21/LNX-Git学习笔记/0 (2" alt="0">.png)</p>
+<p>下面我们需要将<code>HEAD</code>指针重新指向<code>master</code>，以方便后面的合并作用。指令就是使用前面的<code>checkout</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git checkout master</span><br></pre></td></tr></table></figure>
+<p>切换回<code>master</code>分支后，再查看README.txt文件，刚才添加的内容不见了！因为那个提交是在<code>dev</code>分支上，而<code>master</code>分支此刻的提交点并没有变，此时的分支状态如下：</p>
+<p><img src="/2018/10/21/LNX-Git学习笔记/0(5" alt="0">.png)</p>
+<p>现在我们需要将<code>master</code>分支和<code>dev</code>指针合并，合并的指令我们使用<code>merge</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git merge dev</span><br></pre></td></tr></table></figure>
+<p>就把<code>dev</code>和<code>master</code>指针合并在一起了，此时的状态如下图所示：</p>
+<p><img src="/2018/10/21/LNX-Git学习笔记/0 (3" alt="0">.png)</p>
+<p>这一切结束以后就可以删除<code>dev</code>了，删除的过程如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git branch -d dev</span><br><span class="line">Deleted branch dev (was b17d20e).</span><br></pre></td></tr></table></figure>
+<p>此时我们的图就是下面这个样子了：</p>
+<p><img src="/2018/10/21/LNX-Git学习笔记/0 (4" alt="0">.png)</p>
+<h3 id="3-2-处理冲突"><a href="#3-2-处理冲突" class="headerlink" title="3.2 处理冲突"></a>3.2 处理冲突</h3><p>首先我们创见一个新的分支<code>feature</code>，然后在<code>feature</code>分支下对<code>readme</code>文件加上下面一段话，并且执行<code>commit</code>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash is cool</span><br></pre></td></tr></table></figure>
+<p>然后我们换再到<code>master</code>分支，在<code>master</code>分支下对<code>readme</code>文件加上下面这一段话，并且执行<code>commit</code>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">linux is cool</span><br></pre></td></tr></table></figure>
+<p>这个时候我们两个分支就成了下图这样：</p>
+<p><img src="/2018/10/21/LNX-Git学习笔记/0(7" alt="0">.png)</p>
+<p>这时不能执行简单的合并，因为feature1与master的分支存在不同，此时会这样报错：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ git merge feature1</span><br><span class="line">Auto-merging readme.txt</span><br><span class="line">CONFLICT (content): Merge conflict <span class="keyword">in</span> readme.txt</span><br><span class="line">Automatic merge failed; fix conflicts and <span class="keyword">then</span> commit the result.</span><br></pre></td></tr></table></figure>
+<p>这个时候我们就要进入<code>readme</code>中做手动的调整，使得两者相同，例如我们手动让<code>feature</code>分支的内容和<code>master</code>的一样，就可以合并了，下图展示了这个过程：</p>
+<p><img src="/2018/10/21/LNX-Git学习笔记/0(8" alt="0">.png)</p>
+<h3 id="3-3-分支管理策略"><a href="#3-3-分支管理策略" class="headerlink" title="3.3 分支管理策略"></a>3.3 分支管理策略</h3><p>在团队开发当中，很少像我们这样，每一次的分支到最后都会合并到<code>master</code>分支上，相反，我们习惯于建立下面几个分支：</p>
+<ul>
+<li><code>master</code>分支，用于版本的发布</li>
+<li><code>dev</code>分支，用于真正的团队开发分支，完成一次全面的开发后合并到<code>master</code>分支</li>
+<li><code>yourname</code>分支，这个使得每一个组员都应有的一个分支，在自己的分支上做开发，并且合并到<code>dev</code>分支上</li>
+</ul>
+<p><img src="/2018/10/21/LNX-Git学习笔记/0(9" alt="0">.png)</p>
+<p>就像这样乱七八糟的，那么问题来了，我们刚开始的合并分支最后都是把源节点删除了，这些分支却都有自己的<code>commit</code>，该怎么做呢？</p>
+<p>在之前我们在<code>merge</code>的时候都是默认的<code>fastforward</code>模式，也就是我们实际上会删除掉merge前的点，但我们想要一个新的<code>commit</code>就必须停止这种模式，可以如下操作：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git merge --no-ff -m <span class="string">"merge with no-ff"</span> dev</span><br></pre></td></tr></table></figure>
+<p>这样我们得到的点就如下图所示:</p>
+<p><img src="/2018/10/21/LNX-Git学习笔记/0(10" alt="0">.png)</p>
+<p>这样我们也可以在commot分支下继续进行开发了。</p>
+<h3 id="3-4-多人协作"><a href="#3-4-多人协作" class="headerlink" title="3.4 多人协作"></a>3.4 多人协作</h3><p>当你从远程仓库克隆时，实际上Git自动把本地的<code>master</code>分支和远程的<code>master</code>分支对应起来了，并且，远程仓库的默认名称是<code>origin</code>。</p>
+<p>要查看远程库的信息，用<code>git remote</code>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git remote</span><br><span class="line">origin</span><br></pre></td></tr></table></figure>
+<p>或者，用<code>git remote -v</code>显示更详细的信息：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git remote -v</span><br><span class="line">origin	git@github.com:zhaochengd/Learn_Git (fetch)</span><br><span class="line">origin	git@github.com:zhaochengd/Learn_Git (push)</span><br></pre></td></tr></table></figure>
+<p>上面显示了可以抓取和推送的<code>origin</code>的地址。这里我们也就知道了其实<code>origin</code>就等同于我们那么一长串的地址。可以直接使用<code>origin</code>和<code>push</code>再加上我们要提交的分支来来进行改变，例如：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git push origin dev</span><br></pre></td></tr></table></figure>
+<p>如果有多个用户一起开发，很有可能会出现开发出的代码存在冲突，这个时候需要把最新的分支<code>pull</code>下来，然后做手动的修改，修改后再<code>push</code>上去．手动修改，再<code>push</code>上去：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git pull </span><br><span class="line">$ git push origin dev</span><br></pre></td></tr></table></figure>
+<p>其中<code>clone</code>与<code>pull</code>的区别如下：</p>
+<blockquote>
+<p>clone是本地没有repository时，将远程repository整个下载过来。</p>
+<p>pull是本地有repository时，将远程repository里新的commit数据(如有的话)下载过来，并且与本地代码merge。</p>
+</blockquote>
+<h2 id="4-我自己的远程git仓库"><a href="#4-我自己的远程git仓库" class="headerlink" title="4. 我自己的远程git仓库"></a>4. 我自己的远程git仓库</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh://git@74.82.203.94:26593/GitBarn.git</span><br></pre></td></tr></table></figure>
+<h2 id="5-相关指令总结"><a href="#5-相关指令总结" class="headerlink" title="5. 相关指令总结"></a>5. 相关指令总结</h2><table>
+<thead>
+<tr>
+<th>指令</th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>git init</td>
+<td>初始化一个respondary</td>
+</tr>
+<tr>
+<td>git add</td>
+<td>在仓库里增加一个文件</td>
+</tr>
+<tr>
+<td>git commit</td>
+<td>提交更改</td>
+</tr>
+<tr>
+<td>git status</td>
+<td>查看状态</td>
+</tr>
+<tr>
+<td>git diff</td>
+<td>查看不同</td>
+</tr>
+<tr>
+<td>git log</td>
+<td>查看日志</td>
+</tr>
+<tr>
+<td>git reset</td>
+<td>重设到之前的状态</td>
+</tr>
+<tr>
+<td>git reflog</td>
+<td>查看自己的指令</td>
+</tr>
+<tr>
+<td>git remote add origin <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a>:ZhaochengD/Learn_Git</td>
+<td>远程连接我的库</td>
+</tr>
+<tr>
+<td>git push -u origin master</td>
+<td>首次推送库中内容，以后可以省略<code>-u</code></td>
+</tr>
+<tr>
+<td>git clone</td>
+<td>从远程上克隆库到本地</td>
+</tr>
+<tr>
+<td>git branch dev</td>
+<td>创建一个分支dev，-d是删除，什么也不加是列出所有分支，-D强制删除</td>
+</tr>
+<tr>
+<td>git checkout dev</td>
+<td>开始checkout分支</td>
+</tr>
+<tr>
+<td>git merge dev</td>
+<td>合并dev分支到master</td>
+</tr>
+<tr>
+<td>git remote</td>
+<td>查看远程仓库</td>
+</tr>
+<tr>
+<td>git push</td>
+<td>将分支的修改推送到远程</td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag"># Linux</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/17/ST-中心极限定理计算机证明/" rel="next" title="ST.中心极限定理计算机证明">
+                <i class="fa fa-chevron-left"></i> ST.中心极限定理计算机证明
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Zhaocheng Du</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-玩转本地仓库"><span class="nav-number">1.</span> <span class="nav-text">1. 玩转本地仓库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-初始化一个Git仓库"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 初始化一个Git仓库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-在Git仓库中增加文件"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 在Git仓库中增加文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-查看Git仓库状态"><span class="nav-number">1.3.</span> <span class="nav-text">1.3 查看Git仓库状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-Git文件版本回退"><span class="nav-number">1.4.</span> <span class="nav-text">1.4 Git文件版本回退</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-Git的工作区与暂存区"><span class="nav-number">1.5.</span> <span class="nav-text">1.5 Git的工作区与暂存区</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-6-Git的撤销修改"><span class="nav-number">1.6.</span> <span class="nav-text">1.6 Git的撤销修改</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-7-Git的文件删除"><span class="nav-number">1.7.</span> <span class="nav-text">1.7 Git的文件删除</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-玩转远程仓库"><span class="nav-number">2.</span> <span class="nav-text">2. 玩转远程仓库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1添加远程库"><span class="nav-number">2.1.</span> <span class="nav-text">2.1添加远程库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-从远程库进行克隆"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 从远程库进行克隆</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-分支管理"><span class="nav-number">3.</span> <span class="nav-text">3. 分支管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-创建和合并分支"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 创建和合并分支</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-处理冲突"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 处理冲突</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-分支管理策略"><span class="nav-number">3.3.</span> <span class="nav-text">3.3 分支管理策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-多人协作"><span class="nav-number">3.4.</span> <span class="nav-text">3.4 多人协作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-我自己的远程git仓库"><span class="nav-number">4.</span> <span class="nav-text">4. 我自己的远程git仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-相关指令总结"><span class="nav-number">5.</span> <span class="nav-text">5. 相关指令总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zhaocheng Du</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
