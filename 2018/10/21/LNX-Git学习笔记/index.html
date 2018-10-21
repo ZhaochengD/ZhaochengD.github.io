@@ -97,7 +97,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/10/21/LNX-Git学习笔记/0(8">
 <meta property="og:image" content="http://yoursite.com/2018/10/21/LNX-Git学习笔记/0(9">
 <meta property="og:image" content="http://yoursite.com/2018/10/21/LNX-Git学习笔记/0(10">
-<meta property="og:updated_time" content="2018-10-21T03:12:39.575Z">
+<meta property="og:updated_time" content="2018-10-21T03:18:56.118Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LNX-Git学习笔记">
 <meta name="twitter:description" content="Git 不仅仅是一个多人合作工具，更是一个开源项目的聚集地，可以看到很多开源的计算机项目，包括机器学习，人工智能等等，这里简单记录了在学习廖雪峰的Git教程的要点，图文均来自廖雪峰的教程。">
@@ -392,45 +392,45 @@
 <p>可以使用<code>git branch</code>查看当前的分支是哪个，它会列出所有分支，并在当前分支前加上<code>*</code>：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$git</span> branch</span><br><span class="line">* dev</span><br><span class="line">  master</span><br></pre></td></tr></table></figure>
 <p>此时的状态如下图所示：</p>
-<p><img src="/2018/10/21/LNX-Git学习笔记/0 (1" alt="0">.png)</p>
+<p><img src="/2018/10/21/LNX-Git学习笔记/0 (1" alt="1">.png)</p>
 <p>这个时候我们就可以在<code>dev</code>分支上作相应的改动并且进行提交了，例如我们修改<code>README.txt</code>文件，并且进行一次提交，指令如下：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ vim readme.txt <span class="comment">#增加一行</span></span><br><span class="line">$ git commit -m <span class="string">'branch test'</span></span><br></pre></td></tr></table></figure>
 <p>此时Git的状态如下：</p>
-<p><img src="/2018/10/21/LNX-Git学习笔记/0 (2" alt="0">.png)</p>
+<p><img src="/2018/10/21/LNX-Git学习笔记/0 (2" alt="2">.png)</p>
 <p>下面我们需要将<code>HEAD</code>指针重新指向<code>master</code>，以方便后面的合并作用。指令就是使用前面的<code>checkout</code></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git checkout master</span><br></pre></td></tr></table></figure>
 <p>切换回<code>master</code>分支后，再查看README.txt文件，刚才添加的内容不见了！因为那个提交是在<code>dev</code>分支上，而<code>master</code>分支此刻的提交点并没有变，此时的分支状态如下：</p>
-<p><img src="/2018/10/21/LNX-Git学习笔记/0(5" alt="0">.png)</p>
+<p><img src="/2018/10/21/LNX-Git学习笔记/0(5" alt="3">.png)</p>
 <p>现在我们需要将<code>master</code>分支和<code>dev</code>指针合并，合并的指令我们使用<code>merge</code></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git merge dev</span><br></pre></td></tr></table></figure>
 <p>就把<code>dev</code>和<code>master</code>指针合并在一起了，此时的状态如下图所示：</p>
-<p><img src="/2018/10/21/LNX-Git学习笔记/0 (3" alt="0">.png)</p>
+<p><img src="/2018/10/21/LNX-Git学习笔记/0 (3" alt="4">.png)</p>
 <p>这一切结束以后就可以删除<code>dev</code>了，删除的过程如下：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git branch -d dev</span><br><span class="line">Deleted branch dev (was b17d20e).</span><br></pre></td></tr></table></figure>
 <p>此时我们的图就是下面这个样子了：</p>
-<p><img src="/2018/10/21/LNX-Git学习笔记/0 (4" alt="0">.png)</p>
+<p><img src="/2018/10/21/LNX-Git学习笔记/0 (4" alt="5">.png)</p>
 <h3 id="3-2-处理冲突"><a href="#3-2-处理冲突" class="headerlink" title="3.2 处理冲突"></a>3.2 处理冲突</h3><p>首先我们创见一个新的分支<code>feature</code>，然后在<code>feature</code>分支下对<code>readme</code>文件加上下面一段话，并且执行<code>commit</code>：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash is cool</span><br></pre></td></tr></table></figure>
 <p>然后我们换再到<code>master</code>分支，在<code>master</code>分支下对<code>readme</code>文件加上下面这一段话，并且执行<code>commit</code>：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">linux is cool</span><br></pre></td></tr></table></figure>
 <p>这个时候我们两个分支就成了下图这样：</p>
-<p><img src="/2018/10/21/LNX-Git学习笔记/0(7" alt="0">.png)</p>
+<p><img src="/2018/10/21/LNX-Git学习笔记/0(7" alt="6">.png)</p>
 <p>这时不能执行简单的合并，因为feature1与master的分支存在不同，此时会这样报错：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ git merge feature1</span><br><span class="line">Auto-merging readme.txt</span><br><span class="line">CONFLICT (content): Merge conflict <span class="keyword">in</span> readme.txt</span><br><span class="line">Automatic merge failed; fix conflicts and <span class="keyword">then</span> commit the result.</span><br></pre></td></tr></table></figure>
 <p>这个时候我们就要进入<code>readme</code>中做手动的调整，使得两者相同，例如我们手动让<code>feature</code>分支的内容和<code>master</code>的一样，就可以合并了，下图展示了这个过程：</p>
-<p><img src="/2018/10/21/LNX-Git学习笔记/0(8" alt="0">.png)</p>
+<p><img src="/2018/10/21/LNX-Git学习笔记/0(8" alt="7">.png)</p>
 <h3 id="3-3-分支管理策略"><a href="#3-3-分支管理策略" class="headerlink" title="3.3 分支管理策略"></a>3.3 分支管理策略</h3><p>在团队开发当中，很少像我们这样，每一次的分支到最后都会合并到<code>master</code>分支上，相反，我们习惯于建立下面几个分支：</p>
 <ul>
 <li><code>master</code>分支，用于版本的发布</li>
 <li><code>dev</code>分支，用于真正的团队开发分支，完成一次全面的开发后合并到<code>master</code>分支</li>
 <li><code>yourname</code>分支，这个使得每一个组员都应有的一个分支，在自己的分支上做开发，并且合并到<code>dev</code>分支上</li>
 </ul>
-<p><img src="/2018/10/21/LNX-Git学习笔记/0(9" alt="0">.png)</p>
+<p><img src="/2018/10/21/LNX-Git学习笔记/0(9" alt="8">.png)</p>
 <p>就像这样乱七八糟的，那么问题来了，我们刚开始的合并分支最后都是把源节点删除了，这些分支却都有自己的<code>commit</code>，该怎么做呢？</p>
 <p>在之前我们在<code>merge</code>的时候都是默认的<code>fastforward</code>模式，也就是我们实际上会删除掉merge前的点，但我们想要一个新的<code>commit</code>就必须停止这种模式，可以如下操作：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git merge --no-ff -m <span class="string">"merge with no-ff"</span> dev</span><br></pre></td></tr></table></figure>
 <p>这样我们得到的点就如下图所示:</p>
-<p><img src="/2018/10/21/LNX-Git学习笔记/0(10" alt="0">.png)</p>
+<p><img src="/2018/10/21/LNX-Git学习笔记/0(10" alt="9">.png)</p>
 <p>这样我们也可以在commot分支下继续进行开发了。</p>
 <h3 id="3-4-多人协作"><a href="#3-4-多人协作" class="headerlink" title="3.4 多人协作"></a>3.4 多人协作</h3><p>当你从远程仓库克隆时，实际上Git自动把本地的<code>master</code>分支和远程的<code>master</code>分支对应起来了，并且，远程仓库的默认名称是<code>origin</code>。</p>
 <p>要查看远程库的信息，用<code>git remote</code>：</p>
